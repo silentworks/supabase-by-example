@@ -25,42 +25,13 @@ This is the reason you see a `pnpm-lock.yaml`. That being said, any package mana
 
 These templates are meant to be used as is via the [degit](https://github.com/Rich-Harris/degit) utility.
 
-### Reset Password and Change Email flow
+### Examples
 
 Replace `[framework]` with a framework from the supported list of [frameworks](#Frameworks)
 
 ```bash
-npx degit supabase-community/supabase-by-example/reset-flow/[framework] project-name
+npx degit silentworks/supabase-by-example/[framework] project-name
 cd project-name
 npm install # or pnpm install or yarn install
 ```
 
-### Magic Link + Otp SignIn flow
-
-Replace `[framework]` with a framework from the supported list of [frameworks](#Frameworks)
-
-```bash
-npx degit supabase-community/supabase-by-example/magic-link/[framework] project-name
-cd project-name
-npm install # or pnpm install or yarn install
-```
-
-### OAuth Sign-in flow
-
-Replace `[framework]` with a framework from the supported list of [frameworks](#Frameworks)
-
-```bash
-npx degit supabase-community/supabase-by-example/oauth-flow/[framework] project-name
-cd project-name
-npm install # or pnpm install or yarn install
-```
-
-### User Profile
-
-Replace `[framework]` with a framework from the supported list of [frameworks](#Frameworks)
-
-```bash
-npx degit supabase-community/supabase-by-example/user-profile/[framework] project-name
-cd project-name
-npm install # or pnpm install or yarn install
-```
