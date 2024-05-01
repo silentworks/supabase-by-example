@@ -1,0 +1,44 @@
+{
+  "name": "nextjs-supabase-by-example",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "playwright test",
+		"s:start": "supabase start",
+    "s:stop": "supabase stop"
+  },
+  "dependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.8.7",
+    "@supabase/supabase-js": "^2.39.2",
+    "autoprefixer": "10.4.14",
+    "daisyui": "^2.51.6",
+    "just-safe-get": "^4.2.0",
+    "next": "14.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "@playwright/test": "^1.43.1",
+    "@types/tcp-port-used": "^1.0.1",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5",
+    "encoding": "^0.1.13",
+    "postcss": "^8",
+    "supabase": "^1.163.6",
+    "tailwindcss": "^3.4.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "tcp-port-used": "^1.0.2"
+  },
+	"trustedDependencies": [
+		"supabase"
+	]
+}
