@@ -5,14 +5,9 @@ These are example projects using supabase in various frameworks. This repo took 
 ## Frameworks
 
 - nextjs
-- nextjs-pages
 - sveltekit
 - react
 - express (only in Magic Link + Otp SignIn and Reset flow example at the moment)
-- nuxt
-- auth-ui
-  - react (only in Magic Link + Otp SignIn and Reset flow example at the moment)
-  - nextjs (only in Reset flow example at the moment)
 
 ## Getting started
 
@@ -32,3 +27,11 @@ cd project-name
 npm install # or pnpm install or yarn install
 ```
 
+## Magic Link Otp SignIn Flow in Server-side rendering (SSR) environment
+![Magic Link Otp SignIn Flow](Magic_Link_Otp_SignIn_Flow_SSR.excalidraw.png)
+
+## Reset Password Flow in Server-side rendering (SSR) environment
+![Password Reset Flow](Reset_Password_Flow_SSR.excalidraw.png)
+
+## OAuth SignIn Flow in Server-side rendering (SSR) environment
+![OAuth SignIn Flow](OAuth_SignIn_Flow_SSR.excalidraw.png)
