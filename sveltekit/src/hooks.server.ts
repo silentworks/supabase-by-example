@@ -1,14 +1,30 @@
 // src/hooks.server.ts
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
-import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
-import type { Handle } from '@sveltejs/kit';
+import { createServerClient } from '@supabase/ssr';
+import { redirect, type Handle } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
 
-export const handle: Handle = async ({ event, resolve }) => {
-	event.locals.supabase = createSupabaseServerClient({
-		supabaseUrl: PUBLIC_SUPABASE_URL,
-		supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
-		event
-	});
+const supabase: Handle = async ({ event, resolve }) => {
+	event.locals.supabase = createServerClient(
+		PUBLIC_SUPABASE_URL, 
+		PUBLIC_SUPABASE_ANON_KEY,
+		{
+			cookies: {
+				get: (key) => event.cookies.get(key),
+				/**
+				 * SvelteKit's cookies API requires `path` to be explicitly set in
+				 * the cookie options. Setting `path` to `/` replicates previous/
+				 * standard behavior.
+				 */
+				set: (key, value, options) => {
+				  event.cookies.set(key, value, { ...options, path: '/' })
+				},
+				remove: (key, options) => {
+				  event.cookies.delete(key, { ...options, path: '/' })
+				},
+			}
+		}
+	);
 
 	/**
 	 * a little helper that is written for convenience so that instead
@@ -46,3 +62,21 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 	});
 };
+
+const authGuard: Handle = async ({ event, resolve }) => {
+	const { session, user } = await event.locals.getSession();
+	event.locals.session = session;
+	event.locals.user = user;
+  
+	if (!event.locals.session && event.url.pathname.startsWith('/private')) {
+	  return redirect(303, '/auth');
+	}
+  
+	if (event.locals.session && event.url.pathname === '/auth') {
+	  return redirect(303, '/private');
+	}
+  
+	return resolve(event);
+}
+
+export const handle: Handle = sequence(supabase, authGuard);
