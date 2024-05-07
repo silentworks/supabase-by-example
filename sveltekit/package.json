@@ -14,7 +14,7 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"s:start": "supabase start",
-    	"s:stop": "supabase stop"
+		"s:stop": "supabase stop"
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.0.2",
@@ -46,8 +46,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@supabase/auth-helpers-sveltekit": "^0.13.0",
-		"@supabase/supabase-js": "^2.42.7",
+		"@supabase/ssr": "^0.3.0",
+		"@supabase/supabase-js": "^2.43.1",
 		"daisyui": "^2.51.5",
 		"just-safe-get": "^4.2.0",
 		"zod": "^3.23.4"
