@@ -2,7 +2,9 @@
 
 <p>We're sorry to hear that you're having trouble accessing your account. To reset your password and regain access, please click the link below:</p>
 
-<p><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery&next=/account/update-password">Reset Password</a></p>
+<p><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/account/update-password">Reset Password</a></p>
+
+<p>or alternatively, visit the <a href="{{ .SiteURL }}/auth/verify-token">verify token</a> page and enter the token code: {{ .Token }}</p>
 
 <p>Once you've clicked the link, you'll be prompted to enter a new password for your account. Please choose a strong, unique password that you haven't used before, and make sure to remember it for future logins.</p>
 

@@ -4,13 +4,16 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@supabase/auth-js': 2.62.0
+
 dependencies:
   '@supabase/ssr':
-    specifier: ^0.3.0
-    version: 0.3.0(@supabase/supabase-js@2.43.1)
+    specifier: ^0.4.0
+    version: 0.4.0(@supabase/supabase-js@2.44.0)
   '@supabase/supabase-js':
-    specifier: ^2.43.1
-    version: 2.43.1
+    specifier: ^2.44.0
+    version: 2.44.0
   daisyui:
     specifier: ^2.51.5
     version: 2.51.5(autoprefixer@10.4.14)(postcss@8.4.24)
@@ -74,8 +77,8 @@ devDependencies:
     specifier: ^3.1.2
     version: 3.1.2(prettier@3.1.1)(svelte@4.2.7)
   supabase:
-    specifier: ^1.163.6
-    version: 1.163.6
+    specifier: ^1.176.10
+    version: 1.176.10
   svelte:
     specifier: ^4.2.7
     version: 4.2.7
@@ -406,7 +409,7 @@ packages:
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
     dependencies:
-      minipass: 7.0.4
+      minipass: 7.1.2
     dev: true
 
   /@jest/schemas@29.6.3:
@@ -573,7 +576,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-x64-musl@4.17.2:
@@ -612,14 +614,14 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
 
-  /@supabase/auth-js@2.64.2:
-    resolution: {integrity: sha512-s+lkHEdGiczDrzXJ1YWt2y3bxRi+qIUnXcgkpLSrId7yjBeaXBFygNjTaoZLG02KNcYwbuZ9qkEIqmj2hF7svw==}
+  /@supabase/auth-js@2.62.0:
+    resolution: {integrity: sha512-2pkOkd+NBBbLazy2IswnqahEBQTM4fB+U0HiNO/+mUrPCjCZV6RKhzt1AX4SqFfVW5eOENsh0vVc8IcACSpiTg==}
     dependencies:
       '@supabase/node-fetch': 2.6.15
     dev: false
 
-  /@supabase/functions-js@2.3.1:
-    resolution: {integrity: sha512-QyzNle/rVzlOi4BbVqxLSH828VdGY1RElqGFAj+XeVypj6+PVtMlD21G8SDnsPQDtlqqTtoGRgdMlQZih5hTuw==}
+  /@supabase/functions-js@2.4.1:
+    resolution: {integrity: sha512-8sZ2ibwHlf+WkHDUZJUXqqmPvWQ3UHN0W30behOJngVh/qHHekhJLCFbh0AjkE9/FqqXtf9eoVvmYgfCLk5tNA==}
     dependencies:
       '@supabase/node-fetch': 2.6.15
     dev: false
@@ -631,14 +633,14 @@ packages:
       whatwg-url: 5.0.0
     dev: false
 
-  /@supabase/postgrest-js@1.15.2:
-    resolution: {integrity: sha512-9/7pUmXExvGuEK1yZhVYXPZnLEkDTwxgMQHXLrN5BwPZZm4iUCL1YEyep/Z2lIZah8d8M433mVAUEGsihUj5KQ==}
+  /@supabase/postgrest-js@1.15.6:
+    resolution: {integrity: sha512-zg3URVhoHOijdqMyn3LIFHh+Pqj5BmRqWAaoSExzIHc4m0kGBMPMjDcleamGhbelAAiKbjpQ04mBgooDliGl5A==}
     dependencies:
       '@supabase/node-fetch': 2.6.15
     dev: false
 
-  /@supabase/realtime-js@2.9.5:
-    resolution: {integrity: sha512-TEHlGwNGGmKPdeMtca1lFTYCedrhTAv3nZVoSjrKQ+wkMmaERuCe57zkC5KSWFzLYkb5FVHW8Hrr+PX1DDwplQ==}
+  /@supabase/realtime-js@2.10.1:
+    resolution: {integrity: sha512-SrrXxE8xgwWvjREQMkC9LIHIoCQde+OqkFPKP2s/O0ROjhmJ/iXeLvoWhAzXh9gwire4oaK14/ncL/iRiaVWQw==}
     dependencies:
       '@supabase/node-fetch': 2.6.15
       '@types/phoenix': 1.6.4
@@ -649,31 +651,32 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@supabase/ssr@0.3.0(@supabase/supabase-js@2.43.1):
-    resolution: {integrity: sha512-lcVyQ7H6eumb2FB1Wa2N+jYWMfq6CFza3KapikT0fgttMQ+QvDgpNogx9jI8bZgKds+XFSMCojxFvFb+gwdbfA==}
+  /@supabase/ssr@0.4.0(@supabase/supabase-js@2.44.0):
+    resolution: {integrity: sha512-6WS3NUvHDhCPAFN2kJ79AQDO8+M9fJ7y2fYpxgZqIuJEpnnGsHDNnB5Xnv8CiaJIuRU+0pKboy62RVZBMfZ0Lg==}
     peerDependencies:
-      '@supabase/supabase-js': ^2.33.1
+      '@supabase/supabase-js': ^2.43.4
     dependencies:
-      '@supabase/supabase-js': 2.43.1
-      cookie: 0.5.0
-      ramda: 0.29.1
+      '@supabase/supabase-js': 2.44.0
+      cookie: 0.6.0
+    optionalDependencies:
+      '@rollup/rollup-linux-x64-gnu': 4.17.2
     dev: false
 
-  /@supabase/storage-js@2.5.5:
-    resolution: {integrity: sha512-OpLoDRjFwClwc2cjTJZG8XviTiQH4Ik8sCiMK5v7et0MDu2QlXjCAW3ljxJB5+z/KazdMOTnySi+hysxWUPu3w==}
+  /@supabase/storage-js@2.6.0:
+    resolution: {integrity: sha512-REAxr7myf+3utMkI2oOmZ6sdplMZZ71/2NEIEMBZHL9Fkmm3/JnaOZVSRqvG4LStYj2v5WhCruCzuMn6oD/Drw==}
     dependencies:
       '@supabase/node-fetch': 2.6.15
     dev: false
 
-  /@supabase/supabase-js@2.43.1:
-    resolution: {integrity: sha512-A+RV50mWNtyKo6M0u4G6AOqEifQD+MoOjZcpRkPMPpEAFgMsc2dt3kBlBlR/MgZizWQgUKhsvrwKk0efc8g6Ug==}
+  /@supabase/supabase-js@2.44.0:
+    resolution: {integrity: sha512-SzMvAgSVuPzx7itiYiascXAVBqTcZ9zX3ONIdhZEWKUEgWaJftfPyVvz+PMYznK77miSMuy1f4geAvPElyiS2g==}
     dependencies:
-      '@supabase/auth-js': 2.64.2
-      '@supabase/functions-js': 2.3.1
+      '@supabase/auth-js': 2.62.0
+      '@supabase/functions-js': 2.4.1
       '@supabase/node-fetch': 2.6.15
-      '@supabase/postgrest-js': 1.15.2
-      '@supabase/realtime-js': 2.9.5
-      '@supabase/storage-js': 2.5.5
+      '@supabase/postgrest-js': 1.15.6
+      '@supabase/realtime-js': 2.10.1
+      '@supabase/storage-js': 2.6.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -1315,15 +1318,9 @@ packages:
     resolution: {integrity: sha512-uJcB/FKZtBMCJpK8MQji6bJHgu1tixKPxRLeGkNzBoOZzpnZUJm0jm2/sBDWcuBx1dYgxV4JU+g5hmNxCyAmdA==}
     dev: true
 
-  /cookie@0.5.0:
-    resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
-    engines: {node: '>= 0.6'}
-    dev: false
-
   /cookie@0.6.0:
     resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
     engines: {node: '>= 0.6'}
-    dev: true
 
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -2176,20 +2173,20 @@ packages:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
     dev: true
 
-  /minipass@5.0.0:
-    resolution: {integrity: sha512-3FnjYuehv9k6ovOEbyOswadCDPX1piCfhV8ncmYtHOjuPwylVWsghTLo7rabjC3Rx5xD4HDx8Wm1xnMF7S5qFQ==}
-    engines: {node: '>=8'}
-    dev: true
-
   /minipass@7.0.4:
     resolution: {integrity: sha512-jYofLM5Dam9279rdkWzqHozUo4ybjdZmCsDHePy5V/PbBcVMiSZR97gmAy45aqi8CK1lG2ECd356FU86avfwUQ==}
     engines: {node: '>=16 || 14 >=14.17'}
+
+  /minipass@7.1.2:
+    resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
+    engines: {node: '>=16 || 14 >=14.17'}
+    dev: true
 
   /minizlib@3.0.1:
     resolution: {integrity: sha512-umcy022ILvb5/3Djuu8LWeqUa8D68JaBzlttKeMWen48SjabqS3iY5w/vzeMzMUNhLDifyhbOwKDSznB1vvrwg==}
     engines: {node: '>= 18'}
     dependencies:
-      minipass: 7.0.4
+      minipass: 7.1.2
       rimraf: 5.0.5
     dev: true
 
@@ -2576,10 +2573,6 @@ packages:
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  /ramda@0.29.1:
-    resolution: {integrity: sha512-OfxIeWzd4xdUNxlWhgFazxsA/nl3mS4/jGZI5n00uWOoSSFRhC1b6gl6xvmzUamgmqELraWp0J/qqVlXYPDPyA==}
-    dev: false
-
   /react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
     dev: true
@@ -2845,8 +2838,8 @@ packages:
       pirates: 4.0.6
       ts-interface-checker: 0.1.13
 
-  /supabase@1.163.6:
-    resolution: {integrity: sha512-GuanZQdIEGXCWz1UYIMPDmIsAdqD8IiqnATqfNSqlWMYK4y4X912HxyGW1sjYZjQar/10RSkSwPAsRLwDTAxrw==}
+  /supabase@1.176.10:
+    resolution: {integrity: sha512-VS+dRcNk7H2+qG4hCz2WqSKFeZxrMZ0k+LQnHiUX+d9bls1QyZvpXj3qmo4Hs30VS6ZYRQ3sgNVE2tEKWv6kcA==}
     engines: {npm: '>=8'}
     hasBin: true
     requiresBuild: true
@@ -2854,7 +2847,7 @@ packages:
       bin-links: 4.0.3
       https-proxy-agent: 7.0.4
       node-fetch: 3.3.2
-      tar: 7.0.1
+      tar: 7.2.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3028,13 +3021,13 @@ packages:
     transitivePeerDependencies:
       - ts-node
 
-  /tar@7.0.1:
-    resolution: {integrity: sha512-IjMhdQMZFpKsHEQT3woZVxBtCQY+0wk3CVxdRkGXEgyGa0dNS/ehPvOMr2nmfC7x5Zj2N+l6yZUpmICjLGS35w==}
+  /tar@7.2.0:
+    resolution: {integrity: sha512-hctwP0Nb4AB60bj8WQgRYaMOuJYRAPMGiQUAotms5igN8ppfQM+IvjQ5HcKu1MaZh2Wy2KWVTe563Yj8dfc14w==}
     engines: {node: '>=18'}
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0
-      minipass: 5.0.0
+      minipass: 7.1.2
       minizlib: 3.0.1
       mkdirp: 3.0.1
       yallist: 5.0.0
