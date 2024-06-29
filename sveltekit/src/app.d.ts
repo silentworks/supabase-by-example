@@ -1,5 +1,6 @@
 import { SupabaseClient, Session } from '@supabase/supabase-js';
 import { Database } from './lib/schema';
+import { Cookies } from '@sveltejs/kit';
 
 declare global {
 	namespace App {
@@ -12,6 +13,7 @@ declare global {
 		}
 		interface PageData {
 			session: Session | null;
+			// cookies: Array<{ name: string; value: string }>;
 		}
 		// interface PageState {}
 		// interface Platform {}
