@@ -7,12 +7,12 @@ import { z, ZodError } from "zod";
 import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
 import Link from "next/link";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/lib/supabase/client";
 
 type FormData = z.infer<typeof AuthUserSchema>;
 
 export default function SignUpForm() {
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
   const [errors, setErrors] = useState<FormData>();
   const [message, setMessage] = useState<string>("");
   const [formSuccess, setFormSuccess] = useState(false);

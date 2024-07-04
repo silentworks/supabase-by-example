@@ -8,7 +8,7 @@ import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/lib/supabase/client";
 
 type FormData = z.infer<typeof AuthUserSchema>;
 
@@ -40,7 +40,7 @@ const PasswordField = ({password, passwordError, onUpdate}: PasswordFieldType) =
 }
 
 export default function SignInForm() {
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
   const router = useRouter();
   const [errors, setErrors] = useState<FormData>();
   const [message, setMessage] = useState<string>("");

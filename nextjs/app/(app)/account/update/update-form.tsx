@@ -5,17 +5,14 @@ import { useState, FormEvent } from "react";
 import { z, ZodError } from "zod";
 import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
-import {
-  User,
-  createClientComponentClient,
-} from "@supabase/auth-helpers-nextjs";
 import get from "just-safe-get";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 type FormData = z.infer<typeof UpdateProfileSchema>;
 
 export default function UpdateForm({ user, profile }: UserInfo) {
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
   const router = useRouter();
   const [errors, setErrors] = useState<FormData>();
   const [message, setMessage] = useState("");

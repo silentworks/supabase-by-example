@@ -1,9 +1,8 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const supabase = createRouteHandlerClient({ cookies: () => cookies() });
+  const supabase = createClient();
 
   // Check if we have a session
   const {

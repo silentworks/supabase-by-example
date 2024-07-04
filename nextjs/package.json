@@ -12,8 +12,8 @@
     "s:stop": "supabase stop"
   },
   "dependencies": {
-    "@supabase/auth-helpers-nextjs": "^0.8.7",
-    "@supabase/supabase-js": "^2.39.2",
+    "@supabase/ssr": "^0.4.0",
+    "@supabase/supabase-js": "^2.44.0",
     "autoprefixer": "10.4.14",
     "daisyui": "^2.51.6",
     "just-safe-get": "^4.2.0",
@@ -32,7 +32,7 @@
     "typescript": "^5",
     "encoding": "^0.1.13",
     "postcss": "^8",
-    "supabase": "^1.163.6",
+    "supabase": "^1.176.10",
     "tailwindcss": "^3.4.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",

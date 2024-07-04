@@ -1,10 +1,10 @@
-import { createServerClient } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase/server";
 import PasswordForm from "./password-form";
 
 export const dynamic = "force-dynamic";
 
 export default async function UpdatePassword() {
-  const supabase = createServerClient();
+  const supabase = createClient();
 
   const {
     data: { session },

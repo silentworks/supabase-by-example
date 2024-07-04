@@ -5,15 +5,13 @@ import { useState, FormEvent } from "react";
 import { z, ZodError } from "zod";
 import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
-import {
-  User,
-  createClientComponentClient,
-} from "@supabase/auth-helpers-nextjs";
+import { User } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
 
 type FormData = z.infer<typeof UpdateEmailSchema>;
 
 export default function EmailForm({ user }: { user: User | undefined }) {
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
   const [errors, setErrors] = useState<FormData>();
   const [message, setMessage] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
