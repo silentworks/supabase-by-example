@@ -1,37 +1,9 @@
-import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
-import { NextResponse } from "next/server";
-
 import type { NextRequest } from "next/server";
-import { getProfile } from "./lib/utils";
+import { updateSession } from "./lib/supabase/middleware";
 
-export async function middleware(req: NextRequest) {
-  const res = NextResponse.next();
-  const supabase = createMiddlewareClient({ req, res });
-
-  // get profile and session
-  const { profile, session } = await getProfile(supabase);
-
-  if (!session) {
-    return NextResponse.redirect(new URL("/auth/signin", req.url));
-  }
-
-  if (
-    !req.nextUrl.pathname.startsWith("/account/update-password") &&
-    Boolean(req.cookies.get('password_update_required')?.value)
-  ) {
-    return NextResponse.redirect(new URL("/account/update-password", req.url));
-  }
-
-  if (
-    !req.nextUrl.pathname.startsWith("/account/update") &&
-    profile &&
-    profile.display_name == null
-  ) {
-    return NextResponse.redirect(new URL("/account/update", req.url));
-  }
-
-  return res;
-}
+export async function middleware(request: NextRequest) {
+  return await updateSession(request);
+};
 
 export const config = {
   matcher: ["/", "/account/:path*"],

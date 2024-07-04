@@ -1,11 +1,11 @@
-import { createServerClient } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase/server";
 import { getProfile } from "@/lib/utils";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
 export default async function Account() {
-  const supabase = createServerClient();
+  const supabase = createClient();
 
   // get profile and session
   const { profile, session } = await getProfile(supabase);

@@ -1,18 +1,18 @@
 "use client";
 import { formatError } from "@/lib/utils";
 import { AuthUserWithTokenSchema } from "@/lib/validationSchema";
-import { AuthApiError } from "@supabase/supabase-js";
+import { AuthApiError, EmailOtpType } from "@supabase/supabase-js";
 import { useState, FormEvent } from "react";
 import { z, ZodError } from "zod";
 import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 type FormData = z.infer<typeof AuthUserWithTokenSchema>;
 
-export default function VerifyTokenForm() {
-  const supabase = createClientComponentClient();
+export default function VerifyTokenForm({ auth_type }: { auth_type: EmailOtpType }) {
+  const supabase = createClient();
   const router = useRouter();
   const [errors, setErrors] = useState<FormData>();
   const [message, setMessage] = useState<string>("");
@@ -46,7 +46,7 @@ export default function VerifyTokenForm() {
     const { error } = await supabase.auth.verifyOtp({
       email,
       token,
-      type: "email",
+      type: auth_type,
     });
 
     if (error) {

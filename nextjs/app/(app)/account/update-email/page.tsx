@@ -1,10 +1,10 @@
-import { createServerClient } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase/server";
 import EmailForm from "./email-form";
 
 export const dynamic = "force-dynamic";
 
 export default async function UpdateEmail() {
-  const supabase = createServerClient();
+  const supabase = createClient();
 
   const {
     data: { session },

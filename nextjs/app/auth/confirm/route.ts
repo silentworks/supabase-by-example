@@ -1,4 +1,4 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/lib/supabase/server";
 import { EmailOtpType } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     if (type === 'recovery') {
       cookies().set('password_update_required', 'true')
     }
-    const supabase = createRouteHandlerClient({ cookies: () => cookies() });
+    const supabase = createClient();
     await supabase.auth.verifyOtp({ type, token_hash });
   }
 
