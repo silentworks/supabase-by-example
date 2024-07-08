@@ -6,6 +6,6 @@ export const load: LayoutServerLoad = async ({ url, locals: { getSession } }) =>
 
 	// only allow the signout subpath when visiting the auth path
 	if (url.pathname !== '/auth/signout' && session) {
-		throw redirect(303, '/');
+		redirect(303, '/');
 	}
 };

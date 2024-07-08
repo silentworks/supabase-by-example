@@ -28,6 +28,6 @@ export const actions = {
 			return fail(500, fault(error.message, { email }));
 		}
 
-		throw redirect(307, '/');
+		redirect(307, '/');
 	}
 };

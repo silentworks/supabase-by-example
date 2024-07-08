@@ -17,7 +17,6 @@ export const GET = async (event) => {
 	if (error) {
 		throw fail(500, fault('Server error. Try again later.'));
 	}
-	console.log({ data })
-	// throw redirect(303, data.url);
-	throw redirect(302, '/')
+
+	redirect(302, '/')
 };
