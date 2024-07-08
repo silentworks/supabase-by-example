@@ -7,7 +7,7 @@ export const load: LayoutServerLoad = async ({ url, locals: { supabase, getSessi
 	const { session, user } = await getSession();
 
 	if (!session) {
-		throw redirect(307, '/auth/signin');
+		redirect(307, '/auth/signin');
 	}
 
 	// get profile and profile_info
@@ -21,7 +21,7 @@ export const load: LayoutServerLoad = async ({ url, locals: { supabase, getSessi
 	const allowedPaths = ['/account/update', '/account/update-email', '/account/update-password'];
 	if (!allowedPaths.includes(url.pathname)) {
 		if (url.pathname !== '/account/update' && profile && profile.display_name == null) {
-			throw redirect(307, '/account/update');
+			redirect(307, '/account/update');
 		}
 	}
 

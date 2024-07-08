@@ -53,6 +53,6 @@ export const actions: Actions = {
 			return fail(500, fault('Server error. Try again later.'));
 		}
 
-		throw redirect(303, data.url);
+		redirect(303, data.url);
 	}
 };
