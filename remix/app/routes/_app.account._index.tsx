@@ -1,32 +1,27 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData, useLoaderData } from "@remix-run/react";
-import { AuthApiError } from "@supabase/supabase-js";
-import { ZodError, z } from "zod";
-import Alert from "~/components/Alert";
-import InputErrorMessage from "~/components/InputErrorMessage";
-import { isUserAuthorized } from "~/lib/session";
+import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+import { isUserAuthorized, isPasswordUpdateRequired } from "~/lib/session";
 import { createServerClient } from "~/lib/supabase";
-import { fault, formatError, success } from "~/lib/utils";
-import { UpdateEmailSchema } from "~/lib/validationSchema";
-
-type FormData = z.infer<typeof UpdateEmailSchema>;
+import { getProfile } from "~/lib/utils";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const { session, user, headers } = await isUserAuthorized(request)
+  const { user, headers } = await isUserAuthorized(request)
+  await isPasswordUpdateRequired(request)
 
-	// in order for the set-cookie header to be set,
-	// headers must be returned as part of the loader response
-	return json({ session, user }, { headers });
+  const { supabase } = createServerClient(request, request.headers);
+  const { profile } = await getProfile(supabase);
+
+	return json({ user, profile }, { headers });
 }
 
 export default function Account() {
-  const { user } = useLoaderData<typeof loader>();
+  const { user, profile } = useLoaderData<typeof loader>();
   
   return (
-    <div className="w-11/12 p-12 px-6 py-10 rounded-lg sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-3/12 sm:px-10 sm:py-6">
+    <div className="w-11/12 px-6 rounded-lg sm:w-8/12 md:w-6/12 2xl:w-3/12 sm:px-10">
       <h2 className="font-semibold text-4xl mb-4">Account</h2>
       <p className="font-medium mb-4">
-        Hi {user?.email}, you can update your email or password from here
+        Hi {profile?.display_name ?? user?.email}, you can update your email or password from here
       </p>
 
       <ul className="divide-y-2 divide-gray-200">

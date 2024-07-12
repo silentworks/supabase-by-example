@@ -1,14 +1,19 @@
 import type { MetaFunction } from "@remix-run/node";
 import { json, type LoaderFunctionArgs } from '@remix-run/node'
-import { isUserAuthorized } from "~/lib/session";
+import { useLoaderData } from "@remix-run/react";
+import { isUserAuthorized, isPasswordUpdateRequired } from "~/lib/session";
 import { createServerClient } from "~/lib/supabase";
+import { getProfile } from "~/lib/utils";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const { session, headers } = await isUserAuthorized(request)
+  const { user, headers } = await isUserAuthorized(request)
+  await isPasswordUpdateRequired(request)
 
-	// in order for the set-cookie header to be set,
-	// headers must be returned as part of the loader response
-	return json({session}, { headers });
+  const { supabase } = createServerClient(request, request.headers);
+  const { profile, profileInfo } = await getProfile(supabase);
+  const url = new URL(request.url).origin
+
+	return json({ user, profile, profileInfo, url }, { headers });
 }
 
 export const meta: MetaFunction = () => {
@@ -19,41 +24,35 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const { profile, profileInfo, user, url } = useLoaderData<typeof loader>();
+  
   return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className="card w-6/12 bg-base-100 shadow-xl">
+      <div className="card-body">
+        <h2 className="card-title">
+          Welcome {profile?.display_name ?? user?.email}
+        </h2>
+        {profile?.display_name ? (
+          <>
+            <p>
+              Name: {profileInfo?.first_name} {profileInfo?.last_name}
+            </p>
+            <p>Display Name: {profile.display_name}</p>
+            <p>Dob: {profileInfo?.dob}</p>
+            <p>Location: {profileInfo?.profile_location}</p>
+            <h3 className="text-lg font-semibold mt-2">Bio</h3>
+            <p>{profile?.bio}</p>
+            <p className="text-right">
+              <a
+                href={`${url}/u/${profile?.slug}`}
+                className="btn btn-md btn-outline"
+              >
+                View Profile
+              </a>
+            </p>
+          </>
+        ) : null}
+      </div>
     </div>
   );
 }

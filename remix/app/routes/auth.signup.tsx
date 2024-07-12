@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
+import { ActionFunctionArgs, json } from "@remix-run/node";
 import { Form, Link, useActionData } from "@remix-run/react";
 import { AuthApiError } from "@supabase/supabase-js";
 import { ZodError, z } from "zod";

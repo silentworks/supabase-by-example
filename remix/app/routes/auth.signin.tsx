@@ -1,5 +1,5 @@
-import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData } from "@remix-run/react";
+import { ActionFunctionArgs, json, LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { Form, Link, useActionData, useLoaderData, useSearchParams } from "@remix-run/react";
 import { AuthApiError } from "@supabase/supabase-js";
 import { useState } from "react";
 import { ZodError, z } from "zod";
@@ -10,6 +10,13 @@ import { fault, formatError } from "~/lib/utils";
 import { AuthUserSchema, ValidateEmailSchema } from "~/lib/validationSchema";
 
 type FormData = z.infer<typeof AuthUserSchema>;
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const url = new URL(request.url)
+  const authType = url.searchParams.get('auth_type') as string;
+
+	return json({ authType });
+}
 
 export const action = async ({ 
   request 
@@ -97,8 +104,10 @@ const PasswordField = ({ password, passwordError }: PasswordFieldType ) => {
 
 export default function SignIn() {
   const actionData = useActionData<typeof action>();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [magicLink, setMagicLink] = useState(false);
+  const authType = searchParams.get('auth_type') as string;
+  const [magicLink, setMagicLink] = useState(authType == 'magic_link');
   
   return (
     <div className="w-11/12 p-12 px-6 py-10 rounded-lg sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-3/12 sm:px-10 sm:py-6">
@@ -157,9 +166,15 @@ export default function SignIn() {
               name="magiclink"
               type="checkbox"
               className="toggle toggle-xs"
-              onChange={(ev) =>
+              defaultChecked={magicLink}
+              onChange={(event) => {
                 setMagicLink(!magicLink)
-              }
+                setSearchParams(
+                  new URLSearchParams(event.currentTarget.checked ? {
+                    auth_type: "magic_link",
+                  } : {}).toString()
+                );
+              }}
             />
             Magic link login
           </label>

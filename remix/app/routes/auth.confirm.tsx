@@ -1,25 +1,28 @@
-import { LoaderFunctionArgs, createCookie, redirect } from "@remix-run/node";
+import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { EmailOtpType } from "@supabase/supabase-js";
+import { passwordUpdateRequired } from "~/lib/session";
 import { createServerClient } from "~/lib/supabase";
 
 export const loader = async ({ 
   request 
 }: LoaderFunctionArgs) => {
-  const { searchParams } = new URL(request.url);
-  const token_hash = searchParams.get("token_hash");
-  const type = (searchParams.get("type") ?? "email") as EmailOtpType;
-  const next = searchParams.get("next") ?? "/";
+  const url = new URL(request.url);
+  const token_hash = url.searchParams.get("token_hash");
+  const type = (url.searchParams.get("type") ?? "email") as EmailOtpType;
+  const next = url.searchParams.get("next") ?? "/";
 
-  const { supabase, headers } = createServerClient(request, new Headers());
+  const cookies = request.headers.get('Cookie')
+
+  // Create redirect link without the token
+  const redirectTo = url;
+  redirectTo.pathname = next;
+  redirectTo.searchParams.delete('code');
+
+  let { supabase, headers } = createServerClient(request, new Headers());
 
   if (token_hash && type) {
     if (type === 'recovery') {
-      const passwordUpdateRequired = createCookie("password_update_required", {
-        maxAge: 604_800, // one week
-      });
-      headers.append('Set-Cookie', await passwordUpdateRequired.serialize({
-        password_update_required: true
-      }))
+      headers = await passwordUpdateRequired(headers)
     }
     await supabase.auth.verifyOtp({ type, token_hash });
   }
