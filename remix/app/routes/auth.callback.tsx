@@ -7,28 +7,26 @@ export const loader = async ({
   request 
 }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
-  const token_hash = url.searchParams.get("token_hash");
-  const type = (url.searchParams.get("type") ?? "email") as EmailOtpType;
+  const code = url.searchParams.get("code");
   const next = url.searchParams.get("next") ?? "/";
-
-  const cookies = request.headers.get('Cookie')
 
   // Create redirect link without the token
   const redirectTo = url;
   redirectTo.pathname = next;
-  redirectTo.searchParams.delete('token_hash');
-  redirectTo.searchParams.delete('type');
+  redirectTo.searchParams.delete('code');
 
   let { supabase, headers } = createServerClient(request, new Headers());
 
-  if (token_hash && type) {
-    if (type === 'recovery') {
-      headers = await passwordUpdateRequired(headers)
+  if (code) {
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (!error) {
+      redirectTo.searchParams.delete('next')
+      return redirect(redirectTo.toString(), { headers })
     }
-    await supabase.auth.verifyOtp({ type, token_hash });
   }
 
-  
-  return redirect(next, { headers });
+  redirectTo.searchParams.set('error_message', 'There was a problem with your authentication. Please report this to our support team.')
+  redirectTo.pathname = '/auth/signin'
+  return redirect(redirectTo.toString(), { headers });
 };
   
