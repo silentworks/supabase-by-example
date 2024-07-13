@@ -1,22 +1,23 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData, useLoaderData } from "@remix-run/react";
-import { AuthApiError } from "@supabase/supabase-js";
+import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { ZodError, z } from "zod";
 import Alert from "~/components/Alert";
 import InputErrorMessage from "~/components/InputErrorMessage";
-import { isUserAuthorized } from "~/lib/session";
+import { isUserAuthorized, isPasswordUpdateRequired } from "~/lib/session";
 import { createServerClient } from "~/lib/supabase";
-import { fault, formatError, success } from "~/lib/utils";
+import { fault, formatError, getProfile, success } from "~/lib/utils";
 import { UpdateProfileSchema } from "~/lib/validationSchema";
 
 type FormData = z.infer<typeof UpdateProfileSchema>;
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const { session, user, headers } = await isUserAuthorized(request)
+  const { user, headers } = await isUserAuthorized(request)
+  await isPasswordUpdateRequired(request)
 
-	// in order for the set-cookie header to be set,
-	// headers must be returned as part of the loader response
-	return json({ session, user }, { headers });
+  const { supabase } = createServerClient(request, request.headers);
+  const { profile, profileInfo } = await getProfile(supabase);
+  
+	return json({ user, profile, profileInfo }, { headers });
 }
 
 export const action = async ({ 
@@ -99,10 +100,10 @@ export const action = async ({
 
 export default function UpdateEmail() {
   const actionData = useActionData<typeof action>();
-  const { user } = useLoaderData<typeof loader>();
+  const { user, profile, profileInfo } = useLoaderData<typeof loader>();
   
   return (
-    <div className="w-11/12 p-12 px-6 py-10 rounded-lg sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-3/12 sm:px-10 sm:py-6">
+    <div className="w-11/12 px-6 rounded-lg sm:w-8/12 md:w-6/12 2xl:w-3/12 sm:px-10">
       {actionData?.message ? (
         <Alert
           className={`${actionData?.success ? "alert-info" : "alert-error"} mb-10`}
@@ -112,7 +113,7 @@ export default function UpdateEmail() {
       ) : null}
       <h2 className="font-semibold text-4xl mb-4">Update Email</h2>
       <p className="font-medium mb-4">
-        Hi {user?.email}, Enter your new email below and confirm it
+        Hi {profile?.display_name ?? user?.email}, Enter your new email below and confirm it
       </p>
       <Form method="post">
         <div className="form-control">
@@ -123,7 +124,7 @@ export default function UpdateEmail() {
             id="first_name"
             name="firstName"
             type="text"
-            defaultValue={actionData?.data?.firstName}
+            defaultValue={actionData?.data?.firstName || (profileInfo?.first_name ?? "")}
             className="input input-bordered"
           />
         </div>
@@ -138,7 +139,7 @@ export default function UpdateEmail() {
             id="last_name"
             name="lastName"
             type="text"
-            defaultValue={actionData?.data.lastName}
+            defaultValue={actionData?.data.lastName || (profileInfo?.last_name ?? "")}
             className="input input-bordered"
           />
         </div>
@@ -153,7 +154,7 @@ export default function UpdateEmail() {
             id="display_name"
             name="displayName"
             type="text"
-            defaultValue={actionData?.data.displayName}
+            defaultValue={actionData?.data.displayName || (profile?.display_name ?? "")}
             className="input input-bordered"
           />
         </div>
@@ -168,7 +169,7 @@ export default function UpdateEmail() {
             id="bio"
             name="bio"
             className="textarea textarea-bordered textarea-lg w-full"
-            defaultValue={actionData?.data.bio}
+            defaultValue={actionData?.data.bio || (profile?.bio ?? "")}
           />
         </div>
         {actionData?.errors?.bio ? (
@@ -182,7 +183,7 @@ export default function UpdateEmail() {
             id="dob"
             name="dob"
             type="text"
-            defaultValue={actionData?.data.dob}
+            defaultValue={actionData?.data.dob || (profileInfo?.dob ?? "")}
             className="input input-bordered"
           />
         </div>
@@ -197,7 +198,7 @@ export default function UpdateEmail() {
             id="profile_location"
             name="profileLocation"
             type="text"
-            defaultValue={actionData?.data.profileLocation}
+            defaultValue={actionData?.data.profileLocation || (profileInfo?.profile_location ?? "")}
             className="input input-bordered"
           />
         </div>

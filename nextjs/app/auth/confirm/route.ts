@@ -9,6 +9,11 @@ export async function GET(req: NextRequest) {
   const type = searchParams.get("type") as EmailOtpType;
   const next = searchParams.get("next") ?? "/";
 
+    // Create redirect link without the code
+    const redirectTo = req.nextUrl.clone()
+    redirectTo.pathname = next
+    redirectTo.searchParams.delete('code')
+
   if (token_hash && type) {
     if (type === 'recovery') {
       cookies().set('password_update_required', 'true')
