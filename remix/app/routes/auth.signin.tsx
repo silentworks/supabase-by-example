@@ -1,5 +1,5 @@
-import { ActionFunctionArgs, json, LoaderFunctionArgs, redirect } from "@remix-run/node";
-import { Form, Link, useActionData, useLoaderData, useSearchParams } from "@remix-run/react";
+import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
+import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { AuthApiError } from "@supabase/supabase-js";
 import { useState } from "react";
 import { ZodError, z } from "zod";
@@ -10,13 +10,6 @@ import { fault, formatError } from "~/lib/utils";
 import { AuthUserSchema, ValidateEmailSchema } from "~/lib/validationSchema";
 
 type FormData = z.infer<typeof AuthUserSchema>;
-
-export async function loader({ request }: LoaderFunctionArgs) {
-  const url = new URL(request.url)
-  const authType = url.searchParams.get('auth_type') as string;
-
-	return json({ authType });
-}
 
 export const action = async ({ 
   request 
@@ -107,38 +100,39 @@ export default function SignIn() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const authType = searchParams.get('auth_type') as string;
+  const errorMessage = searchParams.get('error_message') as string;
   const [magicLink, setMagicLink] = useState(authType == 'magic_link');
   
   return (
     <div className="w-11/12 p-12 px-6 py-10 rounded-lg sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-3/12 sm:px-10 sm:py-6">
-      {actionData?.message ? (
+      {(actionData?.message ?? errorMessage) ? (
         <Alert
           className={`${actionData?.success ? "alert-info" : "alert-error"} mb-10`}
         >
-          {actionData?.message}
+          {actionData?.message ?? errorMessage}
         </Alert>
       ) : null}
       <h2 className="font-semibold text-4xl mb-4">Sign in</h2>
       <p className="font-medium mb-4">Hi, Welcome back</p>
       <div className="space-y-2">
-        <a
+        <Link
           className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
-          href="/auth/github"
+          to="/auth/github"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
             <use xlinkHref="#img-github"></use>
           </svg>
           Continue with GitHub
-        </a>
-        <a
+        </Link>
+        <Link
           className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
-          href="/auth/google"
+          to="/auth/google"
         >
           <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
             <use xlinkHref="#img-google"></use>
           </svg>
           Continue with Google
-        </a>
+        </Link>
       </div>
       <div className="divider text-gray-400 text-sm">or continue with Email</div>
       <Form method="post">
