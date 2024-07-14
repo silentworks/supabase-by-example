@@ -9,26 +9,20 @@ export const loader = async ({
   const url = new URL(request.url);
   const token_hash = url.searchParams.get("token_hash");
   const type = (url.searchParams.get("type") ?? "email") as EmailOtpType;
-  const next = url.searchParams.get("next") ?? "/";
-
-  const cookies = request.headers.get('Cookie')
+  const next = url.searchParams.get("next") ?? url.origin;
 
   // Create redirect link without the token
-  const redirectTo = url;
-  redirectTo.pathname = next;
-  redirectTo.searchParams.delete('token_hash');
-  redirectTo.searchParams.delete('type');
+  const redirectTo = new URL(next);
 
   let { supabase, headers } = createServerClient(request, new Headers());
 
   if (token_hash && type) {
     if (type === 'recovery') {
-      headers = await passwordUpdateRequired(headers)
+      headers = await passwordUpdateRequired(request, headers)
     }
     await supabase.auth.verifyOtp({ type, token_hash });
   }
 
-  
-  return redirect(next, { headers });
+  return redirect(redirectTo.toString(), { headers });
 };
   

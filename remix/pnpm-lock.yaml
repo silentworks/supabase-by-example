@@ -80,8 +80,8 @@ devDependencies:
     specifier: ^8.4.38
     version: 8.4.39
   supabase:
-    specifier: ^1.178.2
-    version: 1.178.2
+    specifier: ^1.183.5
+    version: 1.183.5
   tailwindcss:
     specifier: ^3.4.4
     version: 3.4.4
@@ -6102,8 +6102,8 @@ packages:
       ts-interface-checker: 0.1.13
     dev: true
 
-  /supabase@1.178.2:
-    resolution: {integrity: sha512-JdjNY56cF5PbuhFdhgdYah5qXOPRsLQn0kXaY7uapTFopdIFX4tRiFXqKSig8S0SdznF/y/f6vLdq30Sek1ZZQ==}
+  /supabase@1.183.5:
+    resolution: {integrity: sha512-PYhxHHoSaEJSoDDQ+SN8iumfSmVQ8cHmBFB/GKhKZV2rDcVAPqe7HiEje37IuXCenOSamdvN8jQ8548tcsq4xw==}
     engines: {npm: '>=8'}
     hasBin: true
     requiresBuild: true

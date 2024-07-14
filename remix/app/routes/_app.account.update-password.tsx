@@ -4,7 +4,7 @@ import { AuthApiError } from "@supabase/supabase-js";
 import { ZodError, z } from "zod";
 import Alert from "~/components/Alert";
 import InputErrorMessage from "~/components/InputErrorMessage";
-import { isUserAuthorized, passwordUpdated } from "~/lib/session";
+import { isUserAuthorized, clearPasswordUpdateCookie } from "~/lib/session";
 import { createServerClient } from "~/lib/supabase";
 import { fault, formatError, getProfile, success } from "~/lib/utils";
 import { UpdatePasswordSchema } from "~/lib/validationSchema";
@@ -36,7 +36,7 @@ export const action = async ({
     }
   }
 
-  let { supabase, headers } = createServerClient(request, new Headers());
+  const { supabase, headers } = createServerClient(request, new Headers());
   
   const { error } = await supabase.auth.updateUser({
     password
@@ -49,7 +49,7 @@ export const action = async ({
     return json(fault({ message: error.message, data: { password: "", passwordConfirm: "" } }), { headers });
   }
 
-  headers = await passwordUpdated(request, headers);
+  await clearPasswordUpdateCookie(request, headers);
 
   return json(success({ 
     message: "Your password was updated successfully.", 
