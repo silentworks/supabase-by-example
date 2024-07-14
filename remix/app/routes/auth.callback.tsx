@@ -1,6 +1,4 @@
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
-import { EmailOtpType } from "@supabase/supabase-js";
-import { passwordUpdateRequired } from "~/lib/session";
 import { createServerClient } from "~/lib/supabase";
 
 export const loader = async ({ 
@@ -8,19 +6,16 @@ export const loader = async ({
 }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
-  const next = url.searchParams.get("next") ?? "/";
+  const next = url.searchParams.get("next") ?? url.origin;
 
   // Create redirect link without the token
-  const redirectTo = url;
-  redirectTo.pathname = next;
-  redirectTo.searchParams.delete('code');
+  const redirectTo = new URL(next);
 
   let { supabase, headers } = createServerClient(request, new Headers());
 
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      redirectTo.searchParams.delete('next')
       return redirect(redirectTo.toString(), { headers })
     }
   }

@@ -22,5 +22,5 @@ export async function GET(req: NextRequest) {
     await supabase.auth.verifyOtp({ type, token_hash });
   }
 
-  return NextResponse.redirect(new URL(next, req.url));
+  return NextResponse.redirect(redirectTo);
 }

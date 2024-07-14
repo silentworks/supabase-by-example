@@ -1,4 +1,4 @@
-import { createCookie, redirect } from "@remix-run/node";
+import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import { createServerClient } from "./supabase";
 
 export const isUserAuthorized = async (request: Request) => {
@@ -24,30 +24,39 @@ export const isUserAuthorized = async (request: Request) => {
     return { session, user, headers }
 }
 
-export const passwordUpdateCookie = createCookie("password_update_required", {
-    maxAge: 604_800, // one week
-});
+type SessionData = {
+    password_update_required: boolean;
+};
+
+  
+const { getSession, commitSession, destroySession } =
+  createCookieSessionStorage<SessionData>({
+    cookie: {
+        name: '__sb_by_example',
+        maxAge: 604_800, // one week
+    }
+  });
 
 export const isPasswordUpdateRequired = async (request: Request) => {
-    const cookie = (await passwordUpdateCookie.parse(request.headers.get('Cookie'))) || {};
+    const session = await getSession(request.headers.get('Cookie'));
 
-    if (cookie.password_update_required) {
-        throw redirect('/account/update-password')
+    if (session.has('password_update_required')) {
+        throw redirect('/account/update-password');
     }
 }
 
-export const passwordUpdateRequired = async (headers: Headers) => {
-    headers.append('Set-Cookie', await passwordUpdateCookie.serialize({
-        password_update_required: true
-    }));
+export const passwordUpdateRequired = async (request: Request, headers: Headers) => {
+    const session = await getSession(request.headers.get('Cookie'));
+    session.set('password_update_required', true);
+
+    headers.append('Set-Cookie', await commitSession(session));
 
     return headers;
 }
 
-export const passwordUpdated = async (request: Request, headers: Headers) => {
-    const cookie = (await passwordUpdateCookie.parse(request.headers.get('Cookie'))) || {};
-    cookie.password_update_required = false;
-    headers.append('Set-Cookie', await passwordUpdateCookie.serialize(cookie));
+export const clearPasswordUpdateCookie = async (request: Request, headers: Headers) => {
+    const session = await getSession(request.headers.get('Cookie'));
+    headers.append('Set-Cookie', await destroySession(session));
 
     return headers;
 }
