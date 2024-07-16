@@ -14,10 +14,12 @@ Features:
 This project makes use of:
 
 - [Zod](https://zod.dev/) Schema Validation library
-- [Supabase Auth Helpers NextJS](https://supabase.com/docs/guides/auth/auth-helpers/nextjs)
+- [Supabase SSR](https://supabase.com/docs/guides/auth/server-side)
 - [DaisyUI](https://daisyui.com/)
 - [tailwindcss](https://tailwindcss.com/)
 - [Playwright](https://playwright.dev/) e2e testing
+- [pgTAP](https://pgtap.org/) Postgres unit testing
+- [Tailwind Profile from Codepen](https://codepen.io/ScottWindon/pen/XWdbPLm)
 
 ## Getting Started
 
