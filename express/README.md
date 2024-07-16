@@ -5,7 +5,7 @@ This is a Express/Supabase project showing how to do password reset and email ch
 This project makes use of:
 
 - [Zod](https://zod.dev/) Schema Validation library
-- [Supabase Auth Helpers Shared](https://github.com/supabase/auth-helpers/tree/main/packages/shared)
+- [Supabase SSR](https://supabase.com/docs/guides/auth/server-side)
 - [DaisyUI](https://daisyui.com/)
 - [tailwindcss](https://tailwindcss.com/)
 - [Playwright](https://playwright.dev/) e2e testing

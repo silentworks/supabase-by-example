@@ -14,7 +14,7 @@ Features:
 This project makes use of:
 
 - [Zod](https://zod.dev/) Schema Validation library
-- [Supabase Auth Helpers SvelteKit](https://supabase.com/docs/guides/auth/auth-helpers/sveltekit)
+- [Supabase SSR](https://supabase.com/docs/guides/auth/server-side)
 - [DaisyUI](https://daisyui.com/)
 - [tailwindcss](https://tailwindcss.com/)
 - [Playwright](https://playwright.dev/) e2e testing
