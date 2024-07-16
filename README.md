@@ -5,6 +5,7 @@ These are example projects using supabase in various frameworks. This repo took 
 ## Frameworks
 
 - nextjs
+- remix
 - sveltekit
 - react
 - express (only in Magic Link + Otp SignIn and Reset flow example at the moment)

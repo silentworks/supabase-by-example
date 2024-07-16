@@ -10,7 +10,7 @@ dependencies:
     version: 1.5.0
   '@supabase/ssr':
     specifier: ^0.4.1
-    version: 0.4.1(@supabase/supabase-js@2.44.3)
+    version: 0.4.1(@supabase/supabase-js@2.44.4)
   cookie-parser:
     specifier: ~1.4.6
     version: 1.4.6
@@ -225,8 +225,8 @@ packages:
     dev: false
     optional: true
 
-  /@supabase/auth-js@2.64.2:
-    resolution: {integrity: sha512-s+lkHEdGiczDrzXJ1YWt2y3bxRi+qIUnXcgkpLSrId7yjBeaXBFygNjTaoZLG02KNcYwbuZ9qkEIqmj2hF7svw==}
+  /@supabase/auth-js@2.64.4:
+    resolution: {integrity: sha512-9ITagy4WP4FLl+mke1rchapOH0RQpf++DI+WSG2sO1OFOZ0rW3cwAM0nCrMOxu+Zw4vJ4zObc08uvQrXx590Tg==}
     dependencies:
       '@supabase/node-fetch': 2.6.15
     dev: false
@@ -255,19 +255,19 @@ packages:
     dependencies:
       '@supabase/node-fetch': 2.6.15
       '@types/phoenix': 1.6.5
-      '@types/ws': 8.5.10
+      '@types/ws': 8.5.11
       ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
     dev: false
 
-  /@supabase/ssr@0.4.1(@supabase/supabase-js@2.44.3):
+  /@supabase/ssr@0.4.1(@supabase/supabase-js@2.44.4):
     resolution: {integrity: sha512-000i7y4ITXjXU0T1JytZYU33VbUNklX9YN47hCweaLKsTBAEigJJJCeq3G+/IiwEggBt58Vu0KQ3UGXON7OmDQ==}
     peerDependencies:
       '@supabase/supabase-js': ^2.43.4
     dependencies:
-      '@supabase/supabase-js': 2.44.3
+      '@supabase/supabase-js': 2.44.4
       cookie: 0.6.0
     optionalDependencies:
       '@rollup/rollup-linux-x64-gnu': 4.18.1
@@ -279,10 +279,10 @@ packages:
       '@supabase/node-fetch': 2.6.15
     dev: false
 
-  /@supabase/supabase-js@2.44.3:
-    resolution: {integrity: sha512-3tYf5ojKSL0RJIpnkwYSdLPdRcza8KMTdRx2SyF9YA6PWnuUfqzmqjZohAHJuGql2CaPMWd9BLPOHupPuGq0lQ==}
+  /@supabase/supabase-js@2.44.4:
+    resolution: {integrity: sha512-vqtUp8umqcgj+RPUc7LiEcQmgsEWFDPJdJizRJF/5tf2zSlVB+3YbUwyQE/hLagYA8TLvGXe7oAqtYyFde6llw==}
     dependencies:
-      '@supabase/auth-js': 2.64.2
+      '@supabase/auth-js': 2.64.4
       '@supabase/functions-js': 2.4.1
       '@supabase/node-fetch': 2.6.15
       '@supabase/postgrest-js': 1.15.8
@@ -307,8 +307,8 @@ packages:
     resolution: {integrity: sha512-0vQ4fz9TTM4bCdllYWEJ2JHBUXR9xqPtc70dJ7BMRDVfvZyYdrgey3nP5RRcVj+qAgnHJM8r9fvgrfnPMxdnhA==}
     dev: true
 
-  /@types/ws@8.5.10:
-    resolution: {integrity: sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==}
+  /@types/ws@8.5.11:
+    resolution: {integrity: sha512-4+q7P5h3SpJxaBft0Dzpbr6lmMaqh0Jr2tbhJZ/luAwvD7ohSCniYkwz/pLxuT2h0EOa6QADgJj1Ko+TzRfZ+w==}
     dependencies:
       '@types/node': 20.14.10
     dev: false
