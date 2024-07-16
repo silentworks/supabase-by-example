@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "playwright test",
-		"s:start": "supabase start",
+    "s:start": "supabase start",
     "s:stop": "supabase stop"
   },
   "dependencies": {
@@ -25,20 +25,20 @@
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
     "@playwright/test": "^1.43.1",
-    "@types/tcp-port-used": "^1.0.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "typescript": "^5",
+    "@types/tcp-port-used": "^1.0.1",
     "encoding": "^0.1.13",
-    "postcss": "^8",
-    "supabase": "^1.176.10",
-    "tailwindcss": "^3.4.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
-    "tcp-port-used": "^1.0.2"
+    "postcss": "^8",
+    "supabase": "^1.183.5",
+    "tailwindcss": "^3.4.1",
+    "tcp-port-used": "^1.0.2",
+    "typescript": "^5"
   },
-	"trustedDependencies": [
-		"supabase"
-	]
+  "trustedDependencies": [
+    "supabase"
+  ]
 }
