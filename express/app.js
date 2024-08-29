@@ -46,6 +46,8 @@ async function hasSession(req, res, next) {
   const nonSecurePaths = [
     "/auth/signin",
     "/auth/signin/otp",
+    "/auth/github",
+    "/auth/google",
     "/auth/signup",
     "/auth/forgotpassword",
     "/auth/callback",
