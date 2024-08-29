@@ -8,6 +8,10 @@ block main
       +alert(message)(class=`${success ? 'alert-info' : 'alert-error'} mb-10`)
     h2(class='font-semibold text-4xl mb-4') Sign in
     p(class='font-medium mb-4') Hi, Welcome back
+    div(class='space-y-2')
+      a(class='btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation' href='/auth/github') Continue with GitHub
+      a(class='btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation' href='/auth/google') Continue with Google
+    div(class='divider text-gray-400 text-sm') or continue with Email
     form(method='post')
       .form-control
         label(class='label' for='email') Email

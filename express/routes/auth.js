@@ -199,4 +199,16 @@ router.post("/signout", async function (req, res) {
   }
 });
 
+router.get("/:provider", async function (req, res, next) {
+  const supabase = createClient({ req, res });
+  const { data } = await supabase.auth.signInWithOAuth({
+    provider: req.params.provider,
+    options: {
+      redirectTo: `${process.env.APP_URL}/auth/callback`
+    }
+  });
+
+  res.redirect(303, data.url);
+});
+
 module.exports = router;
