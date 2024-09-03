@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { email, password, required } from "./validationRules";
+import { email, password, phone, required } from "./validationRules";
 
 export const AuthUserSchema = z.object({
   email: email(),
@@ -8,6 +8,11 @@ export const AuthUserSchema = z.object({
 
 export const AuthUserWithTokenSchema = z.object({
   email: email(),
+  token: required("Token"),
+});
+
+export const AuthPhoneUserWithTokenSchema = z.object({
+  phone: phone(),
   token: required("Token"),
 });
 
@@ -45,6 +50,21 @@ export const UpdateEmailSchema = z
         code: "custom",
         message: "Email Address does not match",
         path: ["emailConfirm"],
+      });
+    }
+  });
+
+export const UpdatePhoneSchema = z
+  .object({
+    phone: phone(),
+    phoneConfirm: phone("Confirm Phone"),
+  })
+  .superRefine(({ phone, phoneConfirm }, ctx) => {
+    if (phone !== phoneConfirm) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Phone number does not match",
+        path: ["phoneConfirm"],
       });
     }
   });

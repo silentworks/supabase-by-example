@@ -36,6 +36,11 @@ export default function Account() {
           </Link>
         </li>
         <li className="flex justify-between hover:bg-blue-600 hover:text-blue-200">
+          <Link className="block w-full p-3" to="/account/update-phone">
+            Update phone
+          </Link>
+        </li>
+        <li className="flex justify-between hover:bg-blue-600 hover:text-blue-200">
           <Link className="block w-full p-3" to="/account/update-password">
             Update password
           </Link>
