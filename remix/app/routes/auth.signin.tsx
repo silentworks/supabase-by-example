@@ -6,7 +6,7 @@ import { ZodError, z } from "zod";
 import Alert from "~/components/Alert";
 import InputErrorMessage from "~/components/InputErrorMessage";
 import { createServerClient } from "~/lib/supabase";
-import { fault, formatError } from "~/lib/utils";
+import { fault, formatError, success } from "~/lib/utils";
 import { AuthUserSchema, ValidateEmailSchema } from "~/lib/validationSchema";
 
 type FormData = z.infer<typeof AuthUserSchema>;
@@ -63,6 +63,11 @@ export const action = async ({
       }
       return json(fault({ message: error.message, data: { email, password: "" } }), { headers });
     }
+
+    return json(success({ 
+      message: "Please check your email for a magic link to log into the website.", 
+      data: { email: "" } 
+    }), { headers });
   }
 
   return redirect(`/`, {

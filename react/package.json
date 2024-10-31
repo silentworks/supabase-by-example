@@ -14,7 +14,7 @@
     "s:stop": "supabase stop"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.2",
+    "@supabase/supabase-js": "^2.46.1",
     "daisyui": "^2.51.5",
     "just-safe-get": "^4.2.0",
     "react": "^18.2.0",
@@ -33,7 +33,7 @@
     "autoprefixer": "^10.4.14",
     "concurrently": "^8.2.0",
     "postcss": "^8.4.24",
-    "supabase": "^1.191.3",
+    "supabase": "^1.207.9",
     "tailwindcss": "^3.3.2",
     "tcp-port-used": "^1.0.2",
     "typescript": "^5.1.3",
