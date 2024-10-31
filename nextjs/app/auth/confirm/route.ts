@@ -9,10 +9,11 @@ export async function GET(req: NextRequest) {
   const type = searchParams.get("type") as EmailOtpType;
   const next = searchParams.get("next") ?? "/";
 
-    // Create redirect link without the code
-    const redirectTo = req.nextUrl.clone()
-    redirectTo.pathname = next
-    redirectTo.searchParams.delete('code')
+  // Create redirect link without the code
+  const redirectTo = new URL(next);
+  redirectTo.searchParams.delete('code')
+
+  console.log({ next })
 
   if (token_hash && type) {
     if (type === 'recovery') {
