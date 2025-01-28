@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@supabase/supabase-js':
-        specifier: ^2.46.1
-        version: 2.46.1
+        specifier: ^2.48.1
+        version: 2.48.1
       daisyui:
         specifier: ^2.51.5
         version: 2.51.5(autoprefixer@10.4.14(postcss@8.4.24))(postcss@8.4.24)
@@ -34,8 +34,8 @@ importers:
         specifier: ^8.0.2
         version: 8.0.2
       '@playwright/test':
-        specifier: ^1.35.0
-        version: 1.35.0
+        specifier: ^1.50.0
+        version: 1.50.0
       '@types/node':
         specifier: ^20.3.1
         version: 20.3.1
@@ -61,8 +61,8 @@ importers:
         specifier: ^8.4.24
         version: 8.4.24
       supabase:
-        specifier: ^1.207.9
-        version: 1.207.9
+        specifier: ^2.9.6
+        version: 2.9.6
       tailwindcss:
         specifier: ^3.3.2
         version: 3.3.2
@@ -408,10 +408,9 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@playwright/test@1.35.0':
-    resolution: {integrity: sha512-6qXdd5edCBynOwsz1YcNfgX8tNWeuS9fxy5o59D0rvHXxRtjXRebB4gE4vFVfEMXl/z8zTnAzfOs7aQDEs8G4Q==}
-    engines: {node: '>=16'}
-    deprecated: Please update to the latest version of Playwright to test up-to-date browsers.
+  '@playwright/test@1.50.0':
+    resolution: {integrity: sha512-ZGNXbt+d65EGjBORQHuYKj+XhCewlwpnSd/EDuLPZGSiEWmgOJB5RmMCCYGy5aMfTs9wx61RivfDKi8H/hcMvw==}
+    engines: {node: '>=18'}
     hasBin: true
 
   '@remix-run/router@1.6.3':
@@ -513,27 +512,27 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@supabase/auth-js@2.65.1':
-    resolution: {integrity: sha512-IA7i2Xq2SWNCNMKxwmPlHafBQda0qtnFr8QnyyBr+KaSxoXXqEzFCnQ1dGTy6bsZjVBgXu++o3qrDypTspaAPw==}
+  '@supabase/auth-js@2.67.3':
+    resolution: {integrity: sha512-NJDaW8yXs49xMvWVOkSIr8j46jf+tYHV0wHhrwOaLLMZSFO4g6kKAf+MfzQ2RaD06OCUkUHIzctLAxjTgEVpzw==}
 
-  '@supabase/functions-js@2.4.3':
-    resolution: {integrity: sha512-sOLXy+mWRyu4LLv1onYydq+10mNRQ4rzqQxNhbrKLTLTcdcmS9hbWif0bGz/NavmiQfPs4ZcmQJp4WqOXlR4AQ==}
+  '@supabase/functions-js@2.4.4':
+    resolution: {integrity: sha512-WL2p6r4AXNGwop7iwvul2BvOtuJ1YQy8EbOd0dhG1oN1q8el/BIRSFCFnWAMM/vJJlHWLi4ad22sKbKr9mvjoA==}
 
   '@supabase/node-fetch@2.6.15':
     resolution: {integrity: sha512-1ibVeYUacxWYi9i0cf5efil6adJ9WRyZBLivgjs+AUpewx1F3xPi7gLgaASI2SmIQxPoCEjAsLAzKPgMJVgOUQ==}
     engines: {node: 4.x || >=6.0.0}
 
-  '@supabase/postgrest-js@1.16.3':
-    resolution: {integrity: sha512-HI6dsbW68AKlOPofUjDTaosiDBCtW4XAm0D18pPwxoW3zKOE2Ru13Z69Wuys9fd6iTpfDViNco5sgrtnP0666A==}
+  '@supabase/postgrest-js@1.18.1':
+    resolution: {integrity: sha512-dWDnoC0MoDHKhaEOrsEKTadWQcBNknZVQcSgNE/Q2wXh05mhCL1ut/jthRUrSbYcqIw/CEjhaeIPp7dLarT0bg==}
 
-  '@supabase/realtime-js@2.10.7':
-    resolution: {integrity: sha512-OLI0hiSAqQSqRpGMTUwoIWo51eUivSYlaNBgxsXZE7PSoWh12wPRdVt0psUMaUzEonSB85K21wGc7W5jHnT6uA==}
+  '@supabase/realtime-js@2.11.2':
+    resolution: {integrity: sha512-u/XeuL2Y0QEhXSoIPZZwR6wMXgB+RQbJzG9VErA3VghVt7uRfSVsjeqd7m5GhX3JR6dM/WRmLbVR8URpDWG4+w==}
 
   '@supabase/storage-js@2.7.1':
     resolution: {integrity: sha512-asYHcyDR1fKqrMpytAS1zjyEfvxuOIp1CIXX7ji4lHHcJKqyk+sLl/Vxgm4sN6u8zvuUtae9e4kDxQP2qrwWBA==}
 
-  '@supabase/supabase-js@2.46.1':
-    resolution: {integrity: sha512-HiBpd8stf7M6+tlr+/82L8b2QmCjAD8ex9YdSAKU+whB/SHXXJdus1dGlqiH9Umy9ePUuxaYmVkGd9BcvBnNvg==}
+  '@supabase/supabase-js@2.48.1':
+    resolution: {integrity: sha512-VMD+CYk/KxfwGbI4fqwSUVA7CLr1izXpqfFerhnYPSi6LEKD8GoR4kuO5Cc8a+N43LnfSQwLJu4kVm2e4etEmA==}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -1112,9 +1111,14 @@ packages:
     resolution: {integrity: sha512-8V9+HQPupnaXMA23c5hvl69zXvTwTzyAYasnkb0Tts4XvO4CliqONMOnvlq26rkhLC3nWDFBJf73LU1e1VZLaQ==}
     engines: {node: '>= 6'}
 
-  playwright-core@1.35.0:
-    resolution: {integrity: sha512-muMXyPmIx/2DPrCHOD1H1ePT01o7OdKxKj2ebmCAYvqhUy+Y1bpal7B0rdoxros7YrXI294JT/DWw2LqyiqTPA==}
-    engines: {node: '>=16'}
+  playwright-core@1.50.0:
+    resolution: {integrity: sha512-CXkSSlr4JaZs2tZHI40DsZUN/NIwgaUPsyLuOAaIZp2CyF2sN5MM5NJsyB188lFSSozFxQ5fPT4qM+f0tH/6wQ==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.50.0:
+    resolution: {integrity: sha512-+GinGfGTrd2IfX1TA4N2gNmeIksSb+IAe589ZH+FlmpV3MYTx6+buChGIuDLQwrGNCw2lWibqV50fU510N7S+w==}
+    engines: {node: '>=18'}
     hasBin: true
 
   postcss-import@15.1.0:
@@ -1293,8 +1297,8 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
-  supabase@1.207.9:
-    resolution: {integrity: sha512-BJPwsAd2UBIpQawcQV3/xKHEZ8YrrkHYpgibxCZbG+RuxuhTtkHG7zR4I3LylIIEwcKp3hmDKu/hO1m2NT5RXA==}
+  supabase@2.9.6:
+    resolution: {integrity: sha512-oPJXgvyuZCsbR/SQ5/0Jvab3zHqUg+lunnweYMCN8EdT9Q0ANChrn1lCKUJ4toXJXdq8gdVgNvTgIDu/JljbMw==}
     engines: {npm: '>=8'}
     hasBin: true
 
@@ -1769,12 +1773,9 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@playwright/test@1.35.0':
+  '@playwright/test@1.50.0':
     dependencies:
-      '@types/node': 20.3.1
-      playwright-core: 1.35.0
-    optionalDependencies:
-      fsevents: 2.3.2
+      playwright: 1.50.0
 
   '@remix-run/router@1.6.3': {}
 
@@ -1835,11 +1836,11 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.32.1':
     optional: true
 
-  '@supabase/auth-js@2.65.1':
+  '@supabase/auth-js@2.67.3':
     dependencies:
       '@supabase/node-fetch': 2.6.15
 
-  '@supabase/functions-js@2.4.3':
+  '@supabase/functions-js@2.4.4':
     dependencies:
       '@supabase/node-fetch': 2.6.15
 
@@ -1847,11 +1848,11 @@ snapshots:
     dependencies:
       whatwg-url: 5.0.0
 
-  '@supabase/postgrest-js@1.16.3':
+  '@supabase/postgrest-js@1.18.1':
     dependencies:
       '@supabase/node-fetch': 2.6.15
 
-  '@supabase/realtime-js@2.10.7':
+  '@supabase/realtime-js@2.11.2':
     dependencies:
       '@supabase/node-fetch': 2.6.15
       '@types/phoenix': 1.6.5
@@ -1865,13 +1866,13 @@ snapshots:
     dependencies:
       '@supabase/node-fetch': 2.6.15
 
-  '@supabase/supabase-js@2.46.1':
+  '@supabase/supabase-js@2.48.1':
     dependencies:
-      '@supabase/auth-js': 2.65.1
-      '@supabase/functions-js': 2.4.3
+      '@supabase/auth-js': 2.67.3
+      '@supabase/functions-js': 2.4.4
       '@supabase/node-fetch': 2.6.15
-      '@supabase/postgrest-js': 1.16.3
-      '@supabase/realtime-js': 2.10.7
+      '@supabase/postgrest-js': 1.18.1
+      '@supabase/realtime-js': 2.11.2
       '@supabase/storage-js': 2.7.1
     transitivePeerDependencies:
       - bufferutil
@@ -2431,7 +2432,13 @@ snapshots:
 
   pirates@4.0.5: {}
 
-  playwright-core@1.35.0: {}
+  playwright-core@1.50.0: {}
+
+  playwright@1.50.0:
+    dependencies:
+      playwright-core: 1.50.0
+    optionalDependencies:
+      fsevents: 2.3.2
 
   postcss-import@15.1.0(postcss@8.4.24):
     dependencies:
@@ -2619,7 +2626,7 @@ snapshots:
       pirates: 4.0.5
       ts-interface-checker: 0.1.13
 
-  supabase@1.207.9:
+  supabase@2.9.6:
     dependencies:
       bin-links: 5.0.0
       https-proxy-agent: 7.0.5
