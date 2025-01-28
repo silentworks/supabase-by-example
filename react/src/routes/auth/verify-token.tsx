@@ -3,16 +3,17 @@ import { AuthUserWithTokenSchema } from "@/lib/validationSchema";
 import { z, ZodError } from "zod";
 import { formatError } from "@/lib/utils";
 import InputErrorMessage from "@/components/InputErrorMessage";
-import { AuthApiError } from "@supabase/supabase-js";
+import { AuthApiError, EmailOtpType } from "@supabase/supabase-js";
 import Alert from "@/components/Alert";
 import { useSupabaseClient } from "@/lib/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 type FormData = z.infer<typeof AuthUserWithTokenSchema>;
 
 export default function VerifyToken() {
   const supabase = useSupabaseClient();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [errors, setErrors] = useState<FormData>();
   const [message, setMessage] = useState<string>("");
   const [formSuccess, setFormSuccess] = useState(false);
@@ -20,6 +21,7 @@ export default function VerifyToken() {
     email: "",
     token: "",
   });
+  const type = (searchParams.get("type") ?? "email") as EmailOtpType;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,7 +47,7 @@ export default function VerifyToken() {
     const { error } = await supabase.auth.verifyOtp({
       email,
       token,
-      type: "email",
+      type,
     });
 
     if (error) {
