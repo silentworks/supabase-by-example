@@ -4,6 +4,7 @@
 	import InputErrorMessage from '$lib/InputErrorMessage.svelte';
 
 	export let form;
+	export let data;
 </script>
 
 <div
@@ -41,6 +42,7 @@
 		{#if form?.errors?.token}
 			<InputErrorMessage>{form?.errors?.token}</InputErrorMessage>
 		{/if}
+		<input type="hidden" name="type" value={data.type} />
 		<div class="form-control mt-6">
 			<button class="btn btn-primary no-animation">Sign in</button>
 		</div>
