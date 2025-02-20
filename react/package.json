@@ -1,7 +1,6 @@
 {
-  "name": "user-profile-react",
+  "name": "react-supabase-by-example",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run dev:css\" \"vite\"",

@@ -1,6 +1,5 @@
 {
   "name": "nextjs-supabase-by-example",
-  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

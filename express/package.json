@@ -1,6 +1,5 @@
 {
-  "name": "express",
-  "version": "0.0.0",
+  "name": "express-supabase-by-example",
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev:css\" \"nodemon ./bin/www\"",

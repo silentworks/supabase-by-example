@@ -1,6 +1,6 @@
 {
   "name": "supabase-by-example",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "",
   "scripts": {
     "format": "prettier --write \"**/*.{js,json,md,yml,ts,tsx,jsx,css,svelte}\"",
