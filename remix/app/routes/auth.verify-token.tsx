@@ -42,7 +42,6 @@ export const action = async ({
     });
 
     if (error) {
-      console.log(`Ex: ${token} ${error}`)
       if (error instanceof AuthApiError && error.status === 400) {
         return json(fault({ message: "Invalid credentials.", data: { phone, token: "", email: "" } }), { headers });
       }
