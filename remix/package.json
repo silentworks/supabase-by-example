@@ -1,5 +1,5 @@
 {
-  "name": "my-remix-app",
+  "name": "remix-supabase-by-example",
   "private": true,
   "sideEffects": false,
   "type": "module",

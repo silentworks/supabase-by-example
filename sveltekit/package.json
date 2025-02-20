@@ -1,6 +1,5 @@
 {
-	"name": "user-profile",
-	"version": "0.1.0",
+	"name": "sveltekit-supabase-by-example",
 	"private": true,
 	"scripts": {
 		"dev": "concurrently \"npm run dev:css\" \"vite dev\"",
