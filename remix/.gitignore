@@ -2,5 +2,5 @@ node_modules
 
 /.cache
 /build
-/.react-router
+.react-router
 .env
