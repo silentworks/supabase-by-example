@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { ActionFunctionArgs, LoaderFunctionArgs, redirect } from "react-router";
 import { clearPasswordUpdateCookie } from "~/lib/session";
 import { createServerClient } from "~/lib/supabase";
 

@@ -1,4 +1,4 @@
-import { json, LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { LoaderFunctionArgs, redirect } from "react-router";
 import { Provider } from "@supabase/supabase-js";
 import { createServerClient } from "~/lib/supabase";
 import { fault } from "~/lib/utils";
@@ -19,7 +19,7 @@ export const loader = async ({
   });
 
   if (error) {
-    return json(fault({ message: 'Server error. Try again later.' }));
+    return fault({ message: 'Server error. Try again later.' });
   }
 
   return redirect(data.url, { headers });

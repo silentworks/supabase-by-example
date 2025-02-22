@@ -1,5 +1,4 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { ActionFunctionArgs, LoaderFunctionArgs, Form, useActionData, useLoaderData, data } from "react-router";
 import { AuthApiError } from "@supabase/supabase-js";
 import { ZodError, z } from "zod";
 import Alert from "~/components/Alert";
@@ -18,7 +17,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const { supabase } = createServerClient(request, request.headers);
   const { profile } = await getProfile(supabase);
 
-	return json({ user, profile }, { headers });
+	return data({ user, profile }, { headers });
 }
 
 export const action = async ({ 
@@ -33,7 +32,7 @@ export const action = async ({
   } catch (err) {
     if (err instanceof ZodError) {
       const errors = formatError(err) as FormData;
-      return json(fault({ data: { phone, phoneConfirm }, errors }));
+      return data(fault({ data: { phone, phoneConfirm }, errors }));
     }
   }
 
@@ -45,12 +44,12 @@ export const action = async ({
 
   if (error) {
     if (error instanceof AuthApiError && error.status === 400) {
-      return json(fault({ message: "Invalid credentials.", data: { phone: "", phoneConfirm: "" } }), { headers });
+      return data(fault({ message: "Invalid credentials.", data: { phone: "", phoneConfirm: "" } }), { headers });
     }
-    return json(fault({ message: error.message, data: { phone: "", phoneConfirm: "" } }), { headers });
+    return data(fault({ message: error.message, data: { phone: "", phoneConfirm: "" } }), { headers });
   }
 
-  return json(success({ 
+  return data(success({ 
     message: "Your phone number was updated successfully.", 
     data: { phone: "", phoneConfirm: "" } 
   }), { headers });

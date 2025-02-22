@@ -1,5 +1,4 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { ActionFunctionArgs, LoaderFunctionArgs, Form, useActionData, useLoaderData, data } from "react-router";
 import { AuthApiError } from "@supabase/supabase-js";
 import { ZodError, z } from "zod";
 import Alert from "~/components/Alert";
@@ -17,7 +16,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const { supabase } = createServerClient(request, request.headers);
   const { profile } = await getProfile(supabase);
   
-	return json({ user, profile }, { headers });
+	return data({ user, profile }, { headers });
 }
 
 export const action = async ({ 
@@ -32,7 +31,7 @@ export const action = async ({
   } catch (err) {
     if (err instanceof ZodError) {
       const errors = formatError(err) as FormData;
-      return json(fault({ data: { password, passwordConfirm }, errors }));
+      return data(fault({ data: { password, passwordConfirm }, errors }));
     }
   }
 
@@ -44,14 +43,14 @@ export const action = async ({
 
   if (error) {
     if (error instanceof AuthApiError && error.status === 400) {
-      return json(fault({ message: "Invalid credentials.", data: { password: "", passwordConfirm: "" } }), { headers });
+      return data(fault({ message: "Invalid credentials.", data: { password: "", passwordConfirm: "" } }), { headers });
     }
-    return json(fault({ message: error.message, data: { password: "", passwordConfirm: "" } }), { headers });
+    return data(fault({ message: error.message, data: { password: "", passwordConfirm: "" } }), { headers });
   }
 
   await clearPasswordUpdateCookie(request, headers);
 
-  return json(success({ 
+  return data(success({ 
     message: "Your password was updated successfully.", 
     data: { password: "", passwordConfirm: "" } 
   }), { headers });

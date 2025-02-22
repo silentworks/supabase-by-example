@@ -1,5 +1,4 @@
-import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+import { ActionFunctionArgs, Form, Link, data, redirect, useActionData, useSearchParams } from "react-router";
 import { AuthApiError, EmailOtpType, MobileOtpType } from "@supabase/supabase-js";
 import { useState } from "react";
 import { ZodError, z } from "zod";
@@ -31,7 +30,7 @@ export const action = async ({
     } catch (err) {
       if (err instanceof ZodError) {
         const errors = formatError(err) as FormData;
-        return json(fault({ data: { phone, token, email: "" }, errors }));
+        return fault({ data: { phone, token, email: "" }, errors });
       }
     }
     
@@ -43,9 +42,9 @@ export const action = async ({
 
     if (error) {
       if (error instanceof AuthApiError && error.status === 400) {
-        return json(fault({ message: "Invalid credentials.", data: { phone, token: "", email: "" } }), { headers });
+        return data(fault({ message: "Invalid credentials.", data: { phone, token: "", email: "" } }), { headers });
       }
-      return json(fault({ message: error.message, data: { phone, token: "", email: "" } }), { headers });
+      return data(fault({ message: error.message, data: { phone, token: "", email: "" } }), { headers });
     }
   } else {
     try {
@@ -53,7 +52,7 @@ export const action = async ({
     } catch (err) {
       if (err instanceof ZodError) {
         const errors = formatError(err) as FormData;
-        return json(fault({ data: { email, token, phone: "" }, errors }));
+        return fault({ data: { email, token, phone: "" }, errors });
       }
     }
     
@@ -65,9 +64,9 @@ export const action = async ({
 
     if (error) {
       if (error instanceof AuthApiError && error.status === 400) {
-        return json(fault({ message: "Invalid credentials.", data: { email, token: "", phone: "" } }), { headers });
+        return data(fault({ message: "Invalid credentials.", data: { email, token: "", phone: "" } }), { headers });
       }
-      return json(fault({ message: error.message, data: { email, token: "", phone: "" } }), { headers });
+      return data(fault({ message: error.message, data: { email, token: "", phone: "" } }), { headers });
     }
   }
 

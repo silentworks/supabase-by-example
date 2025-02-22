@@ -1,5 +1,4 @@
-import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+import { ActionFunctionArgs, Form, Link, data, redirect, useActionData, useSearchParams } from "react-router";
 import { AuthApiError } from "@supabase/supabase-js";
 import { useState } from "react";
 import { ZodError, z } from "zod";
@@ -27,7 +26,7 @@ export const action = async ({
     } catch (err) {
       if (err instanceof ZodError) {
         const errors = formatError(err) as FormData;
-        return json(fault({ data: { email, password }, errors }));
+        return fault({ data: { email, password }, errors });
       }
     }
     
@@ -38,9 +37,9 @@ export const action = async ({
 
     if (error) {
       if (error instanceof AuthApiError && error.status === 400) {
-        return json(fault({ message: "Invalid credentials.", data: { email, password: "" } }), { headers });
+        return data(fault({ message: "Invalid credentials.", data: { email, password: "" } }), { headers });
       }
-      return json(fault({ message: error.message, data: { email, password: "" } }), { headers });
+      return data(fault({ message: error.message, data: { email, password: "" } }), { headers });
     }
   } else {
     // magic link sign in
@@ -49,7 +48,7 @@ export const action = async ({
     } catch (err) {
       if (err instanceof ZodError) {
         const errors = formatError(err) as FormData;
-        return json(fault({ data: { email, password: "" }, errors }));
+        return fault({ data: { email, password: "" }, errors });
       }
     }
 
@@ -59,12 +58,12 @@ export const action = async ({
 
     if (error) {
       if (error instanceof AuthApiError && error.status === 400) {
-        return json(fault({ message: "Invalid credentials.", data: { email, password: "" } }), { headers });
+        return data(fault({ message: "Invalid credentials.", data: { email, password: "" } }), { headers });
       }
-      return json(fault({ message: error.message, data: { email, password: "" } }), { headers });
+      return data(fault({ message: error.message, data: { email, password: "" } }), { headers });
     }
 
-    return json(success({ 
+    return data(success({ 
       message: "Please check your email for a magic link to log into the website.", 
       data: { email: "" } 
     }), { headers });

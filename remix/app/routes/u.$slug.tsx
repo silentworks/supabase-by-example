@@ -1,6 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
-import { json, type LoaderFunctionArgs } from '@remix-run/node'
-import { useLoaderData } from "@remix-run/react";
+import { type MetaFunction, type LoaderFunctionArgs, useLoaderData } from "react-router";
 import { createServerClient } from "~/lib/supabase";
 import { getProfile } from "~/lib/utils";
 
@@ -9,7 +7,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   const { profile, profileInfo } = await getProfile(supabase, params.slug);
   const url = new URL(request.url).origin
 
-	return json({ profile, profileInfo, url });
+	return { profile, profileInfo, url };
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {

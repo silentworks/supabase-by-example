@@ -1,5 +1,4 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { Form, ActionFunctionArgs, LoaderFunctionArgs, useActionData, useLoaderData, data } from "react-router";
 import { ZodError, z } from "zod";
 import Alert from "~/components/Alert";
 import InputErrorMessage from "~/components/InputErrorMessage";
@@ -17,7 +16,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const { supabase } = createServerClient(request, request.headers);
   const { profile, profileInfo } = await getProfile(supabase);
   
-	return json({ user, profile, profileInfo }, { headers });
+	return data({ user, profile, profileInfo }, { headers });
 }
 
 export const action = async ({ 
@@ -85,7 +84,7 @@ export const action = async ({
     } }), { headers });
   }
 
-  return json(success({ 
+  return data(success({ 
     message: "Your email was updated successfully.", 
     data: {
       displayName,
