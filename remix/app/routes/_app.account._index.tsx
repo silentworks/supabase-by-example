@@ -1,5 +1,4 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { LoaderFunctionArgs, Link, data, useLoaderData } from "react-router";
 import { isUserAuthorized, isPasswordUpdateRequired } from "~/lib/session";
 import { createServerClient } from "~/lib/supabase";
 import { getProfile } from "~/lib/utils";
@@ -11,7 +10,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const { supabase } = createServerClient(request, request.headers);
   const { profile } = await getProfile(supabase);
 
-	return json({ user, profile }, { headers });
+	return data({ user, profile }, { headers });
 }
 
 export default function Account() {

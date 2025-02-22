@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { LoaderFunctionArgs, redirect } from "react-router";
 import { EmailOtpType } from "@supabase/supabase-js";
 import { passwordUpdateRequired } from "~/lib/session";
 import { createServerClient } from "~/lib/supabase";

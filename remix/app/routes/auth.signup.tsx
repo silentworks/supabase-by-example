@@ -1,5 +1,4 @@
-import { ActionFunctionArgs, json } from "@remix-run/node";
-import { Form, Link, useActionData } from "@remix-run/react";
+import { ActionFunctionArgs, Form, Link, data, useActionData } from "react-router";
 import { AuthApiError } from "@supabase/supabase-js";
 import { ZodError, z } from "zod";
 import Alert from "~/components/Alert";
@@ -22,7 +21,7 @@ export const action = async ({
   } catch (err) {
     if (err instanceof ZodError) {
       const errors = formatError(err) as FormData;
-      return json(fault({ errors, data: { email } }));
+      return fault({ errors, data: { email } });
     }
   }
 
@@ -35,12 +34,12 @@ export const action = async ({
 
   if (error) {
     if (error instanceof AuthApiError && error.status === 400) {
-      return json(fault({ message: "Invalid credentials.", data: { email } }), { headers });
+      return data(fault({ message: "Invalid credentials.", data: { email } }), { headers });
     }
-    return json(fault({ message: error.message, data: { email } }), { headers });
+    return data(fault({ message: error.message, data: { email } }), { headers });
   }
 
-  return json(success({ 
+  return data(success({ 
     message: "Please check your email for a magic link to log into the website.", 
     data: { email: "" } 
   }), { headers });
