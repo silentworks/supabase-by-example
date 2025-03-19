@@ -1,7 +1,24 @@
 import { Session, SupabaseClient, User } from "@supabase/supabase-js";
 import type { ZodError } from "zod";
 
-export const formatError = (zodError: ZodError) => {
+export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
+
+export const initialFormState = <T>() : Results<T> => ({
+  success: false,
+  message: ''
+})
+
+type Results<T> = ({
+  success: true;
+  message: string;
+  data: T | undefined;
+} | {
+  success: false;
+  message: string;
+  errors?: T;
+})
+
+export const formatError = <T extends Record<string, string>>(zodError: ZodError) => {
   const formattedErrors: Record<string, string> = {};
   zodError.errors.forEach((err) => {
     const k = err.path.pop() as string;
@@ -9,25 +26,31 @@ export const formatError = (zodError: ZodError) => {
       formattedErrors[k] = err.message;
     }
   });
-  return formattedErrors;
+  return formattedErrors as T;
 };
 
-export const success = <T extends Record<string, unknown> | undefined>(
-  message: string,
-  data?: T
-) => ({
-  success: true,
-  message,
-  ...data,
+export const fieldFault = <T>(
+  errors: T,
+): Results<T> => ({
+  success: false,
+  message: "",
+  errors
 });
 
-export const fault = <T extends Record<string, unknown> | undefined>(
+export const success = <T>(
   message: string,
   data?: T
-) => ({
+) : Results<T> => ({
+  success: true,
+  message,
+  data,
+});
+
+export const fault = <T>(
+  message: string
+) : Results<T> => ({
   success: false,
   message,
-  ...data,
 });
 
 export function waitload(sec: number) {

@@ -1,80 +1,26 @@
 "use client";
-import { formatError } from "@/lib/utils";
-import { AuthUserWithTokenSchema } from "@/lib/validationSchema";
-import { AuthApiError, EmailOtpType } from "@supabase/supabase-js";
-import { useState, FormEvent } from "react";
-import { z, ZodError } from "zod";
+import { initialFormState } from "@/lib/utils";
+import { EmailOtpType } from "@supabase/supabase-js";
+import { useFormState } from 'react-dom';
 import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
-import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { verify } from "../actions";
 
-type FormData = z.infer<typeof AuthUserWithTokenSchema>;
-
-export default function VerifyTokenForm({ auth_type }: { auth_type: EmailOtpType }) {
-  const supabase = createClient();
-  const router = useRouter();
-  const [errors, setErrors] = useState<FormData>();
-  const [message, setMessage] = useState<string>("");
-  const [formSuccess, setFormSuccess] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    email: "",
-    token: "",
-  });
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    // reset all states
-    setFormSuccess(false);
-    setErrors(undefined);
-    setMessage("");
-
-    const email = formData.email;
-    const token = formData.token;
-
-    try {
-      AuthUserWithTokenSchema.parse({ email, token });
-    } catch (err) {
-      if (err instanceof ZodError) {
-        const errs = formatError(err) as FormData;
-        setErrors(errs);
-        return;
-      }
-    }
-
-    const { error } = await supabase.auth.verifyOtp({
-      email,
-      token,
-      type: auth_type,
-    });
-
-    if (error) {
-      if (error instanceof AuthApiError && error.status === 400) {
-        setMessage("Invalid credentials.");
-        return;
-      }
-      setMessage(error.message);
-      return;
-    }
-
-    // reset form
-    setFormData({ email: "", token: "" });
-    router.push("/");
-  };
+export default function VerifyTokenForm({ auth_type, next }: { auth_type: EmailOtpType, next: string }) {
+  const [state, formAction] = useFormState(verify, initialFormState())
 
   return (
     <div className="w-11/12 p-12 px-6 py-10 rounded-lg sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-3/12 sm:px-10 sm:py-6">
-      {message ? (
+      {state.message ? (
         <Alert
-          className={`${formSuccess ? "alert-info" : "alert-error"} mb-10`}
+          className={`${state.success ? "alert-info" : "alert-error"} mb-10`}
         >
-          {message}
+          {state.message}
         </Alert>
       ) : null}
       <h2 className="font-semibold text-4xl mb-4">Sign in</h2>
       <p className="font-medium mb-4">Hi, Welcome back</p>
-      <form onSubmit={handleSubmit}>
+      <form action={formAction}>
         <div className="form-control">
           <label htmlFor="email" className="label">
             Email
@@ -83,15 +29,11 @@ export default function VerifyTokenForm({ auth_type }: { auth_type: EmailOtpType
             id="email"
             name="email"
             type="text"
-            value={formData?.email ?? ""}
-            onChange={(ev) =>
-              setFormData({ ...formData, email: ev.target.value })
-            }
             className="input input-bordered"
           />
         </div>
-        {errors?.email ? (
-          <InputErrorMessage>{errors?.email}</InputErrorMessage>
+        {!state.success && state.errors?.email ? (
+          <InputErrorMessage>{state.errors.email}</InputErrorMessage>
         ) : null}
         <div className="form-control">
           <label htmlFor="token" className="label">
@@ -101,16 +43,14 @@ export default function VerifyTokenForm({ auth_type }: { auth_type: EmailOtpType
             id="token"
             name="token"
             type="text"
-            value={formData?.token ?? ""}
-            onChange={(ev) =>
-              setFormData({ ...formData, token: ev.target.value })
-            }
             className="input input-bordered"
           />
         </div>
-        {errors?.token ? (
-          <InputErrorMessage>{errors?.token}</InputErrorMessage>
+        {!state.success && state.errors?.token ? (
+          <InputErrorMessage>{state.errors.token}</InputErrorMessage>
         ) : null}
+        <input type="hidden" name="auth_type" value={auth_type} />
+        <input type="hidden" name="next" value={next} />
         <div className="form-control mt-6">
           <button className="btn btn-primary no-animation">Sign in</button>
         </div>

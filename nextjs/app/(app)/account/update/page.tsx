@@ -6,7 +6,6 @@ export const dynamic = "force-dynamic";
 
 export default async function Update() {
   const supabase = createClient();
-
   const { profile, session } = await getProfile(supabase);
 
   return <UpdateForm profile={profile} user={session?.user} />;

@@ -1,24 +1,17 @@
 "use client";
-import { formatError } from "@/lib/utils";
-import { AuthUserSchema, ValidateEmailSchema } from "@/lib/validationSchema";
-import { AuthApiError } from "@supabase/supabase-js";
-import { useState, FormEvent } from "react";
-import { z, ZodError } from "zod";
+import { useState } from "react";
+import { useFormState } from "react-dom";
 import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/client";
-
-type FormData = z.infer<typeof AuthUserSchema>;
+import { login } from "../actions";
+import { initialFormState } from "@/lib/utils";
 
 interface PasswordFieldType {
-  password: string; 
-  passwordError?: string; 
-  onUpdate: (ev: React.ChangeEvent<HTMLInputElement>) => void
+  passwordError?: string;
 }
 
-const PasswordField = ({password, passwordError, onUpdate}: PasswordFieldType) => {
+const PasswordField = ({passwordError}: PasswordFieldType) => {
   return <>
     <div className="form-control">
       <label htmlFor="password" className="label">
@@ -28,8 +21,6 @@ const PasswordField = ({password, passwordError, onUpdate}: PasswordFieldType) =
         id="password"
         name="password"
         type="password"
-        value={password ?? ""}
-        onChange={onUpdate}
         className="input input-bordered"
       />
     </div>
@@ -39,96 +30,17 @@ const PasswordField = ({password, passwordError, onUpdate}: PasswordFieldType) =
   </>
 }
 
-export default function SignInForm() {
-  const supabase = createClient();
-  const router = useRouter();
-  const [errors, setErrors] = useState<FormData>();
-  const [message, setMessage] = useState<string>("");
-  const [formSuccess, setFormSuccess] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    email: "",
-    password: "",
-  });
-  const [magicLink, setMagicLink] = useState(false);
+export default function SignInForm({ auth_type }: { auth_type: string }) {
+  const [state, formAction] = useFormState(login, initialFormState())
+  const [magicLink, setMagicLink] = useState(auth_type == 'magic-link');
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    // reset all states
-    setFormSuccess(false);
-    setErrors(undefined);
-    setMessage("");
-
-    const email = formData.email;
-    if (!magicLink) {
-      // email/password sign in
-      const password = formData.password;
-
-      try {
-        AuthUserSchema.parse({ email, password });
-      } catch (err) {
-        if (err instanceof ZodError) {
-          const errs = formatError(err) as FormData;
-          setErrors(errs);
-          return;
-        }
-      }
-
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) {
-        if (error instanceof AuthApiError && error.status === 400) {
-          setMessage("Invalid credentials.");
-          return;
-        }
-        setMessage(error.message);
-        return;
-      }
-    } else {
-      // magic link sign in
-      try {
-        ValidateEmailSchema.parse({ email });
-      } catch (err) {
-        if (err instanceof ZodError) {
-          const errs = formatError(err) as FormData;
-          setErrors(errs);
-          return;
-        }
-      }
-
-      const { error } = await supabase.auth.signInWithOtp({
-        email
-      })
-
-      if (error) {
-        if (error instanceof AuthApiError && error.status === 400) {
-          setMessage("Invalid credentials.");
-          return;
-        }
-        setMessage(error.message);
-        return;
-      }
-
-      setMessage(
-        "Please check your email for a magic link to log into the website."
-      );
-    }
-
-    // reset form
-    setFormData({ email: "", password: "" });
-    setFormSuccess(true);
-    router.push("/");
-  };
   return (
     <div className="w-11/12 p-12 px-6 py-10 rounded-lg sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-3/12 sm:px-10 sm:py-6">
-      {message ? (
+      {state.message ? (
         <Alert
-          className={`${formSuccess ? "alert-info" : "alert-error"} mb-10`}
+          className={`${state.success ? "alert-info" : "alert-error"} mb-10`}
         >
-          {message}
+          {state.message}
         </Alert>
       ) : null}
       <h2 className="font-semibold text-4xl mb-4">Sign in</h2>
@@ -154,7 +66,7 @@ export default function SignInForm() {
         </a>
       </div>
       <div className="divider text-gray-400 text-sm">or continue with Email</div>
-      <form onSubmit={handleSubmit}>
+      <form action={formAction}>
         <div className="form-control">
           <label htmlFor="email" className="label">
             Email
@@ -163,28 +75,25 @@ export default function SignInForm() {
             id="email"
             name="email"
             type="text"
-            value={formData?.email ?? ""}
-            onChange={(ev) =>
-              setFormData({ ...formData, email: ev.target.value })
-            }
             className="input input-bordered"
           />
         </div>
-        {errors?.email ? (
-          <InputErrorMessage>{errors?.email}</InputErrorMessage>
+        {!state.success && state.errors?.email ? (
+          <InputErrorMessage>{state.errors.email}</InputErrorMessage>
         ) : null}
         {!magicLink ? (
-          <PasswordField password={formData.password} passwordError={errors?.password} onUpdate={(ev) => {
-            setFormData({ ...formData, password: ev.target.value })}} />
+          <PasswordField passwordError={!state.success ? state.errors?.password : undefined} />
         ) : null}
         <div className="form-control flex-row justify-between pt-4">
           <label className="label justify-start cursor-pointer gap-2 text-gray-500">
             <input
+              name="magic_link"
               type="checkbox"
               className="toggle toggle-xs"
-              onChange={(ev) =>
+              defaultChecked={magicLink}
+              onChange={(ev) => {
                 setMagicLink(!magicLink)
-              }
+              }}
             />
             Magic link login
           </label>
