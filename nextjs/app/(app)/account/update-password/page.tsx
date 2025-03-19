@@ -1,14 +1,12 @@
 import { createClient } from "@/lib/supabase/server";
 import PasswordForm from "./password-form";
+import { getProfile } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
 export default async function UpdatePassword() {
   const supabase = createClient();
+  const { profile, session } = await getProfile(supabase);
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  return <PasswordForm user={session?.user} />;
+  return <PasswordForm profile={profile} user={session?.user} />;
 }

@@ -5,5 +5,6 @@ export default function VerifyToken({ searchParams } : {
   searchParams: { [key: string]: string | string[] | undefined }
 }) {
   const type = (searchParams.type ?? "email") as EmailOtpType;
-  return <VerifyTokenForm auth_type={type} />;
+  const next = searchParams.next as string
+  return <VerifyTokenForm auth_type={type} next={next} />;
 }
