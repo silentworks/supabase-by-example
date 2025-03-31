@@ -61,8 +61,8 @@ importers:
         specifier: ^8.4.24
         version: 8.4.24
       supabase:
-        specifier: ^2.9.6
-        version: 2.9.6
+        specifier: ^2.20.3
+        version: 2.20.3
       tailwindcss:
         specifier: ^3.3.2
         version: 3.3.2
@@ -1297,8 +1297,8 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
-  supabase@2.9.6:
-    resolution: {integrity: sha512-oPJXgvyuZCsbR/SQ5/0Jvab3zHqUg+lunnweYMCN8EdT9Q0ANChrn1lCKUJ4toXJXdq8gdVgNvTgIDu/JljbMw==}
+  supabase@2.20.3:
+    resolution: {integrity: sha512-nUB2Tbbnr3L2RenY51J/FKcXNBAlOK6s7XL7PQUDxBhe8/EoYOLcyVke0XLNTUBeybdqoSw8ApbafLCT6Hd8mg==}
     engines: {npm: '>=8'}
     hasBin: true
 
@@ -1625,7 +1625,7 @@ snapshots:
       '@babel/helper-split-export-declaration': 7.24.5
       '@babel/parser': 7.24.5
       '@babel/types': 7.24.5
-      debug: 4.3.4
+      debug: 4.3.7
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -2626,7 +2626,7 @@ snapshots:
       pirates: 4.0.5
       ts-interface-checker: 0.1.13
 
-  supabase@2.9.6:
+  supabase@2.20.3:
     dependencies:
       bin-links: 5.0.0
       https-proxy-agent: 7.0.5

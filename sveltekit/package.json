@@ -33,7 +33,7 @@
 		"postgres": "^3.4.4",
 		"prettier": "^3.3.3",
 		"prettier-plugin-svelte": "^3.2.6",
-		"supabase": "^2.9.6",
+		"supabase": "^2.20.5",
 		"svelte": "^4.2.19",
 		"svelte-check": "^3.8.6",
 		"tailwindcss": "^3.4.10",
@@ -53,5 +53,13 @@
 	},
 	"trustedDependencies": [
 		"supabase"
-	]
+	],
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"supabase"
+		],
+		"ignoredBuiltDependencies": [
+			"@sveltejs/kit"
+		]
+	}
 }
