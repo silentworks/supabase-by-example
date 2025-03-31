@@ -12,7 +12,7 @@
     "s:stop": "supabase stop"
   },
   "dependencies": {
-    "@supabase/ssr": "^0.5.1",
+    "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.46.1",
     "autoprefixer": "10.4.19",
     "daisyui": "^2.51.6",
@@ -33,12 +33,17 @@
     "eslint": "^8.42.0",
     "eslint-config-next": "14.2.3",
     "postcss": "^8.4.24",
-    "supabase": "^1.226.3",
+    "supabase": "^2.20.3",
     "tailwindcss": "^3.4.1",
     "tcp-port-used": "^1.0.2",
     "typescript": "^5.7.2"
   },
   "trustedDependencies": [
     "supabase"
-  ]
+  ],
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "supabase"
+    ]
+  }
 }
