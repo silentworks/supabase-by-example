@@ -42,14 +42,14 @@ export const action = async ({
   } catch (err) {
     if (err instanceof ZodError) {
       const errors = formatError(err) as FormData;
-      return json(fault({ data: { 
+      return fault({ data: { 
         displayName,
         bio,
         firstName,
         lastName,
         dob,
         profileLocation 
-      }, errors }));
+      }, errors });
     }
   }
 
@@ -72,7 +72,7 @@ export const action = async ({
       errorMessage = '';
     }
 
-    return json(fault({ message: errorMessage, errors: {
+    return data(fault({ message: errorMessage, errors: {
       displayName: displayNameError
     }, data: {
       displayName,
@@ -110,9 +110,14 @@ export default function UpdateEmail() {
           {actionData?.message}
         </Alert>
       ) : null}
-      <h2 className="font-semibold text-4xl mb-4">Update Email</h2>
+      <h2 className="font-semibold text-4xl mb-4"> 
+        {profile?.display_name
+          ? "Update Profile"
+          : "Please complete your profile"}
+      </h2>
       <p className="font-medium mb-4">
-        Hi {profile?.display_name ?? user?.email}, Enter your new email below and confirm it
+        Hi {profile?.display_name ?? user?.email}, Enter your user profile info
+        below
       </p>
       <Form method="post">
         <div className="form-control">

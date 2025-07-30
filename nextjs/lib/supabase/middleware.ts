@@ -44,14 +44,12 @@ export async function updateSession(request: NextRequest) {
     !authPath
   ) {
     // no user, potentially respond by redirecting the user to the login page
-    console.log(`Inside middleware..... user not found`)
     url.pathname = '/auth/signin'
     return NextResponse.redirect(url)
   }
 
   // if user is trying to access auth routes whilst signed in
   if (authPath && user && url.pathname !== '/auth/signout') {
-    console.log(`Inside middleware..... user found`)
     url.pathname = '/'
     return NextResponse.redirect(url)
   }
@@ -73,7 +71,8 @@ export async function updateSession(request: NextRequest) {
   if (
     !request.nextUrl.pathname.startsWith("/account/update") &&
     profile &&
-    profile.display_name == null
+    profile.display_name == null &&
+    url.pathname !== '/auth/signout'
   ) {
     return NextResponse.redirect(new URL("/account/update", request.url));
   }
