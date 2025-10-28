@@ -13,8 +13,6 @@ export async function GET(req: NextRequest) {
   const redirectTo = new URL(next);
   redirectTo.searchParams.delete('code')
 
-  console.log({ next })
-
   if (token_hash && type) {
     if (type === 'recovery') {
       cookies().set('password_update_required', 'true')
