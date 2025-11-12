@@ -16,7 +16,7 @@
     "@react-router/node": "^7.0.0",
     "@react-router/serve": "^7.0.0",
     "@supabase/ssr": "^0.5.2",
-    "@supabase/supabase-js": "^2.48.1",
+    "@supabase/supabase-js": "^2.76.1",
     "daisyui": "^4.12.10",
     "isbot": "^4.1.0",
     "just-safe-get": "^4.2.0",
