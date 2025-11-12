@@ -3,8 +3,7 @@
 	import Alert from '$lib/Alert.svelte';
 	import InputErrorMessage from '$lib/InputErrorMessage.svelte';
 
-	export let form;
-	export let data;
+	let { form, data } = $props();
 </script>
 
 <div

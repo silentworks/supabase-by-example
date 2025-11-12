@@ -3,9 +3,14 @@
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
 
-	export let data: LayoutData;
+	interface Props {
+		data: LayoutData;
+		children?: import('svelte').Snippet;
+	}
 
-	$: ({ supabase, session } = data);
+	let { data, children }: Props = $props();
+
+	let { supabase, session } = $derived(data);
 
 	onMount(() => {
 		const {
@@ -23,7 +28,8 @@
 </script>
 
 <svelte:head>
-	<title>User Profile</title>
+	<title>Supabase by example</title>
+	<meta name="description" content="Supabase by example showcasing it's auth features.">
 </svelte:head>
 
-<slot />
+{@render children?.()}

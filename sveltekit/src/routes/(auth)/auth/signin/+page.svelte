@@ -1,18 +1,22 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import Alert from '$lib/Alert.svelte';
 	import InputErrorMessage from '$lib/InputErrorMessage.svelte';
 	import type { ActionData, PageData } from './$types';
 
-	export let form: ActionData;
-	export let data: PageData;
+	interface Props {
+		form: ActionData;
+		data: PageData;
+	}
 
-	let isMagicLink = data.authType == 'magic_link'
-	$: formAction = isMagicLink ? '?/magic_link' : '?/email_password'
+	let { form, data }: Props = $props();
+
+	let isMagicLink = $state(data.authType == 'magic_link')
+	let formAction = $derived(isMagicLink ? '?/magic_link' : '?/email_password')
 	const magicLink = () => {
-		let query = new URLSearchParams($page.url.searchParams.toString());
+		let query = new URLSearchParams(page.url.searchParams.toString());
 		const authType = query.get('auth_type')
 		if (!authType) {
 			query.set('auth_type', 'magic_link');
@@ -81,7 +85,7 @@
 		{/if}
 		<div class="form-control flex-row justify-between pt-4">
 			<label class="label justify-start cursor-pointer gap-2 text-gray-500">
-				<input type="checkbox" class="toggle toggle-xs" on:change={magicLink} bind:checked={isMagicLink} />
+				<input type="checkbox" class="toggle toggle-xs" onchange={magicLink} bind:checked={isMagicLink} />
 				Magic link login
 			</label>
 			{#if !isMagicLink}

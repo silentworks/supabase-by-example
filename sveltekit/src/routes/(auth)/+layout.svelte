@@ -1,5 +1,14 @@
+<script lang="ts">
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
+</script>
+
 <svelte:head>
-	<title>User Profile</title>
+	<title>Supabase by example</title>
+	<meta name="description" content="Supabase by example showcasing it's auth features.">
 </svelte:head>
 
 <main data-theme="winter">
@@ -15,10 +24,10 @@
 	</svg>
 	<div class="flex flex-col h-screen">
 		<div class="header border-b border-gray-300 py-8 px-4 mx-8 text-center">
-			<h1 class="font-semibold">User Profile</h1>
+			<h1 class="font-semibold">Supabase by example</h1>
 		</div>
 		<div class="grid place-items-center my-20 mx-2 sm:my-auto">
-			<slot />
+			{@render children?.()}
 		</div>
 	</div>
 </main>
