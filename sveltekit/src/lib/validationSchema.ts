@@ -50,6 +50,6 @@ export const UpdateProfileSchema = z.object({
 	bio: z.string().optional(),
 	firstName: required('First Name'),
 	lastName: required('Last Name'),
-	dob: required('Date of birth'),
+	dob: required('Date of birth').date("Date of birth should be in the following format yyyy-mm-dd"),
 	profileLocation: required('Location')
 });

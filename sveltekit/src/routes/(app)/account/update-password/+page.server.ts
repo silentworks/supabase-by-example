@@ -3,9 +3,10 @@ import { UpdatePasswordSchema } from '$lib/validationSchema';
 import { fail } from '@sveltejs/kit';
 import { ZodError } from 'zod';
 import type { Actions } from './$types';
+import { clearPasswordUpdateCookie } from '$lib/session';
 
 export const actions = {
-  default: async ({ request, locals: { supabase } }) => {
+  default: async ({ cookies, request, locals: { supabase } }) => {
     const formData = await request.formData();
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
@@ -25,6 +26,8 @@ export const actions = {
     if (error) {
       return fail(500, fault('Server error. Try again later.', { email }));
     }
+
+    clearPasswordUpdateCookie(cookies);
 
     return success('Your password was updated successfully.');
   }
