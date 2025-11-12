@@ -23,6 +23,6 @@
 
 <div class="top-0 left-0 z-10 block w-full h-full bg-transparent">
 	<span class="relative block w-full h-full mx-auto my-0 text-center text-green-500 opacity-75">
-		<span class="block w-0 h-1 bg-red-500" style="width: {$width}%" />
+		<span class="block w-0 h-1 bg-red-500" style="width: {$width}%"></span>
 	</span>
 </div>

@@ -6,14 +6,14 @@ export const GET = async (event) => {
 		url,
 		locals: { supabase }
 	} = event;
-	
-	const { data, error } = await supabase.auth.linkIdentity({
+
+	const { error } = await supabase.auth.linkIdentity({
 		provider: "github",
 		options: {
 			redirectTo: `${url.origin}/auth/callback`
 		}
 	});
-	
+
 	if (error) {
 		throw fail(500, fault('Server error. Try again later.'));
 	}

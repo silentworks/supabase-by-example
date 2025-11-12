@@ -1,12 +1,13 @@
 // src/hooks.server.ts
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
+import type { Database } from '$lib/schema';
 import { createServerClient } from '@supabase/ssr';
 import { redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
 const supabase: Handle = async ({ event, resolve }) => {
-	event.locals.supabase = createServerClient(
-		PUBLIC_SUPABASE_URL, 
+	event.locals.supabase = createServerClient<Database>(
+		PUBLIC_SUPABASE_URL,
 		PUBLIC_SUPABASE_ANON_KEY,
 		{
 			cookies: {
@@ -39,7 +40,7 @@ const supabase: Handle = async ({ event, resolve }) => {
 		if (!session) {
 			return { session: null, user: null }
 		}
-	
+
 		const {
 			data: { user },
 			error,
@@ -48,7 +49,7 @@ const supabase: Handle = async ({ event, resolve }) => {
 			// JWT validation has failed
 			return { session: null, user: null }
 		}
-	
+
 		return { session, user }
 	};
 
@@ -68,15 +69,15 @@ const authGuard: Handle = async ({ event, resolve }) => {
 	const { session, user } = await event.locals.getSession();
 	event.locals.session = session;
 	event.locals.user = user;
-  
+
 	if (!event.locals.session && (event.url.pathname === '/' || event.url.pathname.startsWith('/account'))) {
 	  redirect(303, '/auth');
 	}
-  
+
 	if (event.locals.session && event.url.pathname === '/auth') {
 	  redirect(303, '/');
 	}
-  
+
 	return resolve(event);
 }
 

@@ -1,4 +1,3 @@
-import type { EmailOtpType } from '@supabase/supabase-js';
 import { redirect } from '@sveltejs/kit';
 
 export const GET = async (event) => {
@@ -6,8 +5,8 @@ export const GET = async (event) => {
 		url,
 		locals: { supabase }
 	} = event;
-	
+
 	await supabase.auth.signInAnonymously();
-	
-	throw redirect(303, `/`);
+
+	redirect(303, `/`);
 };

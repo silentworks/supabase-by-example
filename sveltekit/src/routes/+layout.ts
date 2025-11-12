@@ -14,12 +14,12 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
     : createServerClient<Database>(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
         global: { fetch },
         cookies: {
-          getAll() { 
+          getAll() {
             return data.cookies
           }
         }
       })
-	
+
 
 	const {
 		data: { session }
