@@ -46,7 +46,7 @@
 	"type": "module",
 	"dependencies": {
 		"@supabase/ssr": "^0.5.2",
-		"@supabase/supabase-js": "^2.48.1",
+		"@supabase/supabase-js": "^2.76.1",
 		"daisyui": "^2.52.0",
 		"just-safe-get": "^4.2.0",
 		"zod": "^3.24.1"

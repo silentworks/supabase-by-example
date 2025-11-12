@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",
-    "@supabase/supabase-js": "^2.46.1",
+    "@supabase/supabase-js": "^2.76.1",
     "autoprefixer": "10.4.19",
     "daisyui": "^2.51.6",
     "just-safe-get": "^4.2.0",
