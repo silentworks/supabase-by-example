@@ -112,7 +112,7 @@
 		</div>
 		{#if form?.errors?.profileLocation}
 			<InputErrorMessage>{form?.errors?.profileLocation}</InputErrorMessage>
-		{/if}`
+		{/if}
 		<div class="form-control mt-6">
 			<button class="btn btn-primary no-animation">Update</button>
 		</div>
