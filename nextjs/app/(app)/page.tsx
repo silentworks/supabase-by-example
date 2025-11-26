@@ -5,7 +5,7 @@ import get from "just-safe-get";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // get profile and session
   const { profile, session } = await getProfile(supabase);

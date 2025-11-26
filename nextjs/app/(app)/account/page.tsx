@@ -5,7 +5,7 @@ import Link from "next/link";
 export const dynamic = "force-dynamic";
 
 export default async function Account() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // get profile and session
   const { profile, session } = await getProfile(supabase);

@@ -1,13 +1,13 @@
 "use client";
 import { initialFormState } from "@/lib/utils";
 import { EmailOtpType } from "@supabase/supabase-js";
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
 import { verify } from "../actions";
 
 export default function VerifyTokenForm({ auth_type, next }: { auth_type: EmailOtpType, next: string }) {
-  const [state, formAction] = useFormState(verify, initialFormState())
+  const [state, formAction] = useActionState(verify, initialFormState())
 
   return (
     <div className="w-11/12 p-12 px-6 py-10 rounded-lg sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-3/12 sm:px-10 sm:py-6">

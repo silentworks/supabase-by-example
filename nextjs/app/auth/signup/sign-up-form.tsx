@@ -1,5 +1,5 @@
 "use client";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import { signup } from "../actions";
 import { initialFormState } from "@/lib/utils";
 
 export default function SignUpForm() {
-  const [state, formAction] = useFormState(signup, initialFormState())
+  const [state, formAction] = useActionState(signup, initialFormState())
 
   return (
     <div className="w-11/12 p-12 px-6 py-10 rounded-lg sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-3/12 sm:px-10 sm:py-6">
