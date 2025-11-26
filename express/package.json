@@ -32,7 +32,7 @@
     "@types/tcp-port-used": "^1.0.4",
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.4",
-    "supabase": "^2.54.11",
+    "supabase": "2.58.5",
     "tailwindcss": "^3.4.4",
     "tcp-port-used": "^1.0.2"
   }

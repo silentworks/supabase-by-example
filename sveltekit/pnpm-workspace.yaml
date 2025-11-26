@@ -1,0 +1,3 @@
+onlyBuiltDependencies:
+  - '@sveltejs/kit'
+  - supabase
