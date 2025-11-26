@@ -15,9 +15,9 @@ export async function GET(req: NextRequest) {
 
   if (token_hash && type) {
     if (type === 'recovery') {
-      cookies().set('password_update_required', 'true')
+      (await cookies()).set('password_update_required', 'true')
     }
-    const supabase = createClient();
+    const supabase = await createClient();
     await supabase.auth.verifyOtp({ type, token_hash });
   }
 

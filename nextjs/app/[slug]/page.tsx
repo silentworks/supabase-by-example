@@ -2,12 +2,13 @@ import { createClient } from "@/lib/supabase/server";
 import { getProfile } from "@/lib/utils";
 import get from "just-safe-get";
 
-export default async function VanityHome({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const supabase = createClient();
+export default async function VanityHome(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+) {
+  const params = await props.params;
+  const supabase = await createClient();
 
   // get profile and session
   const { profile } = await getProfile(supabase, params.slug);

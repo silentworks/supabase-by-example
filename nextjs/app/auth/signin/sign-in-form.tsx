@@ -1,6 +1,5 @@
 "use client";
-import { useState } from "react";
-import { useFormState } from "react-dom";
+import { useState, useActionState } from "react";
 import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
 import Link from "next/link";
@@ -11,7 +10,7 @@ interface PasswordFieldType {
   passwordError?: string;
 }
 
-const PasswordField = ({passwordError}: PasswordFieldType) => {
+const PasswordField = ({ passwordError }: PasswordFieldType) => {
   return <>
     <div className="form-control">
       <label htmlFor="password" className="label">
@@ -31,7 +30,7 @@ const PasswordField = ({passwordError}: PasswordFieldType) => {
 }
 
 export default function SignInForm({ auth_type }: { auth_type: string }) {
-  const [state, formAction] = useFormState(login, initialFormState())
+  const [state, formAction] = useActionState(login, initialFormState())
   const [magicLink, setMagicLink] = useState(auth_type == 'magic-link');
 
   return (

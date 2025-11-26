@@ -1,5 +1,5 @@
 "use client";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { UserInfo, initialFormState } from "@/lib/utils";
 import Alert from "@/components/Alert";
 import InputErrorMessage from "@/components/InputErrorMessage";
@@ -7,7 +7,7 @@ import get from "just-safe-get";
 import { update } from "../actions";
 
 export default function UpdateForm({ user, profile }: UserInfo) {
-  const [state, formAction] = useFormState(update, initialFormState())
+  const [state, formAction] = useActionState(update, initialFormState())
   const profileInfo = get(profile as Profile, "profiles_info") as ProfileInfo;
 
   return (
