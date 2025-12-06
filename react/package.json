@@ -32,7 +32,7 @@
     "autoprefixer": "^10.4.14",
     "concurrently": "^8.2.0",
     "postcss": "^8.4.24",
-    "supabase": "2.62.5",
+    "supabase": "2.64.1",
     "tailwindcss": "^3.3.2",
     "tcp-port-used": "^1.0.2",
     "typescript": "^5.1.3",
