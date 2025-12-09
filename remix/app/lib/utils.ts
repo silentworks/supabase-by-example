@@ -1,4 +1,4 @@
-import { Session, SupabaseClient, User } from "@supabase/supabase-js";
+import { SupabaseClient, User } from "@supabase/supabase-js";
 import type { ZodError } from "zod";
 import type { Database } from "./schema";
 import get from "just-safe-get";
@@ -64,15 +64,14 @@ export async function getProfile(
   slug: string | undefined = undefined
 ) {
   // Check if we have a session
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const { data } = await supabase.auth.getClaims();
+  const user = data?.claims;
 
   let match;
   if (slug !== undefined) {
     match = { slug };
   } else {
-    match = { id: session?.user.id };
+    match = { id: user?.sub };
   }
 
   // get profile and profile_info
@@ -87,6 +86,5 @@ export async function getProfile(
   return {
     profile,
     profileInfo,
-    session,
-  } as { profile: Profile; profileInfo: ProfileInfo; session: Session | null };
+  } as { profile: Profile; profileInfo: ProfileInfo; };
 }

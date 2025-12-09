@@ -1,28 +1,36 @@
 import { createCookieSessionStorage, redirect } from "react-router";
 import { createServerClient } from "./supabase";
+import { Profile } from "./utils";
+
+const cookieSecret = process.env.COOKIE_SECRET ?? "uPFNzMoB8VOJ9ji0XoiksN5xqLLNPOXS9RTOHKdd";
 
 export const isUserAuthorized = async (request: Request) => {
     const { supabase, headers } = createServerClient(request, request.headers);
+    
+    const { data, error } = await supabase.auth.getClaims();
+    const user = data?.claims;
 
-    const {
-        data: { session },
-    } = await supabase.auth.getSession()
-    if (!session) {
+    if (!user) {
         throw redirect('/auth/signin')
     }
-
-    const {
-        data: { user },
-        error,
-    } = await supabase.auth.getUser();
 
     if (error) {
         // JWT validation has failed
         throw redirect('/auth/signin')
     }
 
-    return { session, user, headers }
+    return { user, headers }
 }
+
+export const isProfileCompleted = async (profile: Profile) => {
+  if (
+    profile &&
+    profile.display_name == null
+  ){
+    throw redirect('/account/update')
+  }
+}
+
 
 type SessionData = {
     password_update_required: boolean;
@@ -34,6 +42,7 @@ const { getSession, commitSession, destroySession } =
     cookie: {
         name: '__sb_by_example',
         maxAge: 604_800, // one week
+        secrets: [cookieSecret]
     }
   });
 

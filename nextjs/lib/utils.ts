@@ -1,9 +1,9 @@
-import { Session, SupabaseClient, User } from "@supabase/supabase-js";
+import { SupabaseClient, User } from "@supabase/supabase-js";
 import type { ZodError } from "zod";
 
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
 
-export const initialFormState = <T>() : Results<T> => ({
+export const initialFormState = <T>(): Results<T> => ({
   success: false,
   message: ''
 })
@@ -40,7 +40,7 @@ export const fieldFault = <T>(
 export const success = <T>(
   message: string,
   data?: T
-) : Results<T> => ({
+): Results<T> => ({
   success: true,
   message,
   data,
@@ -48,7 +48,7 @@ export const success = <T>(
 
 export const fault = <T>(
   message: string
-) : Results<T> => ({
+): Results<T> => ({
   success: false,
   message,
 });
@@ -67,15 +67,14 @@ export async function getProfile(
   slug: string | undefined = undefined
 ) {
   // Check if we have a session
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const { data } = await supabase.auth.getClaims();
+  const user = data?.claims;
 
   let match;
   if (slug !== undefined) {
     match = { slug };
   } else {
-    match = { id: session?.user.id };
+    match = { id: user?.sub };
   }
 
   // get profile and profile_info
@@ -87,6 +86,5 @@ export async function getProfile(
 
   return {
     profile,
-    session,
-  } as { profile: Profile; session: Session | null };
+  } as { profile: Profile; };
 }
