@@ -16,7 +16,7 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
           supabaseResponse = NextResponse.next({
             request,
           })
@@ -29,12 +29,11 @@ export async function updateSession(request: NextRequest) {
   )
 
   // IMPORTANT: Avoid writing any logic between createServerClient and
-  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
+  // supabase.auth.getClaims(). A simple mistake could make it very hard to debug
   // issues with users being randomly logged out.
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const { data } = await supabase.auth.getClaims()
+  const user = data?.claims
 
   const authPath = request.nextUrl.pathname.startsWith('/auth')
   const url = request.nextUrl.clone()
@@ -55,9 +54,9 @@ export async function updateSession(request: NextRequest) {
   }
 
   // get profile and session
-  const { profile, session } = await getProfile(supabase);
+  const { profile } = await getProfile(supabase);
 
-  if (!session && !authPath) {
+  if (!user && !authPath) {
     return NextResponse.redirect(new URL("/auth/signin", request.url));
   }
 
