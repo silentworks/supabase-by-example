@@ -24,7 +24,7 @@
     "http-errors": "~2.0.0",
     "morgan": "~1.10.0",
     "pug": "3.0.3",
-    "zod": "^3.23.8"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",

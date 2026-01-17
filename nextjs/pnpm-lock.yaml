@@ -33,7 +33,7 @@ importers:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
       zod:
-        specifier: ^3.23.8
+        specifier: ^3.24.1
         version: 3.25.76
     devDependencies:
       '@faker-js/faker':
