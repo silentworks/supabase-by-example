@@ -24,11 +24,11 @@
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@playwright/test": "^1.57.0",
-    "@types/node": "^20.19.30",
-    "@types/react": "^18.3.27",
-    "@types/react-dom": "^18.3.7",
+    "@types/node": "^24.10.7",
+    "@types/react": "^19.2.3",
+    "@types/react-dom": "^19.2.3",
     "@types/tcp-port-used": "^1.0.4",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^5.1.2",
     "autoprefixer": "^10.4.23",
     "concurrently": "^8.2.2",
     "postcss": "^8.5.6",
@@ -36,7 +36,7 @@
     "tailwindcss": "^3.4.19",
     "tcp-port-used": "^1.0.2",
     "typescript": "^5.9.3",
-    "vite": "^5.4.21"
+    "vite": "^7.3.1"
   },
   "trustedDependencies": [
     "supabase"
