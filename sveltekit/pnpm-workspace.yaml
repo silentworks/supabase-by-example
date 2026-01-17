@@ -1,3 +1,4 @@
 onlyBuiltDependencies:
   - '@sveltejs/kit'
+  - esbuild
   - supabase
