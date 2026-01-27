@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { EmailOtpType } from "@supabase/supabase-js";
-import { cookies } from "next/headers";
+import { passwordUpdateRequired } from "@/lib/session";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 
   if (token_hash && type) {
     if (type === 'recovery') {
-      (await cookies()).set('password_update_required', 'true')
+      await passwordUpdateRequired()
     }
     const supabase = await createClient();
     await supabase.auth.verifyOtp({ type, token_hash });

@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { fault, fieldFault, formatError, success } from "@/lib/utils"
 import { UpdateEmailSchema, UpdatePasswordSchema, UpdateProfileSchema } from "@/lib/validationSchema"
+import { clearPasswordUpdateCookie } from "@/lib/session";
 import { AuthWeakPasswordError } from "@supabase/supabase-js"
 import { z } from "zod"
 
@@ -90,6 +91,8 @@ export async function passwordUpdate(prevState: any, formData: FormData) {
     }
     return fault<FormDataUpdatePassword>(error.message)
   }
+
+  await clearPasswordUpdateCookie()
 
   return success<FormDataUpdatePassword>("Your password was updated successfully.")
 }

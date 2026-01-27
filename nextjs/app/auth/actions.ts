@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { APP_URL, fault, fieldFault, formatError, success } from "@/lib/utils"
+import { passwordUpdateRequired } from "@/lib/session";
 import { AuthUserSchema, AuthUserWithTokenSchema, ValidateEmailSchema } from "@/lib/validationSchema"
 import { AuthApiError, EmailOtpType } from "@supabase/supabase-js"
 import { revalidatePath } from "next/cache"
@@ -133,6 +134,11 @@ export async function verify(prevState: any, formData: FormData) {
     if (error) {
         return fault<FormDataAuthUserWithToken>(error.message)
     }
+
+    if (authType === 'recovery') {
+      await passwordUpdateRequired()
+    }
+
 
     revalidatePath('/', 'layout')
     redirect(next)
