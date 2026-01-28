@@ -33,7 +33,7 @@
     "eslint": "^9.39.2",
     "eslint-config-next": "16.0.4",
     "postcss": "^8.4.24",
-    "supabase": "2.72.8",
+    "supabase": "2.72.9",
     "tailwindcss": "^3.4.19",
     "tcp-port-used": "^1.0.2",
     "typescript": "^5.7.2"
