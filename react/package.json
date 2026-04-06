@@ -36,7 +36,7 @@
     "tailwindcss": "^3.4.19",
     "tcp-port-used": "^1.0.2",
     "typescript": "^5.9.3",
-    "vite": "^7.3.1"
+    "vite": "^7.3.2"
   },
   "trustedDependencies": [
     "supabase"
