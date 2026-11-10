@@ -73,8 +73,8 @@ export default function UpdateEmail() {
         Hi {profile?.display_name ?? user?.email}, Enter your new email below and confirm it
       </p>
       <Form method="post">
-        <div className="form-control">
-          <label htmlFor="email" className="label">
+        <div className="fieldset">
+          <label htmlFor="email" className="fieldset-legend">
             Email
           </label>
           <input
@@ -82,14 +82,14 @@ export default function UpdateEmail() {
             name="email"
             type="text"
             defaultValue={actionData?.data?.email}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {actionData?.errors?.email ? (
           <InputErrorMessage>{actionData.errors.email}</InputErrorMessage>
         ) : null}
-        <div className="form-control">
-          <label htmlFor="emailConfirm" className="label">
+        <div className="fieldset">
+          <label htmlFor="emailConfirm" className="fieldset-legend">
             Confirm Email
           </label>
           <input
@@ -97,14 +97,14 @@ export default function UpdateEmail() {
             name="emailConfirm"
             type="text"
             defaultValue={actionData?.data?.emailConfirm}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {actionData?.errors?.emailConfirm ? (
           <InputErrorMessage>{actionData.errors.emailConfirm}</InputErrorMessage>
         ) : null}
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">
             Update Email
           </button>
         </div>

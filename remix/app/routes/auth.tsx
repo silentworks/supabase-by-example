@@ -1,5 +1,4 @@
-import { MetaFunction } from "react-router";
-import { Outlet } from "react-router";
+import { MetaFunction, Outlet } from "react-router";
 
 export const meta: MetaFunction = () => {
   return [

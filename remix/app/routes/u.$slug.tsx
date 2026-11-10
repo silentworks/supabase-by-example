@@ -10,10 +10,10 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 	return { profile, profileInfo, url };
 }
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
   return [
-    { title: data?.profile?.display_name ? `${data?.profile.display_name}'s Profile | Supabase by example` : 'Supabase by example' },
-    { name: "description", content: data?.profile?.bio ?? "Supabase by example showcasing it's auth features." },
+    { title: loaderData?.profile?.display_name ? `${loaderData?.profile.display_name}'s Profile | Supabase by example` : 'Supabase by example' },
+    { name: "description", content: loaderData?.profile?.bio ?? "Supabase by example showcasing it's auth features." },
   ];
 };
 

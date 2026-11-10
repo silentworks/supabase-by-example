@@ -11,7 +11,7 @@ export const loader = async ({
   // Create redirect link without the token
   const redirectTo = new URL(next);
 
-  let { supabase, headers } = createServerClient(request, new Headers());
+  const { supabase, headers } = createServerClient(request, new Headers());
 
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);

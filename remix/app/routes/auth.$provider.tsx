@@ -7,7 +7,7 @@ export const loader = async ({
   request, params 
 }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
-  let { supabase, headers } = createServerClient(request, new Headers());
+  const { supabase, headers } = createServerClient(request, new Headers());
 
   const provider = params.provider as Provider;
 

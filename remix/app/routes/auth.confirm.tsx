@@ -14,11 +14,11 @@ export const loader = async ({
   // Create redirect link without the token
   const redirectTo = new URL(next);
 
-  let { supabase, headers } = createServerClient(request, new Headers());
+  const { supabase, headers } = createServerClient(request, new Headers());
 
   if (token_hash && type) {
     if (type === 'recovery') {
-      headers = await passwordUpdateRequired(request, headers)
+      await passwordUpdateRequired(request, headers)
     }
     await supabase.auth.verifyOtp({ type, token_hash });
   }
