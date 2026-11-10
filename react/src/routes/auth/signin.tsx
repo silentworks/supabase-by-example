@@ -5,7 +5,7 @@ import { formatError, signInWithProvider } from "@/lib/utils";
 import InputErrorMessage from "@/components/InputErrorMessage";
 import { AuthApiError } from "@supabase/supabase-js";
 import Alert from "@/components/Alert";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { useSupabaseClient } from "@/lib/AuthProvider";
 
 type FormData = z.infer<typeof AuthUserSchema>;
@@ -18,8 +18,8 @@ interface PasswordFieldType {
 
 const PasswordField = ({password, passwordError, onUpdate}: PasswordFieldType) => {
   return <>
-    <div className="form-control">
-      <label htmlFor="password" className="label">
+    <div className="fieldset">
+      <label htmlFor="password" className="fieldset-legend">
         Password
       </label>
       <input
@@ -28,7 +28,7 @@ const PasswordField = ({password, passwordError, onUpdate}: PasswordFieldType) =
         type="password"
         value={password ?? ""}
         onChange={onUpdate}
-        className="input input-bordered"
+        className="input w-full"
       />
     </div>
     {passwordError ? (
@@ -134,7 +134,7 @@ export default function SignIn() {
         <p className="font-medium mb-4">Hi, Welcome back</p>
         <div className="space-y-2">
           <button
-            className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
+            className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case"
             onClick={() => signInWithProvider("github")}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
@@ -143,7 +143,7 @@ export default function SignIn() {
             Continue with GitHub
           </button>
           <button
-            className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
+            className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case"
             onClick={() => signInWithProvider("google")}
           >
             <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
@@ -154,8 +154,8 @@ export default function SignIn() {
         </div>
         <div className="divider text-gray-400 text-sm">or continue with Email</div>
         <form onSubmit={handleSubmit}>
-          <div className="form-control">
-            <label htmlFor="email" className="label">
+          <div className="fieldset">
+            <label htmlFor="email" className="fieldset-legend">
               Email
             </label>
             <input
@@ -166,7 +166,7 @@ export default function SignIn() {
               onChange={(ev) =>
                 setFormData({ ...formData, email: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.email ? (
@@ -176,7 +176,7 @@ export default function SignIn() {
             <PasswordField password={formData.password} passwordError={errors?.password} onUpdate={(ev) => {
               setFormData({ ...formData, password: ev.target.value })}} />
           ) : null}
-          <div className="form-control flex-row justify-between pt-4">
+          <div className="flex flex-row justify-between pt-4">
             <label className="label justify-start cursor-pointer gap-2 text-gray-500">
               <input
                 type="checkbox"
@@ -196,8 +196,8 @@ export default function SignIn() {
               </Link>
             ) : null}
           </div>
-          <div className="form-control mt-6">
-            <button className="btn btn-primary no-animation">Sign in</button>
+          <div className="flex flex-col mt-6">
+            <button className="btn btn-primary">Sign in</button>
           </div>
         </form>
         <div className="pt-4 text-center">

@@ -5,7 +5,7 @@ import {
   Outlet,
   useLocation,
   useNavigate,
-} from "react-router-dom";
+} from "react-router";
 
 export default function AppLayout() {
   const supabase = useSupabaseClient();
@@ -23,7 +23,7 @@ export default function AppLayout() {
             </h1>
           </div>
           <div className="flex-none space-x-10">
-            <Link to="/account" className="btn btn-outline no-animation">
+            <Link to="/account" className="btn btn-outline">
               Account
             </Link>
             <button

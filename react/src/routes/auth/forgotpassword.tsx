@@ -4,7 +4,7 @@ import { z, ZodError } from "zod";
 import { formatError } from "@/lib/utils";
 import InputErrorMessage from "@/components/InputErrorMessage";
 import Alert from "@/components/Alert";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useSupabaseClient } from "@/lib/AuthProvider";
 
 type FormData = z.infer<typeof ForgotPasswordSchema>;
@@ -67,8 +67,8 @@ export default function ForgotPassword() {
           Looks like you've forgotten your password
         </p>
         <form onSubmit={handleSubmit}>
-          <div className="form-control">
-            <label htmlFor="email" className="label">
+          <div className="fieldset">
+            <label htmlFor="email" className="fieldset-legend">
               Email
             </label>
             <input
@@ -79,14 +79,14 @@ export default function ForgotPassword() {
               onChange={(ev) =>
                 setFormData({ ...formData, email: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.email ? (
             <InputErrorMessage>{errors?.email}</InputErrorMessage>
           ) : null}
-          <div className="form-control mt-6">
-            <button className="btn btn-primary no-animation">Send</button>
+          <div className="flex flex-col mt-6">
+            <button className="btn btn-primary">Send</button>
           </div>
         </form>
         <div className="pt-4 text-center">

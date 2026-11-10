@@ -1,6 +1,6 @@
 import { useAuth } from "@/lib/AuthProvider";
 import { ProfileWithInfoAndSession, generateUrl } from "@/lib/utils";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router";
 
 export default function Home() {
   const { user } = useAuth();

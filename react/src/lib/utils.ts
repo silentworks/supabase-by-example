@@ -1,12 +1,12 @@
 import { User, SupabaseClient, Session, Provider } from "@supabase/supabase-js";
 import get from "just-safe-get";
-import { LoaderFunction, redirect } from "react-router-dom";
+import { LoaderFunction, redirect } from "react-router";
 import type { ZodError } from "zod";
 import { supabase } from "./db";
 
 export const formatError = (zodError: ZodError) => {
   const formattedErrors: Record<string, string> = {};
-  zodError.errors.forEach((err) => {
+  zodError.issues.forEach((err) => {
     const k = err.path.pop() as string;
     if (formattedErrors[k] == null) {
       formattedErrors[k] = err.message;

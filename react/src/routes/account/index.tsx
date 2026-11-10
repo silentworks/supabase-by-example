@@ -1,6 +1,6 @@
 import { useAuth } from "@/lib/AuthProvider";
 import { ProfileWithInfoAndSession } from "@/lib/utils";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router";
 
 export default function AccountIndex() {
   const { user } = useAuth();

@@ -66,9 +66,13 @@ export const AuthProvider = ({ children, supabaseClient }: Props) => {
 
 export function useSupabaseClient<
   Database = any,
-  SchemaName extends string & keyof Database = "public" extends keyof Database
+  SchemaName extends string &
+    keyof Omit<Database, "__InternalSupabase"> = "public" extends keyof Omit<
+    Database,
+    "__InternalSupabase"
+  >
     ? "public"
-    : string & keyof Database
+    : string & keyof Omit<Database, "__InternalSupabase">
 >() {
   const context = useContext(AuthContext);
   if (context === undefined) {
