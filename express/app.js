@@ -7,11 +7,7 @@ var logger = require("morgan");
 
 var session = require("express-session");
 var flash = require("express-flash");
-dotenv.config();
-
-// WebCrypto Polyfill for NodeJS
-const { Crypto } = require("@peculiar/webcrypto");
-globalThis.crypto = new Crypto();
+dotenv.config({ quiet: true });
 
 var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");

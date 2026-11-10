@@ -9,15 +9,15 @@ block main
     h2(class='font-semibold text-4xl mb-4') Update Email
     p(class='font-medium mb-4') Hi #{user.email}, Enter your new email below and confirm it
     form(method='post')
-      .form-control
-        label(class='label' for='email') Email
-        input(id='email' name='email' type='text' class='input input-bordered' value=`${email ? email : ''}`)
+      fieldset.fieldset
+        label(class='fieldset-legend' for='email') Email
+        input(id='email' name='email' type='text' class='input w-full' value=`${email ? email : ''}`)
       if errors
         +input_error(errors.email)
-      .form-control
-        label(class='label' for='emailConfirm') Confirm Email
-        input(id='emailConfirm' name='emailConfirm' type='text' class='input input-bordered' value=`${emailConfirm ? emailConfirm : ''}`)
+      fieldset.fieldset
+        label(class='fieldset-legend' for='emailConfirm') Confirm Email
+        input(id='emailConfirm' name='emailConfirm' type='text' class='input w-full' value=`${emailConfirm ? emailConfirm : ''}`)
       if errors
         +input_error(errors.emailConfirm)
-      .form-control.mt-6
-        button(class='btn btn-primary no-animation') Update Email
+      .mt-6
+        button(class='btn btn-primary w-full') Update Email

@@ -9,21 +9,21 @@ block main
     h2(class='font-semibold text-4xl mb-4') Create an account
     p(class='font-medium mb-4') Let's get started
     div(class='space-y-2')
-      a(class='btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation' href='/auth/github') Continue with GitHub
-      a(class='btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation' href='/auth/google') Continue with Google
+      a(class='btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case' href='/auth/github') Continue with GitHub
+      a(class='btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case' href='/auth/google') Continue with Google
     div(class='divider text-gray-400 text-sm') or continue with Email
     form(method='post')
-      .form-control
-        label(class='label' for='email') Email
-        input(id='email' name='email' type='text' class='input input-bordered' value=`${email ? email : ''}`)
+      fieldset.fieldset
+        label(class='fieldset-legend' for='email') Email
+        input(id='email' name='email' type='text' class='input w-full' value=`${email ? email : ''}`)
       if errors
         +input_error(errors.email)
-      .form-control
-        label(class='label' for='password') Password
-        input(id='password' name='password' type='password' class='input input-bordered')
+      fieldset.fieldset
+        label(class='fieldset-legend' for='password') Password
+        input(id='password' name='password' type='password' class='input w-full')
       if errors
         +input_error(errors.password)
-      .form-control.mt-6
-        button(class='btn btn-primary no-animation') Create account
+      .mt-6
+        button(class='btn btn-primary w-full') Create account
     .pt-4.text-center Already have an account? 
       a(class='underline text-blue-500' href='/auth/signin') Sign in
