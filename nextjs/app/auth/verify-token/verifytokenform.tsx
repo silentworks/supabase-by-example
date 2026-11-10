@@ -21,29 +21,29 @@ export default function VerifyTokenForm({ auth_type, next }: { auth_type: EmailO
       <h2 className="font-semibold text-4xl mb-4">Sign in</h2>
       <p className="font-medium mb-4">Hi, Welcome back</p>
       <form action={formAction}>
-        <div className="form-control">
-          <label htmlFor="email" className="label">
+        <div className="fieldset">
+          <label htmlFor="email" className="fieldset-legend">
             Email
           </label>
           <input
             id="email"
             name="email"
             type="text"
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.email ? (
           <InputErrorMessage>{state.errors.email}</InputErrorMessage>
         ) : null}
-        <div className="form-control">
-          <label htmlFor="token" className="label">
+        <div className="fieldset">
+          <label htmlFor="token" className="fieldset-legend">
             Token
           </label>
           <input
             id="token"
             name="token"
             type="text"
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.token ? (
@@ -51,8 +51,8 @@ export default function VerifyTokenForm({ auth_type, next }: { auth_type: EmailO
         ) : null}
         <input type="hidden" name="auth_type" value={auth_type} />
         <input type="hidden" name="next" value={next} />
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">Sign in</button>
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">Sign in</button>
         </div>
       </form>
     </div>

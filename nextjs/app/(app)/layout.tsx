@@ -16,7 +16,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </h1>
           </div>
           <div className="flex-none space-x-10">
-            <Link className="btn btn-outline no-animation" href="/account">
+            <Link className="btn btn-outline" href="/account">
               Account
             </Link>
 

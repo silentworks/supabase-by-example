@@ -23,22 +23,22 @@ export default function ForgotPasswordForm() {
         Looks like you&apos;ve forgotten your password
       </p>
       <form action={formAction}>
-        <div className="form-control">
-          <label htmlFor="email" className="label">
+        <div className="fieldset">
+          <label htmlFor="email" className="fieldset-legend">
             Email
           </label>
           <input
             id="email"
             name="email"
             type="text"
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.email ? (
           <InputErrorMessage>{state.errors.email}</InputErrorMessage>
         ) : null}
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">Send</button>
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">Send</button>
         </div>
       </form>
       <div className="pt-4 text-center">

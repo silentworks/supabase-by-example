@@ -29,8 +29,8 @@ export default function UpdateForm({ user, profile }: UserInfo) {
         below
       </p>
       <form action={formAction}>
-        <div className="form-control">
-          <label htmlFor="first_name" className="label">
+        <div className="fieldset">
+          <label htmlFor="first_name" className="fieldset-legend">
             First Name
           </label>
           <input
@@ -38,14 +38,14 @@ export default function UpdateForm({ user, profile }: UserInfo) {
             name="first_name"
             type="text"
             defaultValue={profileInfo?.first_name ?? ""}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.firstName ? (
           <InputErrorMessage>{state.errors.firstName}</InputErrorMessage>
         ) : null}
-        <div className="form-control">
-          <label htmlFor="last_name" className="label">
+        <div className="fieldset">
+          <label htmlFor="last_name" className="fieldset-legend">
             Last Name
           </label>
           <input
@@ -53,14 +53,14 @@ export default function UpdateForm({ user, profile }: UserInfo) {
             name="last_name"
             type="text"
             defaultValue={profileInfo.last_name ?? ""}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.lastName ? (
           <InputErrorMessage>{state.errors.lastName}</InputErrorMessage>
         ) : null}
-        <div className="form-control">
-          <label htmlFor="display_name" className="label">
+        <div className="fieldset">
+          <label htmlFor="display_name" className="fieldset-legend">
             Display Name
           </label>
           <input
@@ -68,28 +68,28 @@ export default function UpdateForm({ user, profile }: UserInfo) {
             name="display_name"
             type="text"
             defaultValue={profile.display_name ?? ""}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.displayName ? (
           <InputErrorMessage>{state.errors.displayName}</InputErrorMessage>
         ) : null}
-        <div className="form-control">
-          <label htmlFor="bio" className="label">
+        <div className="fieldset">
+          <label htmlFor="bio" className="fieldset-legend">
             Bio
           </label>
           <textarea
             id="bio"
             name="bio"
-            className="textarea textarea-bordered textarea-lg w-full"
+            className="textarea w-full textarea-lg w-full"
             defaultValue={profile.bio ?? ""}
           />
         </div>
         {!state.success && state.errors?.bio ? (
           <InputErrorMessage>{state.errors.bio}</InputErrorMessage>
         ) : null}
-        <div className="form-control">
-          <label htmlFor="dob" className="label">
+        <div className="fieldset">
+          <label htmlFor="dob" className="fieldset-legend">
             Date of birth
           </label>
           <input
@@ -97,14 +97,14 @@ export default function UpdateForm({ user, profile }: UserInfo) {
             name="dob"
             type="text"
             defaultValue={profileInfo.dob ?? ""}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.dob ? (
           <InputErrorMessage>{state.errors.dob}</InputErrorMessage>
         ) : null}
-        <div className="form-control">
-          <label htmlFor="profile_location" className="label">
+        <div className="fieldset">
+          <label htmlFor="profile_location" className="fieldset-legend">
             Location
           </label>
           <input
@@ -112,14 +112,14 @@ export default function UpdateForm({ user, profile }: UserInfo) {
             name="profile_location"
             type="text"
             defaultValue={profileInfo.profile_location ?? ""}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.profileLocation ? (
           <InputErrorMessage>{state.errors.profileLocation}</InputErrorMessage>
         ) : null}
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">Update</button>
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">Update</button>
         </div>
       </form>
     </div>
