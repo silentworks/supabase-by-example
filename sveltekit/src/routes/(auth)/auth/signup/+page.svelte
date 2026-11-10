@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { enhance } from '$app/forms';
-	import Alert from '$lib/Alert.svelte';
-	import InputErrorMessage from '$lib/InputErrorMessage.svelte';
+	import Alert from '#lib/Alert.svelte';
+	import InputErrorMessage from '#lib/InputErrorMessage.svelte';
 	import type { ActionData } from './$types';
 
 	interface Props {
@@ -24,9 +25,16 @@
 		<form method="post" action="?/oauth">
 			<input type="hidden" name="provider" value="github" />
 			<button
-				class="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
+				class="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case"
 			>
-				<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
+				<svg
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					xmlns="http://www.w3.org/2000/svg"
+					version="1.1"
+					preserveAspectRatio="xMinYMin"
+				>
 					<use xlink:href="#img-github"></use>
 				</svg>
 				Continue with GitHub
@@ -35,9 +43,16 @@
 		<form method="post" action="?/oauth">
 			<input type="hidden" name="provider" value="google" />
 			<button
-				class="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
+				class="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case"
 			>
-				<svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
+				<svg
+					width="24"
+					height="24"
+					viewBox="0 0 48 48"
+					xmlns="http://www.w3.org/2000/svg"
+					version="1.1"
+					preserveAspectRatio="xMinYMin"
+				>
 					<use xlink:href="#img-google"></use>
 				</svg>
 				Continue with Google
@@ -46,31 +61,31 @@
 	</div>
 	<div class="divider text-gray-400 text-sm">or continue with Email</div>
 	<form class="" method="post" action="?/email_password" use:enhance>
-		<div class="form-control">
-			<label for="email" class="label">Email</label>
+		<div class="fieldset">
+			<label for="email" class="fieldset-legend">Email</label>
 			<input
 				id="email"
 				name="email"
 				type="text"
 				value={form?.email ?? ''}
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.email}
 			<InputErrorMessage>{form?.errors?.email}</InputErrorMessage>
 		{/if}
-		<div class="form-control">
-			<label for="password" class="label">Password</label>
-			<input id="password" name="password" type="password" value="" class="input input-bordered" />
+		<div class="fieldset">
+			<label for="password" class="fieldset-legend">Password</label>
+			<input id="password" name="password" type="password" value="" class="input w-full" />
 		</div>
 		{#if form?.errors?.password}
 			<InputErrorMessage>{form?.errors?.password}</InputErrorMessage>
 		{/if}
-		<div class="form-control mt-6">
-			<button class="btn btn-primary no-animation">Create account</button>
+		<div class="flex flex-col mt-6">
+			<button class="btn btn-primary">Create account</button>
 		</div>
 	</form>
 	<div class="pt-4 text-center">
-		Already have an account? <a href="/auth/signin" class="underline text-blue-500">Sign In</a>
+		Already have an account? <a href={resolve('auth/signin')} class="underline text-blue-500">Sign In</a>
 	</div>
 </div>

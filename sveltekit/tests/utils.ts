@@ -1,4 +1,4 @@
-import type { AuthUserSchema, ForgotPasswordSchema } from '$lib/validationSchema';
+import type { AuthUserSchema, ForgotPasswordSchema } from '#lib/validationSchema.ts';
 import { expect, type Page } from '@playwright/test';
 import type { z } from 'zod';
 import { faker } from '@faker-js/faker';

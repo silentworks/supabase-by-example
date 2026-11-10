@@ -2,3 +2,5 @@ onlyBuiltDependencies:
   - '@sveltejs/kit'
   - esbuild
   - supabase
+ignoredBuiltDependencies:
+  - "@parcel/watcher"

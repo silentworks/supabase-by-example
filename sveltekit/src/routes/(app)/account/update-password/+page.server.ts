@@ -1,34 +1,34 @@
-import { formatError, fault, success } from '$lib/utils';
-import { UpdatePasswordSchema } from '$lib/validationSchema';
+import { formatError, fault, success } from '#lib/utils.ts';
+import { UpdatePasswordSchema } from '#lib/validationSchema.ts';
 import { fail } from '@sveltejs/kit';
 import { ZodError } from 'zod';
 import type { Actions } from './$types';
-import { clearPasswordUpdateCookie } from '$lib/session';
+import { clearPasswordUpdateCookie } from '#lib/session.ts';
 
 export const actions = {
-  default: async ({ cookies, request, locals: { supabase } }) => {
-    const formData = await request.formData();
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const passwordConfirm = formData.get('passwordConfirm') as string;
+	default: async ({ cookies, request, locals: { supabase } }) => {
+		const formData = await request.formData();
+		const email = formData.get('email') as string;
+		const password = formData.get('password') as string;
+		const passwordConfirm = formData.get('passwordConfirm') as string;
 
-    try {
-      UpdatePasswordSchema.parse({ password, passwordConfirm });
-    } catch (err) {
-      if (err instanceof ZodError) {
-        const errors = formatError(err);
-        return fail(400, { errors, password });
-      }
-    }
+		try {
+			UpdatePasswordSchema.parse({ password, passwordConfirm });
+		} catch (err) {
+			if (err instanceof ZodError) {
+				const errors = formatError(err);
+				return fail(400, { errors, password });
+			}
+		}
 
-    const { error } = await supabase.auth.updateUser({ password });
+		const { error } = await supabase.auth.updateUser({ password });
 
-    if (error) {
-      return fail(500, fault('Server error. Try again later.', { email }));
-    }
+		if (error) {
+			return fail(500, fault('Server error. Try again later.', { email }));
+		}
 
-    clearPasswordUpdateCookie(cookies);
+		clearPasswordUpdateCookie(cookies);
 
-    return success('Your password was updated successfully.');
-  }
+		return success('Your password was updated successfully.');
+	}
 } satisfies Actions;

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -19,13 +20,13 @@
 
 	<ul class="divide-y-2 divide-gray-200">
 		<li class="flex justify-between hover:bg-blue-600 hover:text-blue-200">
-			<a class="block w-full p-3" href="/account/update">Update profile</a>
+			<a class="block w-full p-3" href={resolve('account/update')}>Update profile</a>
 		</li>
 		<li class="flex justify-between hover:bg-blue-600 hover:text-blue-200">
-			<a class="block w-full p-3" href="/account/update-email">Update email</a>
+			<a class="block w-full p-3" href={resolve('account/update-email')}>Update email</a>
 		</li>
 		<li class="flex justify-between hover:bg-blue-600 hover:text-blue-200">
-			<a class="block w-full p-3" href="/account/update-password">Update password</a>
+			<a class="block w-full p-3" href={resolve('account/update-password')}>Update password</a>
 		</li>
 	</ul>
 </div>

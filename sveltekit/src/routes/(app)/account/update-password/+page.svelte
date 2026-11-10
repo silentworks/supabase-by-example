@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ActionData, PageData } from './$types';
-	import InputErrorMessage from '$lib/InputErrorMessage.svelte';
-	import Alert from '$lib/Alert.svelte';
+	import InputErrorMessage from '#lib/InputErrorMessage.svelte';
+	import Alert from '#lib/Alert.svelte';
 	import { enhance } from '$app/forms';
 
 	interface Props {
@@ -23,34 +23,34 @@
 		Hi {data.session?.user.email}, Enter your new password below and confirm it
 	</p>
 	<form class="" method="post" use:enhance>
-		<div class="form-control">
-			<label for="password" class="label">Password</label>
+		<div class="fieldset">
+			<label for="password" class="fieldset-legend">Password</label>
 			<input
 				id="password"
 				name="password"
 				type="password"
 				value={form?.password ?? ''}
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.password}
 			<InputErrorMessage>{form?.errors?.password}</InputErrorMessage>
 		{/if}
-		<div class="form-control">
-			<label for="passwordConfirm" class="label">Confirm Password</label>
+		<div class="fieldset">
+			<label for="passwordConfirm" class="fieldset-legend">Confirm Password</label>
 			<input
 				id="passwordConfirm"
 				name="passwordConfirm"
 				type="password"
 				value=""
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.passwordConfirm}
 			<InputErrorMessage>{form?.errors?.passwordConfirm}</InputErrorMessage>
 		{/if}
-		<div class="form-control mt-6">
-			<button class="btn btn-primary no-animation">Update Password</button>
+		<div class="flex flex-col mt-6">
+			<button class="btn btn-primary">Update Password</button>
 		</div>
 	</form>
 </div>

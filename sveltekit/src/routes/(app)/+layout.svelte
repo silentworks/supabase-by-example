@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	interface Props {
 		children?: import('svelte').Snippet;
 	}
@@ -16,11 +17,11 @@
 		<div class="navbar border-b border-gray-300 py-8 px-4">
 			<div class="flex-1">
 				<h1 class="font-semibold">
-					<a href="/">Supabase by example</a>
+					<a href={resolve('')}>Supabase by example</a>
 				</h1>
 			</div>
 			<div class="flex-none space-x-10">
-				<a class="btn btn-outline" href="/account">Account</a>
+				<a class="btn btn-outline" href={resolve('account')}>Account</a>
 				<form action="/auth/signout" method="post">
 					<button class="btn btn-ghost">Sign out</button>
 				</form>

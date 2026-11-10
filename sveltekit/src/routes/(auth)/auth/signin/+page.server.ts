@@ -1,5 +1,6 @@
-import { fault, formatError, success } from '$lib/utils';
-import { AuthUserSchema, ForgotPasswordSchema } from '$lib/validationSchema';
+import { PUBLIC_SUPABASE_URL } from '$app/env/public';
+import { fault, formatError, success } from '#lib/utils.ts';
+import { AuthUserSchema, ForgotPasswordSchema } from '#lib/validationSchema.ts';
 import { AuthApiError, type Provider } from '@supabase/supabase-js';
 import { fail, redirect } from '@sveltejs/kit';
 import { ZodError } from 'zod';
@@ -11,87 +12,89 @@ export const load: PageServerLoad = async (event) => {
 
 	return {
 		authType
-	}
+	};
 };
 
 export const actions = {
-  email_password: async (event) => {
-    const {
-      request,
-      locals: { supabase }
-    } = event;
+	email_password: async (event) => {
+		const {
+			request,
+			locals: { supabase }
+		} = event;
 
-    const formData = await request.formData();
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
+		const formData = await request.formData();
+		const email = formData.get('email') as string;
+		const password = formData.get('password') as string;
 
-    try {
-      AuthUserSchema.parse({ email, password });
-    } catch (err) {
-      if (err instanceof ZodError) {
-        const errors = formatError(err);
-        return fail(400, { errors, email });
-      }
-    }
+		try {
+			AuthUserSchema.parse({ email, password });
+		} catch (err) {
+			if (err instanceof ZodError) {
+				const errors = formatError(err);
+				return fail(400, { errors, email });
+			}
+		}
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
+		const { error } = await supabase.auth.signInWithPassword({
+			email,
+			password
+		});
 
-    if (error) {
-      if (error instanceof AuthApiError && error.status === 400) {
-        return fail(400, fault('Email or Password is incorrect.', { email }));
-      }
+		if (error) {
+			if (error instanceof AuthApiError && error.status === 400) {
+				return fail(400, fault('Email or Password is incorrect.', { email }));
+			}
 
-      return fail(500, fault('Server error. Try again later.', { email }));
-    }
+			return fail(500, fault('Server error. Try again later.', { email }));
+		}
 
-    redirect(303, '/');
-  },
-  magic_link: async (event) => {
-    const {
-      request,
-      locals: { supabase }
-    } = event;
+		redirect(303, '/');
+	},
+	magic_link: async (event) => {
+		const {
+			request,
+			locals: { supabase }
+		} = event;
 
-    const formData = await request.formData();
-    const email = formData.get('email') as string;
+		const formData = await request.formData();
+		const email = formData.get('email') as string;
 
-    try {
-      ForgotPasswordSchema.parse({ email });
-    } catch (err) {
-      if (err instanceof ZodError) {
-        const errors = formatError(err);
-        return fail(400, { errors, email });
-      }
-    }
+		try {
+			ForgotPasswordSchema.parse({ email });
+		} catch (err) {
+			if (err instanceof ZodError) {
+				const errors = formatError(err);
+				return fail(400, { errors, email });
+			}
+		}
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email
-    });
+		const { error } = await supabase.auth.signInWithOtp({
+			email
+		});
 
-    if (error) {
-      return fail(500, fault('Server error. Try again later.', { email }));
-    }
+		if (error) {
+			return fail(500, fault('Server error. Try again later.', { email }));
+		}
 
-    return success('Please check your email for a magic link to log into the website.');
-  },
-  oauth: async ({ url, request, locals: { supabase } }) => {
-    const formData = await request.formData();
-    const provider = formData.get('provider') as Provider;
+		return success('Please check your email for a magic link to log into the website.');
+	},
+	oauth: async ({ url, request, locals: { supabase } }) => {
+		const formData = await request.formData();
+		const provider = formData.get('provider') as Provider;
 
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider,
-      options: {
-        redirectTo: `${url.origin}/auth/callback`
-      }
-    });
+		const { data, error } = await supabase.auth.signInWithOAuth({
+			provider,
+			options: {
+				redirectTo: `${url.origin}/auth/callback`
+			}
+		});
 
-    if (error) {
-      return fail(500, fault('Server error. Try again later.'));
-    }
+		if (error) {
+			return fail(500, fault('Server error. Try again later.'));
+		}
 
-    redirect(303, data.url);
-  }
+		// SvelteKit 3 requires external redirects to be opted into; only allow
+		// the Supabase Auth server that signInWithOAuth sends the user to.
+		redirect(303, data.url, { external: [new URL(PUBLIC_SUPABASE_URL).origin] });
+	}
 } satisfies Actions;

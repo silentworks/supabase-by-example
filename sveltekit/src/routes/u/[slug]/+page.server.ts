@@ -1,6 +1,6 @@
 import get from 'just-safe-get';
 import type { PageServerLoad } from './$types';
-import type { Profile, ProfileInfo } from '$lib/utils';
+import type { Profile, ProfileInfo } from '#lib/utils.ts';
 
 export const load: PageServerLoad = async ({ params, url, locals: { supabase, getSession } }) => {
 	const { session } = await getSession();

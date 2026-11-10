@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ActionData, PageData } from './$types';
-	import InputErrorMessage from '$lib/InputErrorMessage.svelte';
-	import Alert from '$lib/Alert.svelte';
+	import InputErrorMessage from '#lib/InputErrorMessage.svelte';
+	import Alert from '#lib/Alert.svelte';
 	import { enhance } from '$app/forms';
 
 	interface Props {
@@ -23,34 +23,34 @@
 		Hi {data.session?.user.email}, Enter your new email below and confirm it
 	</p>
 	<form class="" method="post" use:enhance>
-		<div class="form-control">
-			<label for="email" class="label">Email</label>
+		<div class="fieldset">
+			<label for="email" class="fieldset-legend">Email</label>
 			<input
 				id="email"
 				name="email"
 				type="email"
 				value={form?.email ?? ''}
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.email}
 			<InputErrorMessage>{form?.errors?.email}</InputErrorMessage>
 		{/if}
-		<div class="form-control">
-			<label for="emailConfirm" class="label">Confirm Email</label>
+		<div class="fieldset">
+			<label for="emailConfirm" class="fieldset-legend">Confirm Email</label>
 			<input
 				id="emailConfirm"
 				name="emailConfirm"
 				type="email"
 				value={form?.emailConfirm ?? ''}
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.emailConfirm}
 			<InputErrorMessage>{form?.errors?.emailConfirm}</InputErrorMessage>
 		{/if}
-		<div class="form-control mt-6">
-			<button class="btn btn-primary no-animation">Update Email</button>
+		<div class="flex flex-col mt-6">
+			<button class="btn btn-primary">Update Email</button>
 		</div>
 	</form>
 </div>
