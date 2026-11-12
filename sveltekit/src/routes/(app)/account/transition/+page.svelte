@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import Alert from '$lib/Alert.svelte';
-	import InputErrorMessage from '$lib/InputErrorMessage.svelte';
+	import Alert from '#lib/Alert.svelte';
+	import InputErrorMessage from '#lib/InputErrorMessage.svelte';
 
 	let { form } = $props();
 </script>
@@ -15,34 +15,34 @@
 	<h2 class="font-semibold text-4xl mb-4">Transition to permanent account</h2>
 	<p class="font-medium mb-4">Hi, please enter your email and token below:</p>
 	<form class="" method="post" use:enhance>
-		<div class="form-control">
-			<label for="email" class="label">Email</label>
+		<div class="fieldset">
+			<label for="email" class="fieldset-legend">Email</label>
 			<input
 				id="email"
 				name="email"
 				type="text"
 				value={form?.email ?? ''}
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.email}
 			<InputErrorMessage>{form?.errors?.email}</InputErrorMessage>
 		{/if}
-		<div class="form-control">
-			<label for="token" class="label">Token</label>
+		<div class="fieldset">
+			<label for="token" class="fieldset-legend">Token</label>
 			<input
 				id="token"
 				name="token"
 				type="text"
 				value={form?.token ?? ''}
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.token}
 			<InputErrorMessage>{form?.errors?.token}</InputErrorMessage>
 		{/if}
-		<div class="form-control mt-6">
-			<button class="btn btn-primary no-animation">Sign in</button>
+		<div class="flex flex-col mt-6">
+			<button class="btn btn-primary">Sign in</button>
 		</div>
 	</form>
 </div>

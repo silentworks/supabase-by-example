@@ -1,4 +1,4 @@
-import { fault } from '$lib/utils';
+import { fault } from '#lib/utils.ts';
 import { fail, redirect } from '@sveltejs/kit';
 
 export const GET = async (event) => {
@@ -8,7 +8,7 @@ export const GET = async (event) => {
 	} = event;
 
 	const { error } = await supabase.auth.linkIdentity({
-		provider: "github",
+		provider: 'github',
 		options: {
 			redirectTo: `${url.origin}/auth/callback`
 		}
@@ -18,5 +18,5 @@ export const GET = async (event) => {
 		throw fail(500, fault('Server error. Try again later.'));
 	}
 
-	redirect(307, '/')
+	redirect(307, '/');
 };

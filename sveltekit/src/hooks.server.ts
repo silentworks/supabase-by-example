@@ -1,9 +1,10 @@
+import { redirect } from '@sveltejs/kit';
+
 // src/hooks.server.ts
-import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
-import type { Database } from '$lib/schema';
+import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$app/env/public';
+import type { Database } from '#lib/schema.ts';
 import { createServerClient } from '@supabase/ssr';
-import { redirect, type Handle } from '@sveltejs/kit';
-import { sequence } from '@sveltejs/kit/hooks';
+import { sequence, type Handle } from '@sveltejs/kit/hooks';
 
 const supabase: Handle = async ({ event, resolve }) => {
 	event.locals.supabase = createServerClient<Database>(
@@ -12,7 +13,7 @@ const supabase: Handle = async ({ event, resolve }) => {
 		{
 			cookies: {
 				getAll: () => {
-					return event.cookies.getAll()
+					return event.cookies.getAll();
 				},
 				/**
 				 * SvelteKit's cookies API requires `path` to be explicitly set in
@@ -21,9 +22,9 @@ const supabase: Handle = async ({ event, resolve }) => {
 				 */
 				setAll: (cookies) => {
 					cookies.forEach(({ name, value, options }) => {
-						event.cookies.set(name, value, { ...options, path: '/' })
-					})
-				},
+						event.cookies.set(name, value, { ...options, path: '/' });
+					});
+				}
 			}
 		}
 	);
@@ -35,22 +36,22 @@ const supabase: Handle = async ({ event, resolve }) => {
 	 */
 	event.locals.getSession = async () => {
 		const {
-			data: { session },
-		} = await event.locals.supabase.auth.getSession()
+			data: { session }
+		} = await event.locals.supabase.auth.getSession();
 		if (!session) {
-			return { session: null, user: null }
+			return { session: null, user: null };
 		}
 
 		const {
 			data: { user },
-			error,
-		} = await event.locals.supabase.auth.getUser()
+			error
+		} = await event.locals.supabase.auth.getUser();
 		if (error) {
 			// JWT validation has failed
-			return { session: null, user: null }
+			return { session: null, user: null };
 		}
 
-		return { session, user }
+		return { session, user };
 	};
 
 	return resolve(event, {
@@ -70,15 +71,18 @@ const authGuard: Handle = async ({ event, resolve }) => {
 	event.locals.session = session;
 	event.locals.user = user;
 
-	if (!event.locals.session && (event.url.pathname === '/' || event.url.pathname.startsWith('/account'))) {
-	  redirect(303, '/auth');
+	if (
+		!event.locals.session &&
+		(event.url.pathname === '/' || event.url.pathname.startsWith('/account'))
+	) {
+		redirect(303, '/auth');
 	}
 
 	if (event.locals.session && event.url.pathname === '/auth') {
-	  redirect(303, '/');
+		redirect(303, '/');
 	}
 
 	return resolve(event);
-}
+};
 
 export const handle: Handle = sequence(supabase, authGuard);

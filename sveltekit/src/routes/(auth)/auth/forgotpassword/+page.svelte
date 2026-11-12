@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { enhance } from '$app/forms';
-	import Alert from '$lib/Alert.svelte';
-	import InputErrorMessage from '$lib/InputErrorMessage.svelte';
+	import Alert from '#lib/Alert.svelte';
+	import InputErrorMessage from '#lib/InputErrorMessage.svelte';
 	import type { ActionData } from './$types';
 
 	interface Props {
@@ -21,24 +22,24 @@
 	<h2 class="font-semibold text-4xl mb-4">Forgot password</h2>
 	<p class="font-medium mb-4">Looks like you've forgotten your password</p>
 	<form class="" method="post" use:enhance>
-		<div class="form-control">
-			<label for="email" class="label">Email</label>
+		<div class="fieldset">
+			<label for="email" class="fieldset-legend">Email</label>
 			<input
 				id="email"
 				name="email"
 				type="text"
 				value={form?.email ?? ''}
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.email}
 			<InputErrorMessage>{form?.errors?.email}</InputErrorMessage>
 		{/if}
-		<div class="form-control mt-6">
-			<button class="btn btn-primary no-animation">Send</button>
+		<div class="flex flex-col mt-6">
+			<button class="btn btn-primary">Send</button>
 		</div>
 	</form>
 	<div class="pt-4 text-center">
-		Not registered yet? <a href="/auth/signup" class="underline text-blue-500">Create an account</a>
+		Not registered yet? <a href={resolve('auth/signup')} class="underline text-blue-500">Create an account</a>
 	</div>
 </div>

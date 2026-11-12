@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { ActionData, PageData } from './$types';
 	import { enhance } from '$app/forms';
-	import Alert from '$lib/Alert.svelte';
-	import InputErrorMessage from '$lib/InputErrorMessage.svelte';
+	import Alert from '#lib/Alert.svelte';
+	import InputErrorMessage from '#lib/InputErrorMessage.svelte';
 
 	interface Props {
 		data: PageData;
@@ -35,14 +35,14 @@
 	>
 		<div class="mb-4 md:grid md:grid-cols-6 gap-4">
 			<div class="col-span-6 sm:col-span-3">
-				<div class="form-control">
-					<label for="first_name" class="label">First Name</label>
+				<div class="fieldset">
+					<label for="first_name" class="fieldset-legend">First Name</label>
 					<input
 						id="first_name"
 						name="firstName"
 						type="text"
 						value={form?.firstName ?? data.profileInfo?.first_name ?? ''}
-						class="input input-bordered"
+						class="input w-full"
 					/>
 				</div>
 				{#if form?.errors?.firstName}
@@ -50,14 +50,14 @@
 				{/if}
 			</div>
 			<div class="col-span-6 sm:col-span-3">
-				<div class="form-control">
-					<label for="last_name" class="label">Last Name</label>
+				<div class="fieldset">
+					<label for="last_name" class="fieldset-legend">Last Name</label>
 					<input
 						id="last_name"
 						name="lastName"
 						type="text"
 						value={form?.lastName ?? data.profileInfo?.last_name ?? ''}
-						class="input input-bordered"
+						class="input w-full"
 					/>
 				</div>
 				{#if form?.errors?.lastName}
@@ -65,56 +65,56 @@
 				{/if}
 			</div>
 		</div>
-		<div class="form-control">
-			<label for="display_name" class="label">Display Name</label>
+		<div class="fieldset">
+			<label for="display_name" class="fieldset-legend">Display Name</label>
 			<input
 				id="display_name"
 				name="displayName"
 				type="text"
 				value={form?.displayName ?? data.profile?.display_name ?? ''}
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.displayName}
 			<InputErrorMessage>{form?.errors?.displayName}</InputErrorMessage>
 		{/if}
-		<div class="form-control">
-			<label for="bio" class="label">Bio</label>
-			<textarea id="bio" name="bio" class="textarea textarea-bordered textarea-lg w-full"
+		<div class="fieldset">
+			<label for="bio" class="fieldset-legend">Bio</label>
+			<textarea id="bio" name="bio" class="textarea w-full textarea-lg w-full"
 				>{form?.bio ?? data.profile?.bio}</textarea
 			>
 		</div>
 		{#if form?.errors?.bio}
 			<InputErrorMessage>{form?.errors?.bio}</InputErrorMessage>
 		{/if}
-		<div class="form-control">
-			<label for="dob" class="label">Date of birth</label>
+		<div class="fieldset">
+			<label for="dob" class="fieldset-legend">Date of birth</label>
 			<input
 				id="dob"
 				name="dob"
 				type="text"
 				value={form?.dob ?? data.profileInfo?.dob ?? ''}
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.dob}
 			<InputErrorMessage>{form?.errors?.dob}</InputErrorMessage>
 		{/if}
-		<div class="form-control">
-			<label for="profile_location" class="label">Location</label>
+		<div class="fieldset">
+			<label for="profile_location" class="fieldset-legend">Location</label>
 			<input
 				id="profile_location"
 				name="profileLocation"
 				type="text"
 				value={form?.profileLocation ?? data.profileInfo?.profile_location ?? ''}
-				class="input input-bordered"
+				class="input w-full"
 			/>
 		</div>
 		{#if form?.errors?.profileLocation}
 			<InputErrorMessage>{form?.errors?.profileLocation}</InputErrorMessage>
 		{/if}
-		<div class="form-control mt-6">
-			<button class="btn btn-primary no-animation">Update</button>
+		<div class="flex flex-col mt-6">
+			<button class="btn btn-primary">Update</button>
 		</div>
 	</form>
 </div>

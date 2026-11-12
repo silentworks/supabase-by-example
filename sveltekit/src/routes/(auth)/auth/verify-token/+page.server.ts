@@ -1,51 +1,51 @@
-import { fault, formatError } from '$lib/utils';
-import { AuthUserWithTokenSchema } from '$lib/validationSchema';
+import { fault, formatError } from '#lib/utils.ts';
+import { AuthUserWithTokenSchema } from '#lib/validationSchema.ts';
 import type { EmailOtpType } from '@supabase/supabase-js';
 import { fail, redirect } from '@sveltejs/kit';
 import { ZodError } from 'zod';
 import type { Actions } from './$types';
-import { passwordUpdateRequired } from '$lib/session';
+import { passwordUpdateRequired } from '#lib/session.ts';
 
 export const load = async (event) => {
 	const { url } = event;
-	const type = (url.searchParams.get('type')  ?? "email") as EmailOtpType;
+	const type = (url.searchParams.get('type') ?? 'email') as EmailOtpType;
 
 	return {
 		type
-	}
+	};
 };
 
 export const actions = {
-  default: async ({ cookies, request, url, locals: { supabase } }) => {
-    const formData = await request.formData();
-    const email = formData.get('email') as string;
-    const token = formData.get('token') as string;
-    const type = (url.searchParams.get('type')  ?? "email") as EmailOtpType;
-    const nextUrl = url.searchParams.get("next") ?? "/";
+	default: async ({ cookies, request, url, locals: { supabase } }) => {
+		const formData = await request.formData();
+		const email = formData.get('email') as string;
+		const token = formData.get('token') as string;
+		const type = (url.searchParams.get('type') ?? 'email') as EmailOtpType;
+		const nextUrl = url.searchParams.get('next') ?? '/';
 
-    try {
-      AuthUserWithTokenSchema.parse({ email, token });
-    } catch (err) {
-      if (err instanceof ZodError) {
-        const errors = formatError(err);
-        return fail(400, { errors, email });
-      }
-    }
+		try {
+			AuthUserWithTokenSchema.parse({ email, token });
+		} catch (err) {
+			if (err instanceof ZodError) {
+				const errors = formatError(err);
+				return fail(400, { errors, email, token });
+			}
+		}
 
-    if (type === 'recovery') {
-      passwordUpdateRequired(cookies);
-    }
+		if (type === 'recovery') {
+			passwordUpdateRequired(cookies);
+		}
 
-    const { error } = await supabase.auth.verifyOtp({
-      email,
-      token,
-      type
-    });
+		const { error } = await supabase.auth.verifyOtp({
+			email,
+			token,
+			type
+		});
 
-    if (error) {
-      return fail(500, fault(error.message, { email }));
-    }
+		if (error) {
+			return fail(500, fault(error.message, { email }));
+		}
 
-    redirect(307, nextUrl);
-  }
+		redirect(307, nextUrl);
+	}
 } satisfies Actions;
