@@ -1,8 +1,5 @@
-import {
-  Navigate,
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router";
+import { RouterProvider } from "react-router/dom";
 import AppLayout from "./components/AppLayout";
 import AuthLayout from "./components/AuthLayout";
 import Home from "./routes";
@@ -17,10 +14,15 @@ import Profile from "./routes/u/profile";
 import { profileLoader, profileSlugLoader } from "./lib/utils";
 import VerifyToken from "./routes/auth/verify-token";
 
-let router = createBrowserRouter([
+function Fallback() {
+  return <p>Performing initial data load</p>;
+}
+
+const router = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
+    hydrateFallbackElement: <Fallback />,
     children: [
       {
         index: true,
@@ -28,7 +30,7 @@ let router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/account/*",
+        path: "/account",
         children: [
           {
             index: true,
@@ -55,7 +57,7 @@ let router = createBrowserRouter([
     ],
   },
   {
-    path: "/auth/*",
+    path: "/auth",
     element: <AuthLayout />,
     children: [
       {
@@ -76,23 +78,20 @@ let router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <Navigate to="signin" replace />,
+        element: <Navigate to="/auth/signin" replace />,
       },
     ],
   },
   {
     path: "u/:slug",
     loader: profileSlugLoader,
+    hydrateFallbackElement: <Fallback />,
     element: <Profile />,
   },
 ]);
 
-function Fallback() {
-  return <p>Performing initial data load</p>;
-}
-
 function App() {
-  return <RouterProvider router={router} fallbackElement={<Fallback />} />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

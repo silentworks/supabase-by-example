@@ -1,5 +1,5 @@
 import { ProfileWithInfoAndSession, generateUrl } from "@/lib/utils";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router";
 
 export default function Profile() {
   const data = useLoaderData() as ProfileWithInfoAndSession;

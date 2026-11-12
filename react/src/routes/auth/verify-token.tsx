@@ -6,7 +6,7 @@ import InputErrorMessage from "@/components/InputErrorMessage";
 import { AuthApiError, EmailOtpType } from "@supabase/supabase-js";
 import Alert from "@/components/Alert";
 import { useSupabaseClient } from "@/lib/AuthProvider";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router";
 
 type FormData = z.infer<typeof AuthUserWithTokenSchema>;
 
@@ -77,8 +77,8 @@ export default function VerifyToken() {
         <h2 className="font-semibold text-4xl mb-4">Sign in</h2>
         <p className="font-medium mb-4">Hi, Welcome back</p>
         <form onSubmit={handleSubmit}>
-          <div className="form-control">
-            <label htmlFor="email" className="label">
+          <div className="fieldset">
+            <label htmlFor="email" className="fieldset-legend">
               Email
             </label>
             <input
@@ -89,14 +89,14 @@ export default function VerifyToken() {
               onChange={(ev) =>
                 setFormData({ ...formData, email: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.email ? (
             <InputErrorMessage>{errors?.email}</InputErrorMessage>
           ) : null}
-          <div className="form-control">
-            <label htmlFor="token" className="label">
+          <div className="fieldset">
+            <label htmlFor="token" className="fieldset-legend">
               Token
             </label>
             <input
@@ -107,14 +107,14 @@ export default function VerifyToken() {
               onChange={(ev) =>
                 setFormData({ ...formData, token: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.token ? (
             <InputErrorMessage>{errors?.token}</InputErrorMessage>
           ) : null}
-          <div className="form-control mt-6">
-            <button className="btn btn-primary no-animation">Sign in</button>
+          <div className="flex flex-col mt-6">
+            <button className="btn btn-primary">Sign in</button>
           </div>
         </form>
       </div>

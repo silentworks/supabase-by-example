@@ -67,8 +67,8 @@ export default function UpdatePassword() {
           Hi {user?.email}, Enter your new password below and confirm it
         </p>
         <form onSubmit={handleSubmit}>
-          <div className="form-control">
-            <label htmlFor="password" className="label">
+          <div className="fieldset">
+            <label htmlFor="password" className="fieldset-legend">
               Password
             </label>
             <input
@@ -79,14 +79,14 @@ export default function UpdatePassword() {
               onChange={(ev) =>
                 setFormData({ ...formData, password: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.password ? (
             <InputErrorMessage>{errors?.password}</InputErrorMessage>
           ) : null}
-          <div className="form-control">
-            <label htmlFor="passwordConfirm" className="label">
+          <div className="fieldset">
+            <label htmlFor="passwordConfirm" className="fieldset-legend">
               Confirm Password
             </label>
             <input
@@ -97,14 +97,14 @@ export default function UpdatePassword() {
               onChange={(ev) =>
                 setFormData({ ...formData, passwordConfirm: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.passwordConfirm ? (
             <InputErrorMessage>{errors?.passwordConfirm}</InputErrorMessage>
           ) : null}
-          <div className="form-control mt-6">
-            <button className="btn btn-primary no-animation">
+          <div className="flex flex-col mt-6">
+            <button className="btn btn-primary">
               Update Password
             </button>
           </div>

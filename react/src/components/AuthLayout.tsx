@@ -1,5 +1,5 @@
 import { useAuth } from "@/lib/AuthProvider";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router";
 
 export default function AuthLayout() {
   const { user } = useAuth();

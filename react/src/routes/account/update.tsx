@@ -5,7 +5,7 @@ import { ProfileWithInfoAndSession, formatError } from "@/lib/utils";
 import InputErrorMessage from "@/components/InputErrorMessage";
 import Alert from "@/components/Alert";
 import { useAuth, useSupabaseClient } from "@/lib/AuthProvider";
-import { useLoaderData, useRevalidator } from "react-router-dom";
+import { useLoaderData, useRevalidator } from "react-router";
 
 type FormData = z.infer<typeof UpdateProfileSchema>;
 
@@ -101,8 +101,8 @@ export default function Update() {
           profile info below
         </p>
         <form onSubmit={handleSubmit}>
-          <div className="form-control">
-            <label htmlFor="first_name" className="label">
+          <div className="fieldset">
+            <label htmlFor="first_name" className="fieldset-legend">
               First Name
             </label>
             <input
@@ -113,14 +113,14 @@ export default function Update() {
               onChange={(ev) =>
                 setFormData({ ...formData, firstName: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.firstName ? (
             <InputErrorMessage>{errors?.firstName}</InputErrorMessage>
           ) : null}
-          <div className="form-control">
-            <label htmlFor="last_name" className="label">
+          <div className="fieldset">
+            <label htmlFor="last_name" className="fieldset-legend">
               Last Name
             </label>
             <input
@@ -131,14 +131,14 @@ export default function Update() {
               onChange={(ev) =>
                 setFormData({ ...formData, lastName: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.lastName ? (
             <InputErrorMessage>{errors?.lastName}</InputErrorMessage>
           ) : null}
-          <div className="form-control">
-            <label htmlFor="display_name" className="label">
+          <div className="fieldset">
+            <label htmlFor="display_name" className="fieldset-legend">
               Display Name
             </label>
             <input
@@ -149,20 +149,20 @@ export default function Update() {
               onChange={(ev) =>
                 setFormData({ ...formData, displayName: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.displayName ? (
             <InputErrorMessage>{errors?.displayName}</InputErrorMessage>
           ) : null}
-          <div className="form-control">
-            <label htmlFor="bio" className="label">
+          <div className="fieldset">
+            <label htmlFor="bio" className="fieldset-legend">
               Bio
             </label>
             <textarea
               id="bio"
               name="bio"
-              className="textarea textarea-bordered textarea-lg w-full"
+              className="textarea w-full textarea-lg w-full"
               value={formData.bio}
               onChange={(ev) =>
                 setFormData({ ...formData, bio: ev.target.value })
@@ -172,8 +172,8 @@ export default function Update() {
           {errors?.bio ? (
             <InputErrorMessage>{errors?.bio}</InputErrorMessage>
           ) : null}
-          <div className="form-control">
-            <label htmlFor="dob" className="label">
+          <div className="fieldset">
+            <label htmlFor="dob" className="fieldset-legend">
               Date of birth
             </label>
             <input
@@ -184,14 +184,14 @@ export default function Update() {
               onChange={(ev) =>
                 setFormData({ ...formData, dob: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.dob ? (
             <InputErrorMessage>{errors?.dob}</InputErrorMessage>
           ) : null}
-          <div className="form-control">
-            <label htmlFor="profile_location" className="label">
+          <div className="fieldset">
+            <label htmlFor="profile_location" className="fieldset-legend">
               Location
             </label>
             <input
@@ -202,14 +202,14 @@ export default function Update() {
               onChange={(ev) =>
                 setFormData({ ...formData, profileLocation: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.profileLocation ? (
             <InputErrorMessage>{errors?.profileLocation}</InputErrorMessage>
           ) : null}
-          <div className="form-control mt-6">
-            <button className="btn btn-primary no-animation">Update</button>
+          <div className="flex flex-col mt-6">
+            <button className="btn btn-primary">Update</button>
           </div>
         </form>
       </div>

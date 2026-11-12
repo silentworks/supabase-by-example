@@ -5,7 +5,7 @@ import { formatError, signInWithProvider } from "@/lib/utils";
 import InputErrorMessage from "@/components/InputErrorMessage";
 import { AuthApiError } from "@supabase/supabase-js";
 import Alert from "@/components/Alert";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useSupabaseClient } from "@/lib/AuthProvider";
 
 type FormData = z.infer<typeof AuthUserSchema>;
@@ -76,7 +76,7 @@ export default function SignUp() {
         <p className="font-medium mb-4">Let's get started</p>
         <div className="space-y-2">
           <button
-            className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
+            className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case"
             onClick={() => signInWithProvider("github")}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
@@ -85,7 +85,7 @@ export default function SignUp() {
             Continue with GitHub
           </button>
           <button
-            className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
+            className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case"
             onClick={() => signInWithProvider("google")}
           >
             <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
@@ -96,8 +96,8 @@ export default function SignUp() {
         </div>
         <div className="divider text-gray-400 text-sm">or continue with Email</div>
         <form onSubmit={handleSubmit}>
-          <div className="form-control">
-            <label htmlFor="email" className="label">
+          <div className="fieldset">
+            <label htmlFor="email" className="fieldset-legend">
               Email
             </label>
             <input
@@ -108,14 +108,14 @@ export default function SignUp() {
               onChange={(ev) =>
                 setFormData({ ...formData, email: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.email ? (
             <InputErrorMessage>{errors?.email}</InputErrorMessage>
           ) : null}
-          <div className="form-control">
-            <label htmlFor="password" className="label">
+          <div className="fieldset">
+            <label htmlFor="password" className="fieldset-legend">
               Password
             </label>
             <input
@@ -126,14 +126,14 @@ export default function SignUp() {
               onChange={(ev) =>
                 setFormData({ ...formData, password: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.password ? (
             <InputErrorMessage>{errors?.password}</InputErrorMessage>
           ) : null}
-          <div className="form-control mt-6">
-            <button className="btn btn-primary no-animation">
+          <div className="flex flex-col mt-6">
+            <button className="btn btn-primary">
               Create account
             </button>
           </div>

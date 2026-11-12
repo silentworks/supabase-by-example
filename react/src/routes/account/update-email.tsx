@@ -67,8 +67,8 @@ export default function UpdateEmail() {
           Hi {user?.email}, Enter your new email below and confirm it
         </p>
         <form onSubmit={handleSubmit}>
-          <div className="form-control">
-            <label htmlFor="email" className="label">
+          <div className="fieldset">
+            <label htmlFor="email" className="fieldset-legend">
               Email
             </label>
             <input
@@ -79,14 +79,14 @@ export default function UpdateEmail() {
               onChange={(ev) =>
                 setFormData({ ...formData, email: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.email ? (
             <InputErrorMessage>{errors?.email}</InputErrorMessage>
           ) : null}
-          <div className="form-control">
-            <label htmlFor="emailConfirm" className="label">
+          <div className="fieldset">
+            <label htmlFor="emailConfirm" className="fieldset-legend">
               Confirm Email
             </label>
             <input
@@ -97,14 +97,14 @@ export default function UpdateEmail() {
               onChange={(ev) =>
                 setFormData({ ...formData, emailConfirm: ev.target.value })
               }
-              className="input input-bordered"
+              className="input w-full"
             />
           </div>
           {errors?.emailConfirm ? (
             <InputErrorMessage>{errors?.emailConfirm}</InputErrorMessage>
           ) : null}
-          <div className="form-control mt-6">
-            <button className="btn btn-primary no-animation">
+          <div className="flex flex-col mt-6">
+            <button className="btn btn-primary">
               Update Email
             </button>
           </div>
