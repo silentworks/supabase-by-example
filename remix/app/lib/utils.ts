@@ -5,7 +5,7 @@ import get from "just-safe-get";
 
 export const formatError = (zodError: ZodError) => {
   const formattedErrors: Record<string, string> = {};
-  zodError.errors.forEach((err) => {
+  zodError.issues.forEach((err) => {
     const k = err.path.pop() as string;
     if (formattedErrors[k] == null) {
       formattedErrors[k] = err.message;

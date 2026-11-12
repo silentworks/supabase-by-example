@@ -73,8 +73,8 @@ export default function UpdatePhone() {
         Hi {profile?.display_name ?? user?.email}, Enter your new phone below and confirm it
       </p>
       <Form method="post">
-        <div className="form-control">
-          <label htmlFor="phone" className="label">
+        <div className="fieldset">
+          <label htmlFor="phone" className="fieldset-legend">
             Phone
           </label>
           <input
@@ -82,14 +82,14 @@ export default function UpdatePhone() {
             name="phone"
             type="text"
             defaultValue={actionData?.data?.phone}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {actionData?.errors?.phone ? (
           <InputErrorMessage>{actionData.errors.phone}</InputErrorMessage>
         ) : null}
-        <div className="form-control">
-          <label htmlFor="phoneConfirm" className="label">
+        <div className="fieldset">
+          <label htmlFor="phoneConfirm" className="fieldset-legend">
             Confirm Phone
           </label>
           <input
@@ -97,14 +97,14 @@ export default function UpdatePhone() {
             name="phoneConfirm"
             type="text"
             defaultValue={actionData?.data?.phoneConfirm}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {actionData?.errors?.phoneConfirm ? (
           <InputErrorMessage>{actionData.errors.phoneConfirm}</InputErrorMessage>
         ) : null}
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">
             Update Phone
           </button>
         </div>

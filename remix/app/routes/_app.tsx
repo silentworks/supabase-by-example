@@ -1,5 +1,4 @@
-import { MetaFunction } from "react-router";
-import { Form, Link, Outlet } from "react-router";
+import { MetaFunction, Form, Link, Outlet } from "react-router";
 
 export const meta: MetaFunction = () => {
   return [
@@ -19,7 +18,7 @@ export default function AppLayout() {
             </h1>
           </div>
           <div className="flex-none space-x-10">
-            <Link className="btn btn-outline no-animation" to="/account">
+            <Link className="btn btn-outline" to="/account">
               Account
             </Link>
 

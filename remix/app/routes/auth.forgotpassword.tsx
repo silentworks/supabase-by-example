@@ -58,11 +58,11 @@ export default function ForgotPassword() {
       ) : null}
       <h2 className="font-semibold text-4xl mb-4">Forgot Password</h2>
       <p className="font-medium mb-4">
-        Looks like you've forgotten your password
+        Looks like you&apos;ve forgotten your password
       </p>
       <Form method="post">
-        <div className="form-control">
-          <label htmlFor="email" className="label">
+        <div className="fieldset">
+          <label htmlFor="email" className="fieldset-legend">
             Email
           </label>
           <input
@@ -70,14 +70,14 @@ export default function ForgotPassword() {
             name="email"
             type="text"
             defaultValue={actionData?.data?.email}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {actionData?.errors?.email ? (
           <InputErrorMessage>{actionData.errors.email}</InputErrorMessage>
         ) : null}
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">Send</button>
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">Send</button>
         </div>
       </Form>
       <div className="pt-4 text-center">

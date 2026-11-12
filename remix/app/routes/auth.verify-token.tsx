@@ -82,8 +82,8 @@ interface PhoneFieldType {
 
 const PhoneField = ({ phone, phoneError }: PhoneFieldType ) => {
   return <>
-    <div className="form-control">
-      <label htmlFor="phone" className="label">
+    <div className="fieldset">
+      <label htmlFor="phone" className="fieldset-legend">
         Phone
       </label>
       <input
@@ -91,7 +91,7 @@ const PhoneField = ({ phone, phoneError }: PhoneFieldType ) => {
         name="phone"
         type="text"
         defaultValue={phone}
-        className="input input-bordered"
+        className="input w-full"
       />
     </div>
     {phoneError ? (
@@ -107,8 +107,8 @@ interface EmailFieldType {
 
 const EmailField = ({ email, emailError }: EmailFieldType ) => {
   return <>
-    <div className="form-control">
-      <label htmlFor="email" className="label">
+    <div className="fieldset">
+      <label htmlFor="email" className="fieldset-legend">
         Email
       </label>
       <input
@@ -116,7 +116,7 @@ const EmailField = ({ email, emailError }: EmailFieldType ) => {
         name="email"
         type="text"
         defaultValue={email}
-        className="input input-bordered"
+        className="input w-full"
       />
     </div>
     {emailError ? (
@@ -127,10 +127,10 @@ const EmailField = ({ email, emailError }: EmailFieldType ) => {
 
 export default function VerifyToken() {
   const actionData = useActionData<typeof action>();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   
   const authType = searchParams.get('type') as string;
-  const [phoneLink, setPhoneLink] = useState(['sms', 'phone_change'].includes(authType));
+  const [phoneLink] = useState(['sms', 'phone_change'].includes(authType));
   
   return (
     <div className="w-11/12 p-12 px-6 py-10 rounded-lg sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-3/12 sm:px-10 sm:py-6">
@@ -149,8 +149,8 @@ export default function VerifyToken() {
         ) : (
           <PhoneField phone={actionData?.data?.phone} phoneError={actionData?.errors?.phone} />
         )}
-        <div className="form-control">
-          <label htmlFor="token" className="label">
+        <div className="fieldset">
+          <label htmlFor="token" className="fieldset-legend">
             Token
           </label>
           <input
@@ -158,14 +158,14 @@ export default function VerifyToken() {
             name="token"
             type="text"
             defaultValue={actionData?.data?.token}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {actionData?.errors?.token ? (
           <InputErrorMessage>{actionData.errors.token}</InputErrorMessage>
         ) : null}
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">Sign in</button>
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">Sign in</button>
         </div>
       </Form>
       <div className="pt-4 text-center">

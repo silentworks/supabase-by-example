@@ -65,7 +65,7 @@ export const action = async ({
 
     return data(success({ 
       message: "Please check your email for a magic link to log into the website.", 
-      data: { email: "" } 
+      data: { email: "", password: "" }
     }), { headers });
   }
 
@@ -81,8 +81,8 @@ interface PasswordFieldType {
 
 const PasswordField = ({ password, passwordError }: PasswordFieldType ) => {
   return <>
-    <div className="form-control">
-      <label htmlFor="password" className="label">
+    <div className="fieldset">
+      <label htmlFor="password" className="fieldset-legend">
         Password
       </label>
       <input
@@ -90,7 +90,7 @@ const PasswordField = ({ password, passwordError }: PasswordFieldType ) => {
         name="password"
         type="password"
         defaultValue={password}
-        className="input input-bordered"
+        className="input w-full"
       />
     </div>
     {passwordError ? (
@@ -120,7 +120,7 @@ export default function SignIn() {
       <p className="font-medium mb-4">Hi, Welcome back</p>
       <div className="space-y-2">
         <Link
-          className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
+          className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case"
           to="/auth/github"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
@@ -129,7 +129,7 @@ export default function SignIn() {
           Continue with GitHub
         </Link>
         <Link
-          className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
+          className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case"
           to="/auth/google"
         >
           <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
@@ -140,8 +140,8 @@ export default function SignIn() {
       </div>
       <div className="divider text-gray-400 text-sm">or continue with Email</div>
       <Form method="post">
-        <div className="form-control">
-          <label htmlFor="email" className="label">
+        <div className="fieldset">
+          <label htmlFor="email" className="fieldset-legend">
             Email
           </label>
           <input
@@ -149,7 +149,7 @@ export default function SignIn() {
             name="email"
             type="text"
             defaultValue={actionData?.data?.email}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {actionData?.errors?.email ? (
@@ -158,7 +158,7 @@ export default function SignIn() {
         {!magicLink ? (
           <PasswordField password={actionData?.data.password} passwordError={actionData?.errors?.password} />
         ) : null}
-        <div className="form-control flex-row justify-between pt-4">
+        <div className="flex flex-row justify-between pt-4">
           <label className="label justify-start cursor-pointer gap-2 text-gray-500">
             <input
               name="magiclink"
@@ -185,8 +185,8 @@ export default function SignIn() {
             </Link>
           ) : null}
         </div>
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">Sign in</button>
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">Sign in</button>
         </div>
       </Form>
       <div className="pt-4 text-center">

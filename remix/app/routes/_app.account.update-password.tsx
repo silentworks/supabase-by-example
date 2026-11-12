@@ -74,8 +74,8 @@ export default function UpdatePassword() {
         Hi {profile?.display_name ?? user?.email}, Enter your new password below and confirm it
       </p>
       <Form method="post">
-        <div className="form-control">
-          <label htmlFor="password" className="label">
+        <div className="fieldset">
+          <label htmlFor="password" className="fieldset-legend">
             Password
           </label>
           <input
@@ -83,14 +83,14 @@ export default function UpdatePassword() {
             name="password"
             type="password"
             defaultValue={actionData?.data?.password}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {actionData?.errors?.password ? (
           <InputErrorMessage>{actionData.errors.password}</InputErrorMessage>
         ) : null}
-        <div className="form-control">
-          <label htmlFor="passwordConfirm" className="label">
+        <div className="fieldset">
+          <label htmlFor="passwordConfirm" className="fieldset-legend">
             Confirm Password
           </label>
           <input
@@ -98,14 +98,14 @@ export default function UpdatePassword() {
             name="passwordConfirm"
             type="password"
             defaultValue={actionData?.data?.passwordConfirm}
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {actionData?.errors?.passwordConfirm ? (
           <InputErrorMessage>{actionData.errors.passwordConfirm}</InputErrorMessage>
         ) : null}
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">
             Update Password
           </button>
         </div>

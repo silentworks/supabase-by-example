@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, redirect } from "react-router";
+import { ActionFunctionArgs, redirect } from "react-router";
 import { clearPasswordUpdateCookie } from "~/lib/session";
 import { createServerClient } from "~/lib/supabase";
 
