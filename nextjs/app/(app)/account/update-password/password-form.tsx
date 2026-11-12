@@ -22,36 +22,36 @@ export default function PasswordForm({ user, profile }: UserInfo) {
         Hi {profile?.display_name ?? user?.email}, Enter your new password below and confirm it
       </p>
       <form action={formAction}>
-        <div className="form-control">
-          <label htmlFor="password" className="label">
+        <div className="fieldset">
+          <label htmlFor="password" className="fieldset-legend">
             Password
           </label>
           <input
             id="password"
             name="password"
             type="password"
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.password ? (
           <InputErrorMessage>{state.errors.password}</InputErrorMessage>
         ) : null}
-        <div className="form-control">
-          <label htmlFor="password_confirm" className="label">
+        <div className="fieldset">
+          <label htmlFor="password_confirm" className="fieldset-legend">
             Confirm Password
           </label>
           <input
             id="password_confirm"
             name="password_confirm"
             type="password"
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.passwordConfirm ? (
           <InputErrorMessage>{state.errors.passwordConfirm}</InputErrorMessage>
         ) : null}
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">
             Update Password
           </button>
         </div>

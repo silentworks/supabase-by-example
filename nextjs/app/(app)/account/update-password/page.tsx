@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export default async function UpdatePassword() {
   const supabase = await createClient();
-  const { profile, session } = await getProfile(supabase);
+  const { profile, user } = await getProfile(supabase);
 
-  return <PasswordForm profile={profile} user={session?.user} />;
+  return <PasswordForm profile={profile} user={user} />;
 }

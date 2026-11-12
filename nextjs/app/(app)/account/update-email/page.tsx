@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export default async function UpdateEmail() {
   const supabase = await createClient();
-  const { profile, session } = await getProfile(supabase);
+  const { profile, user } = await getProfile(supabase);
 
-  return <EmailForm profile={profile} user={session?.user} />;
+  return <EmailForm profile={profile} user={user} />;
 }

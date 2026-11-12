@@ -10,7 +10,7 @@ import { redirect } from "next/navigation"
 import { z } from "zod"
 
 export type FormDataAuthUser = z.infer<typeof AuthUserSchema>;
-export async function login(prevState: any, formData: FormData) {
+export async function login(prevState: unknown, formData: FormData) {
     const supabase = await createClient()
 
     // type-casting here for convenience
@@ -60,7 +60,7 @@ export async function login(prevState: any, formData: FormData) {
     }
 }
 
-export async function signup(prevState: any, formData: FormData) {
+export async function signup(prevState: unknown, formData: FormData) {
     const supabase = await createClient()
 
     const email = formData.get('email') as string
@@ -88,7 +88,7 @@ export async function signup(prevState: any, formData: FormData) {
     return success<FormDataAuthUser>("Please check your email for a magic link to log into the website.")
 }
 export type FormDataValidateEmail = z.infer<typeof ValidateEmailSchema>;
-export async function forgot(prevState: any, formData: FormData) {
+export async function forgot(prevState: unknown, formData: FormData) {
     const supabase = await createClient()
 
     const email = formData.get('email') as string
@@ -111,7 +111,7 @@ export async function forgot(prevState: any, formData: FormData) {
 }
 
 export type FormDataAuthUserWithToken = z.infer<typeof AuthUserWithTokenSchema>;
-export async function verify(prevState: any, formData: FormData) {
+export async function verify(prevState: unknown, formData: FormData) {
     const supabase = await createClient()
 
     const authType = formData.get('auth_type') as EmailOtpType

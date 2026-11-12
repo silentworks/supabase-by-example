@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const supabase = await createClient();
 
-  // get profile and session
-  const { profile, session } = await getProfile(supabase);
+  // get profile and user claims
+  const { profile, user } = await getProfile(supabase);
 
   const profileInfo = get(profile as Profile, "profiles_info") as ProfileInfo;
   const website = "";
@@ -17,7 +17,7 @@ export default async function Home() {
     <div className="card w-4/12 bg-base-100 shadow-xl">
       <div className="card-body">
         <h2 className="card-title">
-          Welcome {profile?.display_name ?? session?.user?.email}
+          Welcome {profile?.display_name ?? user?.email}
         </h2>
         {profile?.display_name ? (
           <>

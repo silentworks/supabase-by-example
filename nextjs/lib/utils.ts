@@ -1,4 +1,4 @@
-import { SupabaseClient, User } from "@supabase/supabase-js";
+import { SupabaseClient } from "@supabase/supabase-js";
 import type { ZodError } from "zod";
 
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
@@ -20,7 +20,7 @@ type Results<T> = ({
 
 export const formatError = <T extends Record<string, string>>(zodError: ZodError) => {
   const formattedErrors: Record<string, string> = {};
-  zodError.errors.forEach((err) => {
+  zodError.issues.forEach((err) => {
     const k = err.path.pop() as string;
     if (formattedErrors[k] == null) {
       formattedErrors[k] = err.message;
@@ -58,7 +58,7 @@ export function waitload(sec: number) {
 }
 
 export interface UserInfo {
-  user: User | undefined;
+  user: { email?: string } | undefined;
   profile: Profile;
 }
 
@@ -86,5 +86,6 @@ export async function getProfile(
 
   return {
     profile,
-  } as { profile: Profile; };
+    user,
+  } as { profile: Profile; user: UserInfo["user"] };
 }

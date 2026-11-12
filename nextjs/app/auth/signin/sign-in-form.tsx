@@ -12,15 +12,15 @@ interface PasswordFieldType {
 
 const PasswordField = ({ passwordError }: PasswordFieldType) => {
   return <>
-    <div className="form-control">
-      <label htmlFor="password" className="label">
+    <div className="fieldset">
+      <label htmlFor="password" className="fieldset-legend">
         Password
       </label>
       <input
         id="password"
         name="password"
         type="password"
-        className="input input-bordered"
+        className="input w-full"
       />
     </div>
     {passwordError ? (
@@ -46,7 +46,7 @@ export default function SignInForm({ auth_type }: { auth_type: string }) {
       <p className="font-medium mb-4">Hi, Welcome back</p>
       <div className="space-y-2">
         <a
-          className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
+          className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case"
           href="/auth/github"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
@@ -55,7 +55,7 @@ export default function SignInForm({ auth_type }: { auth_type: string }) {
           Continue with GitHub
         </a>
         <a
-          className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation"
+          className="btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case"
           href="/auth/google"
         >
           <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
@@ -66,15 +66,15 @@ export default function SignInForm({ auth_type }: { auth_type: string }) {
       </div>
       <div className="divider text-gray-400 text-sm">or continue with Email</div>
       <form action={formAction}>
-        <div className="form-control">
-          <label htmlFor="email" className="label">
+        <div className="fieldset">
+          <label htmlFor="email" className="fieldset-legend">
             Email
           </label>
           <input
             id="email"
             name="email"
             type="text"
-            className="input input-bordered"
+            className="input w-full"
           />
         </div>
         {!state.success && state.errors?.email ? (
@@ -83,14 +83,14 @@ export default function SignInForm({ auth_type }: { auth_type: string }) {
         {!magicLink ? (
           <PasswordField passwordError={!state.success ? state.errors?.password : undefined} />
         ) : null}
-        <div className="form-control flex-row justify-between pt-4">
+        <div className="flex flex-row justify-between pt-4">
           <label className="label justify-start cursor-pointer gap-2 text-gray-500">
             <input
               name="magic_link"
               type="checkbox"
               className="toggle toggle-xs"
               defaultChecked={magicLink}
-              onChange={(ev) => {
+              onChange={() => {
                 setMagicLink(!magicLink)
               }}
             />
@@ -105,8 +105,8 @@ export default function SignInForm({ auth_type }: { auth_type: string }) {
             </Link>
           ) : null}
         </div>
-        <div className="form-control mt-6">
-          <button className="btn btn-primary no-animation">Sign in</button>
+        <div className="flex flex-col mt-6">
+          <button className="btn btn-primary">Sign in</button>
         </div>
       </form>
       {!magicLink ? (

@@ -8,7 +8,7 @@ import { AuthWeakPasswordError } from "@supabase/supabase-js"
 import { z } from "zod"
 
 export type FormDataUpdate = z.infer<typeof UpdateProfileSchema>;
-export async function update(prevState: any, formData: FormData) {
+export async function update(prevState: unknown, formData: FormData) {
   const supabase = await createClient()
 
   const displayName = formData.get('display_name') as string
@@ -41,7 +41,7 @@ export async function update(prevState: any, formData: FormData) {
 }
 
 export type FormDataUpdateEmail = z.infer<typeof UpdateEmailSchema>;
-export async function emailUpdate(prevState: any, formData: FormData) {
+export async function emailUpdate(prevState: unknown, formData: FormData) {
   const supabase = await createClient()
 
   const email = formData.get('email') as string
@@ -65,7 +65,7 @@ export async function emailUpdate(prevState: any, formData: FormData) {
 }
 
 export type FormDataUpdatePassword = z.infer<typeof UpdatePasswordSchema>;
-export async function passwordUpdate(prevState: any, formData: FormData) {
+export async function passwordUpdate(prevState: unknown, formData: FormData) {
   const supabase = await createClient()
 
   const password = formData.get('password') as string
