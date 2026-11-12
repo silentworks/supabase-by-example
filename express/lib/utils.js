@@ -1,6 +1,6 @@
 exports.formatError = (zodError) => {
   const formattedErrors = {};
-  zodError.errors.forEach((err) => {
+  zodError.issues.forEach((err) => {
     const k = err.path.pop();
     if (formattedErrors[k] == null) {
       formattedErrors[k] = err.message;

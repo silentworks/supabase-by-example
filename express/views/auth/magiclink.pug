@@ -9,10 +9,10 @@ block main
     h2(class='font-semibold text-4xl mb-4') Sign in
     p(class='font-medium mb-4') Hi, Welcome back
     form(method='post')
-      .form-control
-        label(class='label' for='email') Email
-        input(id='email' name='email' type='text' class='input input-bordered' value=`${email ? email : ''}`)
+      fieldset.fieldset
+        label(class='fieldset-legend' for='email') Email
+        input(id='email' name='email' type='text' class='input w-full' value=`${email ? email : ''}`)
       if errors
         +input_error(errors.email)
-      .form-control.mt-6
-        button(class='btn btn-primary no-animation') Sign in
+      .mt-6
+        button(class='btn btn-primary w-full') Sign in

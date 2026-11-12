@@ -9,23 +9,23 @@ block main
     h2(class='font-semibold text-4xl mb-4') Sign in
     p(class='font-medium mb-4') Hi, Welcome back
     div(class='space-y-2')
-      a(class='btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation' href='/auth/github') Continue with GitHub
-      a(class='btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case no-animation' href='/auth/google') Continue with Google
+      a(class='btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case' href='/auth/github') Continue with GitHub
+      a(class='btn btn-outline border-gray-200 hover:bg-transparent hover:text-gray-500 gap-2 w-full normal-case' href='/auth/google') Continue with Google
     div(class='divider text-gray-400 text-sm') or continue with Email
     form(method='post')
-      .form-control
-        label(class='label' for='email') Email
-        input(id='email' name='email' type='text' class='input input-bordered' value=`${email ? email : ''}`)
+      fieldset.fieldset
+        label(class='fieldset-legend' for='email') Email
+        input(id='email' name='email' type='text' class='input w-full' value=`${email ? email : ''}`)
       if errors
         +input_error(errors.email)
-      .form-control
-        label(class='label' for='password') Password
-        input(id='password' name='password' type='password' class='input input-bordered')
+      fieldset.fieldset
+        label(class='fieldset-legend' for='password') Password
+        input(id='password' name='password' type='password' class='input w-full')
       if errors
         +input_error(errors.password)
-      .form-control.flex-row.justify-end.pt-4
+      .flex.justify-end.pt-4
         a(class='block py-2 text-blue-500' href='/auth/forgotpassword') Forgot Password?
-      .form-control.mt-6
-        button(class='btn btn-primary no-animation') Sign in
+      .mt-6
+        button(class='btn btn-primary w-full') Sign in
     .pt-4.text-center Not registered yet? 
       a(class='underline text-blue-500' href='/auth/signup') Create an account
